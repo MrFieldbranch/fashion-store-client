@@ -3,14 +3,15 @@ import type { LoginRequest } from "../models/LoginRequest";
 import type { TokenResponse } from "../models/TokenResponse";
 import apiService from "../services/api-service";
 import { jwtDecode } from "jwt-decode";
-import { isAdmin } from "../services/authentication-service";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 type LoginProps = {
   setLoginWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Login = ({ setLoginWindowOpen }: LoginProps) => {
+  const { login } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -26,12 +27,12 @@ const Login = ({ setLoginWindowOpen }: LoginProps) => {
       const loginResponse: TokenResponse = await apiService.loginAsync(loginRequest);
       apiService.setAuthorizationHeader(loginResponse.token);
       const decodedToken: any = jwtDecode(loginResponse.token);
-      localStorage.setItem("token", loginResponse.token);
-      localStorage.setItem("loggedInUserFirstName", loginResponse.firstName);
-      localStorage.setItem("loggedInUserId", decodedToken.nameid);
-      let isUserAdmin = isAdmin();
-      if (isUserAdmin) navigate("/admindashboard");
-      else setLoginWindowOpen(false);
+      const userId = decodedToken.nameid;
+      const userName = loginResponse.firstName;
+      const role = decodedToken.role; /* Skippar || "User" eftersom det finns väl i role? */
+      login(userId, userName, loginResponse.token, role);      
+      if (role === "Admin") navigate("/admindashboard");
+      else setLoginWindowOpen(false);      
     } catch (err: any) {
       setLoginWindowOpen(false);
       setError(err.message || "Ett oväntat fel inträffade. Inloggningen misslyckades.");

@@ -4,12 +4,14 @@ import apiService from "../services/api-service";
 import type { LoginRequest } from "../models/LoginRequest";
 import type { TokenResponse } from "../models/TokenResponse";
 import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../contexts/AuthContext";
 
 type RegisterProps = {
   setRegisterWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
+  const { login } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordAgain, setPasswordAgain] = useState<string>("");
@@ -59,9 +61,11 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
       const loginResponse: TokenResponse = await apiService.loginAsync(loginRequest);
       apiService.setAuthorizationHeader(loginResponse.token);
       const decodedToken: any = jwtDecode(loginResponse.token);
-      localStorage.setItem("token", loginResponse.token);
-      localStorage.setItem("loggedInUserFirstName", loginResponse.firstName);
-      localStorage.setItem("loggedInUserId", decodedToken.nameid);
+      const userId = decodedToken.nameid;
+      const userName = loginResponse.firstName;
+      const role = decodedToken.role;
+      login(userId, userName, loginResponse.token, role);
+      /* Behöver inte ha någon check här om användaren är Admin, eftersom admin registreras manuellt i db */      
       setRegisterWindowOpen(false);      
     } catch (err: any) {
       setRegisterWindowOpen(false);
