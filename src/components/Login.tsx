@@ -1,9 +1,56 @@
 import { useState } from "react";
+import type { LoginRequest } from "../models/LoginRequest";
+import type { TokenResponse } from "../models/TokenResponse";
+import apiService from "../services/api-service";
+import { jwtDecode } from "jwt-decode";
+import { isAdmin } from "../services/authentication-service";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+type LoginProps = {
+  setLoginWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Login = ({ setLoginWindowOpen }: LoginProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  /* const [loginError, setLoginError] = useState<string | null>(null); */
+  const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (email: string, password: string) => {
+    const loginRequest: LoginRequest = {
+      email: email,
+      password: password,
+    };
+    try {
+      const loginResponse: TokenResponse = await apiService.loginAsync(loginRequest);
+      apiService.setAuthorizationHeader(loginResponse.token);
+      const decodedToken: any = jwtDecode(loginResponse.token);
+      localStorage.setItem("token", loginResponse.token);
+      localStorage.setItem("loggedInUserFirstName", loginResponse.firstName);
+      localStorage.setItem("loggedInUserId", decodedToken.nameid);
+      let isUserAdmin = isAdmin();
+      if (isUserAdmin) navigate("/admindashboard");
+      else setLoginWindowOpen(false);
+    } catch (err: any) {
+      setLoginWindowOpen(false);
+      setError(err.message || "Ett oväntat fel inträffade. Inloggningen misslyckades.");
+    }
+  };
+
+  const handleLoginError = () => {
+    setEmail("");
+    setPassword("");
+    setError(null);
+  };
+
+  if (error)
+    return (
+      <div className="pop-up">
+        <p>{error}</p>
+        <button onClick={handleLoginError}>Tillbaka</button>
+      </div>
+    );
 
   return (
     <div className="pop-up">
@@ -20,17 +67,15 @@ const Login = () => {
       </div>
       <div className="label-and-input">
         <label htmlFor="password">Lösenord</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <input type="password" id="password" value={password} required onChange={(e) => setPassword(e.target.value)} />
       </div>
       <div className="confirm-or-cancel">
-        <button className="confirm-button">OK</button>
-        <button className="cancel-button">AVBRYT</button>
+        <button className="confirm-button" onClick={() => handleLogin(email, password)}>
+          OK
+        </button>
+        <button className="cancel-button" onClick={() => setLoginWindowOpen(false)}>
+          AVBRYT
+        </button>
       </div>
     </div>
   );

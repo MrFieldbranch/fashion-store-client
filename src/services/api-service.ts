@@ -1,6 +1,6 @@
-import type { CreateNewUserRequest } from "./models/CreateNewUserRequest";
-import type { LoginRequest } from "./models/LoginRequest";
-import type { TokenResponse } from "./models/TokenResponse";
+import type { CreateNewUserRequest } from "../models/CreateNewUserRequest";
+import type { LoginRequest } from "../models/LoginRequest";
+import type { TokenResponse } from "../models/TokenResponse";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
