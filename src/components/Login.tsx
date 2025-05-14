@@ -47,36 +47,46 @@ const Login = ({ setLoginWindowOpen }: LoginProps) => {
 
   if (error)
     return (
-      <div className="pop-up">
-        <p>{error}</p>
-        <button onClick={handleLoginError}>Tillbaka</button>
+      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
+        <div className="pop-up">
+          <p>{error}</p>
+          <button onClick={handleLoginError}>Tillbaka</button>
+        </div>
       </div>
     );
 
   return (
-    <div className="pop-up">
-      <div className="label-and-input">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          autoComplete="off"
-          id="email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="label-and-input">
-        <label htmlFor="password">Lösenord</label>
-        <input type="password" id="password" value={password} required onChange={(e) => setPassword(e.target.value)} />
-      </div>
-      <div className="confirm-or-cancel">
-        <button className="confirm-button" onClick={() => handleLogin(email, password)}>
-          OK
-        </button>
-        <button className="cancel-button" onClick={() => setLoginWindowOpen(false)}>
-          AVBRYT
-        </button>
+    <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
+      <div className="pop-up">
+        <div className="label-and-input">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            autoComplete="off"
+            id="email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="label-and-input">
+          <label htmlFor="password">Lösenord</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="confirm-or-cancel">
+          <button className="confirm-button" onClick={() => handleLogin(email, password)}>
+            OK
+          </button>
+          <button className="cancel-button" onClick={() => setLoginWindowOpen(false)}>
+            AVBRYT
+          </button>
+        </div>
       </div>
     </div>
   );

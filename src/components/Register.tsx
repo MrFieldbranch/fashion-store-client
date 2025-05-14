@@ -65,12 +65,12 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
       const userName = loginResponse.firstName;
       const role = decodedToken.role;
       login(userId, userName, loginResponse.token, role);
-      /* Behöver inte ha någon check här om användaren är Admin, eftersom admin registreras manuellt i db */      
-      setRegisterWindowOpen(false);      
+      /* Behöver inte ha någon check här om användaren är Admin, eftersom admin registreras manuellt i db */
+      setRegisterWindowOpen(false);
     } catch (err: any) {
       setRegisterWindowOpen(false);
       setError(err.message || "Ett oväntat fel inträffade. Inloggningen misslyckades.");
-    }    
+    }
   };
 
   const handleRegisterError = () => {
@@ -81,59 +81,70 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
     setError(null);
   };
 
+  
   if (error)
     return (
-      <div className="pop-up">
-        <p>{error}</p>
-        <button onClick={handleRegisterError}>Tillbaka</button>
+      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
+        <div className="pop-up">
+          <p>{error}</p>
+          <button onClick={handleRegisterError}>Tillbaka</button>
+        </div>
       </div>
     );
 
   return (
-    <div className="pop-up">
-      <div className="label-and-input">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          autoComplete="off"
-          id="email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="label-and-input">
-        <label htmlFor="password">Lösenord</label>
-        <input type="password" id="password" value={password} required onChange={(e) => setPassword(e.target.value)} />
-      </div>
-      <div className="label-and-input">
-        <label htmlFor="passwordagain">Upprepa lösenord</label>
-        <input
-          type="password"
-          id="passwordagain"
-          value={passwordAgain}
-          required
-          onChange={(e) => setPasswordAgain(e.target.value)}
-        />
-      </div>
-      <div className="label-and-input">
-        <label htmlFor="firstname">Förnamn</label>
-        <input type="text" id="firstname" value={firstName} required onChange={(e) => setFirstName(e.target.value)} />
-      </div>
-      <div className="label-and-input">
-        <label htmlFor="lastname">Efternamn</label>
-        <input type="text" id="lastname" value={lastName} required onChange={(e) => setLastName(e.target.value)} />
-      </div>
-      <div className="confirm-or-cancel">
-        <button
-          className="confirm-button"
-          onClick={() => handleRegister(email, password, passwordAgain, firstName, lastName)}
-        >
-          OK
-        </button>
-        <button className="cancel-button" onClick={() => setRegisterWindowOpen(false)}>
-          AVBRYT
-        </button>
+    <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
+      <div className="pop-up">
+        <div className="label-and-input">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            autoComplete="off"
+            id="email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="label-and-input">
+          <label htmlFor="password">Lösenord</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="label-and-input">
+          <label htmlFor="passwordagain">Upprepa lösenord</label>
+          <input
+            type="password"
+            id="passwordagain"
+            value={passwordAgain}
+            required
+            onChange={(e) => setPasswordAgain(e.target.value)}
+          />
+        </div>
+        <div className="label-and-input">
+          <label htmlFor="firstname">Förnamn</label>
+          <input type="text" id="firstname" value={firstName} required onChange={(e) => setFirstName(e.target.value)} />
+        </div>
+        <div className="label-and-input">
+          <label htmlFor="lastname">Efternamn</label>
+          <input type="text" id="lastname" value={lastName} required onChange={(e) => setLastName(e.target.value)} />
+        </div>
+        <div className="confirm-or-cancel">
+          <button
+            className="confirm-button"
+            onClick={() => handleRegister(email, password, passwordAgain, firstName, lastName)}
+          >
+            OK
+          </button>
+          <button className="cancel-button" onClick={() => setRegisterWindowOpen(false)}>
+            AVBRYT
+          </button>
+        </div>
       </div>
     </div>
   );

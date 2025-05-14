@@ -1,15 +1,10 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-interface AuthContextType {  
+interface AuthContextType {
   loggedInUserId: string | null;
   loggedInUserFirstName: string | null;
   userRole: string | null;
-  login: (
-    userId: string,
-    userName: string,
-    token: string,
-	role: string
-  ) => void;
+  login: (userId: string, userName: string, token: string, role: string) => void;
   logout: () => void;
 }
 
@@ -23,7 +18,7 @@ export const useAuth = (): AuthContextType => {
   return context;
 };
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {  
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
   const [loggedInUserFirstName, setLoggedInUserFirstName] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
@@ -33,12 +28,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const storedUserId = localStorage.getItem("loggedInUserId");
     const storedUserName = localStorage.getItem("loggedInUserFirstName");
     const storedToken = localStorage.getItem("token");
-	const storedUserRole = localStorage.getItem("userRole");
+    const storedUserRole = localStorage.getItem("userRole");
 
-    if (storedUserId && storedUserName && storedToken && storedUserRole) {      
+    if (storedUserId && storedUserName && storedToken && storedUserRole) {
       setLoggedInUserId(storedUserId);
       setLoggedInUserFirstName(storedUserName);
-	  setUserRole(storedUserRole);
+      setUserRole(storedUserRole);
     }
   }, []);
 
@@ -46,20 +41,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("loggedInUserId", userId);
     localStorage.setItem("loggedInUserFirstName", userName);
     localStorage.setItem("token", token);
-	localStorage.setItem("userRole", role);    
+    localStorage.setItem("userRole", role);
     setLoggedInUserId(userId);
     setLoggedInUserFirstName(userName);
-	setUserRole(role);
+    setUserRole(role);
   };
 
   const logout = () => {
     localStorage.removeItem("loggedInUserId");
     localStorage.removeItem("loggedInUserFirstName");
     localStorage.removeItem("token");
-	localStorage.removeItem("userRole");    
+    localStorage.removeItem("userRole");
     setLoggedInUserId(null);
     setLoggedInUserFirstName(null);
-	setUserRole(null);
+    setUserRole(null);
   };
 
   return (

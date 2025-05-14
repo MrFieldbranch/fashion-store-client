@@ -1,8 +1,9 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import StartView from "./views/StartView";
 import NotFoundView from "./views/NotFoundView";
-import AdminDashboard from "./views/admin-views/AdminDashboard";
+import AdminDashboardView from "./views/admin-views/AdminDashboardView";
 import { useAuth } from "./contexts/AuthContext";
+import CategoryAdminView from "./views/admin-views/CategoryAdminView";
 
 const App = () => {
   const { userRole } = useAuth();
@@ -10,7 +11,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Navigate to="/start" />} />
       <Route path="/start" element={<StartView />} />
-      <Route path="/admindashboard" element={userRole === "Admin" ? <AdminDashboard /> : <Navigate to="/start" />} />
+      <Route path="/admindashboard" element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />} />
+      <Route path="/categoryadmin/:categoryId" element={userRole === "Admin" ? <CategoryAdminView /> : <Navigate to="/start" />} />
       <Route path="*" element={<NotFoundView />} />
     </Routes>
   );
