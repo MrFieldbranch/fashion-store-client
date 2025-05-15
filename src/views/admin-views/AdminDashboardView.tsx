@@ -46,7 +46,7 @@ const AdminDashboardView = () => {
 
     try {
       const response: BasicCategoryResponse = await apiService.createNewCategoryAsync(newCategoryRequest);
-      setAllCategories(prev => [...prev, response]);      
+      setAllCategories((prev) => [...prev, response]);
     } catch (err: any) {
       setError(err.message || "Ett oväntat fel inträffade. Den nya kategorin skapades inte.");
     } finally {
@@ -75,9 +75,9 @@ const AdminDashboardView = () => {
     <div className="main-container">
       <Nav />
       <div className="admin-dashboard">
-        <h1>Välkommen till Admin Dashboard</h1>
+        <h1>Admin Dashboard</h1>
         <h2>Alla kategorier</h2>
-        <div className="all-categories-admin">
+        <div className="records-container">
           {allCategories.length === 0 ? (
             <div className="no-records">
               <p>Inga kategorier finns</p>

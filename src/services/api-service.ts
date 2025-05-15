@@ -1,8 +1,10 @@
 import type { BasicCategoryResponse } from "../models/BasicCategoryResponse";
 import type { CreateNewCategoryRequest } from "../models/CreateNewCategoryRequest";
+import type { CreateNewProductRequest } from "../models/CreateNewProductRequest";
 import type { CreateNewUserRequest } from "../models/CreateNewUserRequest";
 import type { DetailedCategoryResponse } from "../models/DetailedCategoryResponse";
 import type { LoginRequest } from "../models/LoginRequest";
+import type { ProductResponse } from "../models/ProductResponse";
 import type { TokenResponse } from "../models/TokenResponse";
 
 export class ApiService {
@@ -100,6 +102,22 @@ export class ApiService {
 
     const newCategory: BasicCategoryResponse = await response.json();
     return newCategory;
+  }
+
+  async createNewProductAsync (categoryId: number, request: CreateNewProductRequest): Promise<ProductResponse> {
+    const response = await fetch(`${this.baseUrl}/products/${categoryId}`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att skapa produkten. ${errorMessage}`);
+    }
+
+    const newProduct: ProductResponse = await response.json();
+    return newProduct;
   }
 }
 

@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import type { DetailedCategoryResponse } from "../../models/DetailedCategoryResponse";
 import apiService from "../../services/api-service";
 import AdminBasicProduct from "../../components/admin-components/AdminBasicProduct";
+import Nav from "../../components/Nav";
+import type { CreateNewProductRequest } from "../../models/CreateNewProductRequest";
 
 const CategoryAdminView = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -10,6 +12,13 @@ const CategoryAdminView = () => {
 
   const [categoryWithProducts, setCategoryWithProducts] = useState<DetailedCategoryResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showEnterNewProduct, setShowEnterNewProduct] = useState<boolean>(false);
+  const [productName, setProductName] = useState<string>("");
+  const [productSex, setProductSex] = useState<number>(0);
+  const [productImageUrl, setProductImageUrl] = useState<string>("");
+  const [productColor, setProductColor] = useState<string>("");
+  const [productDescription, setProductDescription] = useState<string>("");
+  const [useEffectTrigger, setUseEffectTrigger] = useState<number>(1);
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -31,7 +40,55 @@ const CategoryAdminView = () => {
 
     fetchCategoryWithProducts();
     return () => abortCont.abort();
-  }, []);
+  }, [useEffectTrigger]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductSex(Number(e.target.value));
+  };
+
+  const handleCloseEnterNewProduct = () => {
+    setProductName("");
+    setProductSex(0);
+    setProductImageUrl("");
+    setProductColor("");
+    setProductDescription("");
+    setShowEnterNewProduct(false);
+  };
+
+  const handleCreateNewProduct = async (
+    productName: string,
+    productSex: number,
+    productImageUrl: string,
+    productColor: string,
+    productDescription: string
+  ) => {
+    if (productName.trim() === "" || productImageUrl.trim() === "" || productColor.trim() === "") {
+      setError(
+        "Skapande av ny produkt misslyckades. Du måste skriva något i alla fält (förutom Beskrivning, som är valfri)."
+      );
+      return;
+    }
+
+    const newProductRequest: CreateNewProductRequest = {
+      name: productName,
+      productSex: productSex,
+      imageUrl: productImageUrl,
+      color: productColor,
+    };
+
+    if (productDescription.trim() !== "") {
+      newProductRequest.description = productDescription;
+    }
+
+    try {
+      await apiService.createNewProductAsync(id, newProductRequest);
+      setUseEffectTrigger((prev) => prev + 1);
+    } catch (err: any) {
+      setError(err.message || "Ett oväntat fel inträffade. Den nya produkten skapades inte.");
+    } finally {
+      handleCloseEnterNewProduct();
+    }
+  };
 
   if (!categoryWithProducts)
     return (
@@ -51,19 +108,94 @@ const CategoryAdminView = () => {
     );
 
   return (
-    <div className="category-with-products">
-      <h1>{categoryWithProducts.name}</h1>
-      <p>Antal produkter: {categoryWithProducts.productCount}</p>
-      {categoryWithProducts.productsInCategory.map((p) => (
-        <AdminBasicProduct
-          key={p.id}
-          productId={p.id}
-          productName={p.name}
-          productSex={p.productSex}
-          imageUrl={p.imageUrl}
-          startPrice={p.startPrice ? p.startPrice : 0}
-        />
-      ))}
+    <div className="main-container">
+      <Nav />
+      <div className="category-with-products">
+        <h1>{categoryWithProducts.name}</h1>
+        <p>Antal produkter: {categoryWithProducts.productCount}</p>
+        <div className="records-container">
+          {categoryWithProducts.productsInCategory.map((p) => (
+            <AdminBasicProduct
+              key={p.id}
+              productId={p.id}
+              productName={p.name}
+              productSex={p.productSex}
+              imageUrl={p.imageUrl}
+              startPrice={p.startPrice ? p.startPrice : 0}
+            />
+          ))}
+        </div>
+        {!showEnterNewProduct && (
+          <div className="press-to-create-new">
+            <h4>Tryck för att skapa ny produkt</h4>
+            <button onClick={() => setShowEnterNewProduct(true)}>Skapa</button>
+          </div>
+        )}
+        {showEnterNewProduct && (
+          <div className="create-new">
+            <h3>Skapa en ny produkt</h3>
+            <label htmlFor="productname">Nytt produktnamn</label>
+            <input
+              type="text"
+              id="productname"
+              required
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+            />
+
+            <label>
+              <input type="radio" name="option" value="0" checked={productSex === 0} onChange={handleChange} />
+              Unisex
+            </label>
+
+            <label>
+              <input type="radio" name="option" value="1" checked={productSex === 1} onChange={handleChange} />
+              Man
+            </label>
+
+            <label>
+              <input type="radio" name="option" value="2" checked={productSex === 2} onChange={handleChange} />
+              Kvinna
+            </label>
+
+            <label htmlFor="productimageurl">URL för produktens bild</label>
+            <input
+              type="text"
+              id="productimageurl"
+              required
+              value={productImageUrl}
+              onChange={(e) => setProductImageUrl(e.target.value)}
+            />
+            <label htmlFor="color">Produktens färg</label>
+            <input
+              type="text"
+              id="color"
+              required
+              value={productColor}
+              onChange={(e) => setProductColor(e.target.value)}
+            />
+            <label htmlFor="productdescription">Valfri beskrivning för produkten</label>
+            <textarea
+              id="productdescription"
+              value={productDescription}
+              onChange={(e) => setProductDescription(e.target.value)}
+            />
+            <div className="confirm-or-cancel">
+              <button
+                className="confirm-button"
+                onClick={() =>
+                  handleCreateNewProduct(productName, productSex, productImageUrl, productColor, productDescription)
+                }
+              >
+                OK
+              </button>
+            </div>
+            <button className="cancel-button" onClick={handleCloseEnterNewProduct}>
+              AVBRYT
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
