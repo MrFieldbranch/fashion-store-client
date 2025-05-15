@@ -1,4 +1,5 @@
 import type { BasicCategoryResponse } from "../models/BasicCategoryResponse";
+import type { CreateNewCategoryRequest } from "../models/CreateNewCategoryRequest";
 import type { CreateNewUserRequest } from "../models/CreateNewUserRequest";
 import type { DetailedCategoryResponse } from "../models/DetailedCategoryResponse";
 import type { LoginRequest } from "../models/LoginRequest";
@@ -83,6 +84,22 @@ export class ApiService {
 
     const categoryWithProducts: DetailedCategoryResponse = await response.json();
     return categoryWithProducts;
+  }
+
+  async createNewCategoryAsync(request: CreateNewCategoryRequest): Promise<BasicCategoryResponse> {
+    const response = await fetch(`${this.baseUrl}/categories`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att skapa kategorin. ${errorMessage}`);
+    }
+
+    const newCategory: BasicCategoryResponse = await response.json();
+    return newCategory;
   }
 }
 
