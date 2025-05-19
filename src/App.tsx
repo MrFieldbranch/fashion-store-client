@@ -4,6 +4,7 @@ import NotFoundView from "./views/NotFoundView";
 import AdminDashboardView from "./views/admin-views/AdminDashboardView";
 import { useAuth } from "./contexts/AuthContext";
 import CategoryAdminView from "./views/admin-views/CategoryAdminView";
+import ProductAdminView from "./views/admin-views/ProductAdminView";
 
 const App = () => {
   const { userRole } = useAuth();
@@ -11,8 +12,18 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Navigate to="/start" />} />
       <Route path="/start" element={<StartView />} />
-      <Route path="/admindashboard" element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />} />
-      <Route path="/categoryadmin/:categoryId" element={userRole === "Admin" ? <CategoryAdminView /> : <Navigate to="/start" />} />
+      <Route
+        path="/admindashboard"
+        element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />}
+      />
+      <Route
+        path="/categoryadmin/:categoryId"
+        element={userRole === "Admin" ? <CategoryAdminView /> : <Navigate to="/start" />}
+      />
+      <Route
+        path="/productadmin/:productId"
+        element={userRole === "Admin" ? <ProductAdminView /> : <Navigate to="/start" />}
+      />
       <Route path="*" element={<NotFoundView />} />
     </Routes>
   );

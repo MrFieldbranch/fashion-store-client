@@ -63,6 +63,7 @@ const CategoryAdminView = () => {
     productDescription: string
   ) => {
     if (productName.trim() === "" || productImageUrl.trim() === "" || productColor.trim() === "") {
+      handleCloseEnterNewProduct();
       setError(
         "Skapande av ny produkt misslyckades. Du måste skriva något i alla fält (förutom Beskrivning, som är valfri)."
       );
@@ -74,11 +75,8 @@ const CategoryAdminView = () => {
       productSex: productSex,
       imageUrl: productImageUrl,
       color: productColor,
-    };
-
-    if (productDescription.trim() !== "") {
-      newProductRequest.description = productDescription;
-    }
+      description: productDescription
+    };    
 
     try {
       await apiService.createNewProductAsync(id, newProductRequest);
@@ -114,21 +112,26 @@ const CategoryAdminView = () => {
         <h1>{categoryWithProducts.name}</h1>
         <p>Antal produkter: {categoryWithProducts.productCount}</p>
         <div className="records-container">
-          {categoryWithProducts.productsInCategory.map((p) => (
-            <AdminBasicProduct
-              key={p.id}
-              productId={p.id}
-              productName={p.name}
-              productSex={p.productSex}
-              imageUrl={p.imageUrl}
-              startPrice={p.startPrice ? p.startPrice : 0}
-            />
-          ))}
+          {categoryWithProducts.productCount === 0 ? (
+            <div className="no-records">
+              <p>Inga produkter finns i kategorin</p>
+            </div>
+          ) : (
+            categoryWithProducts.productsInCategory.map((p) => (
+              <AdminBasicProduct
+                key={p.id}
+                productId={p.id}
+                productName={p.name}
+                productSex={p.productSex}
+                imageUrl={p.imageUrl}
+                startPrice={p.startPrice ? p.startPrice : 0}
+              />
+            ))
+          )}
         </div>
         {!showEnterNewProduct && (
           <div className="press-to-create-new">
-            <h4>Tryck för att skapa ny produkt</h4>
-            <button onClick={() => setShowEnterNewProduct(true)}>Skapa</button>
+            <button onClick={() => setShowEnterNewProduct(true)}>Skapa ny produkt</button>
           </div>
         )}
         {showEnterNewProduct && (
@@ -147,12 +150,10 @@ const CategoryAdminView = () => {
               <input type="radio" name="option" value="0" checked={productSex === 0} onChange={handleChange} />
               Unisex
             </label>
-
             <label>
               <input type="radio" name="option" value="1" checked={productSex === 1} onChange={handleChange} />
               Man
             </label>
-
             <label>
               <input type="radio" name="option" value="2" checked={productSex === 2} onChange={handleChange} />
               Kvinna
@@ -166,7 +167,7 @@ const CategoryAdminView = () => {
               value={productImageUrl}
               onChange={(e) => setProductImageUrl(e.target.value)}
             />
-            <label htmlFor="color">Produktens färg</label>
+            <label htmlFor="color">Produktfärg</label>
             <input
               type="text"
               id="color"
@@ -174,7 +175,7 @@ const CategoryAdminView = () => {
               value={productColor}
               onChange={(e) => setProductColor(e.target.value)}
             />
-            <label htmlFor="productdescription">Valfri beskrivning för produkten</label>
+            <label htmlFor="productdescription">Valfri beskrivning av produkten</label>
             <textarea
               id="productdescription"
               value={productDescription}
@@ -189,10 +190,10 @@ const CategoryAdminView = () => {
               >
                 OK
               </button>
+              <button className="cancel-button" onClick={handleCloseEnterNewProduct}>
+                AVBRYT
+              </button>
             </div>
-            <button className="cancel-button" onClick={handleCloseEnterNewProduct}>
-              AVBRYT
-            </button>
           </div>
         )}
       </div>

@@ -13,19 +13,15 @@ const AdminBasicProduct = ({ productId, productName, productSex, imageUrl, start
 
   // Kanske bryta ut till en separat fil/funktion.
   // Kanske också alltid skicka med productSex från API:ets endpoints/services som använder ProductResponse.
-  let sex: string;
-
-  if (productSex === 0) sex = "Unisex";
-  else if (productSex === 1) sex = "Man";
-  else sex = "Kvinna";
+  const sex = productSex === 0 ? "Unisex" : productSex === 1 ? "Man" : "Kvinna";
 
   return (
     <div className="admin-basic-product">
       <h3>{productName}</h3>
       <p>{sex}</p>
       <p>Från {startPrice} kr</p>
-      <img src={imageUrl} alt={productName} className="product-small" />      
-      <button onClick={() => navigate(`/productadmin/${productId}`)}>Mer info</button> {/* Skapa i App.tsx */}
+      <img src={imageUrl} alt={productName} className="product-small" />
+      <button onClick={() => navigate(`/productadmin/${productId}`)}>Mer info</button>
     </div>
   );
 };

@@ -3,5 +3,5 @@ export interface CreateNewProductRequest {
 	productSex: number;
 	imageUrl: string;
 	color: string;
-	description?: string;
+	description: string;
 }

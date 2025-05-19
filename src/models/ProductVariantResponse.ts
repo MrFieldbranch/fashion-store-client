@@ -1,8 +1,8 @@
 export interface ProductVariantResponse {
-  id: number;
+  productVariantId: number;
   size: string;
   SKU: string;
   price: number;
   stock: number;
-  productId: number;
+  productId: number;  
 }
