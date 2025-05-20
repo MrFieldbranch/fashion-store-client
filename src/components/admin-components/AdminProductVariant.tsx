@@ -28,7 +28,7 @@ const AdminProductVariant = ({
 
   const handleCloseEditProductVariant = () => {
     setNewPriceAsString(price.toString()); // Är detta rätt?
-    setStockChangeAsString("");
+    setStockChangeAsString("0");
     setShowEditProductVariant(false);
   };
 
@@ -36,8 +36,7 @@ const AdminProductVariant = ({
     newPriceAsString = newPriceAsString.trim();
     stockChangeAsString = stockChangeAsString.trim();
 
-    const isUnchanged =
-      (newPriceAsString === price.toString()) && (stockChangeAsString === "0");
+    const isUnchanged = newPriceAsString === price.toString() && stockChangeAsString === "0";
 
     if (isUnchanged) {
       handleCloseEditProductVariant();
@@ -63,8 +62,8 @@ const AdminProductVariant = ({
     const request: UpdateProductVariantRequest = {
       productVariantId: productVariantId,
       newPrice: newPrice,
-      stockChange: stockChange
-    }; 
+      stockChange: stockChange,
+    };
 
     try {
       await apiService.updateExistingProductVariantAsync(productId, request);
@@ -87,32 +86,38 @@ const AdminProductVariant = ({
     );
 
   return (
-    <div className="admin-product-variant">
+    <div className="admin-record">
       <h3>{size}</h3>
       <p>{SKU}</p>
       <p>{price} kr</p>
       <p>Antal i lager: {stock}</p>
       {!showEditProductVariant && (
-        <div className="press-to-create-new">          
-          <button onClick={() => setShowEditProductVariant(true)}>Redigera produktvariant</button>
-        </div>
+        <button className="press-to-create-edit" onClick={() => setShowEditProductVariant(true)}>
+          Redigera storlek
+        </button>
       )}
       {showEditProductVariant && (
-        <div className="create-new">
-          <label htmlFor="newprice">Nytt pris i kr</label>
-          <input
-            type="text"
-            id="newprice"
-            value={newPriceAsString}
-            onChange={(e) => setNewPriceAsString(e.target.value)}
-          />
-          <label htmlFor="stockchange">Antal nya (minus för antal förlorade)</label>
-          <input
-            type="text"
-            id="stockchange"
-            value={stockChangeAsString}
-            onChange={(e) => setStockChangeAsString(e.target.value)}
-          />
+        <div className="create-edit">
+          <div className="label-and-input">
+            <label htmlFor="newprice">Nytt pris i kr</label>
+            <input
+              type="text"
+              id="newprice"
+              value={newPriceAsString}
+              onChange={(e) => setNewPriceAsString(e.target.value)}
+            />
+          </div>
+
+          <div className="label-and-input">
+            <label htmlFor="stockchange">Antal nya (minus för antal förlorade)</label>
+            <input
+              type="text"
+              id="stockchange"
+              value={stockChangeAsString}
+              onChange={(e) => setStockChangeAsString(e.target.value)}
+            />
+          </div>
+
           <div className="confirm-or-cancel">
             <button
               className="confirm-button"

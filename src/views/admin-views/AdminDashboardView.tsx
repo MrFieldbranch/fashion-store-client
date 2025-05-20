@@ -86,16 +86,17 @@ const AdminDashboardView = () => {
             allCategories.map((c) => <AdminCategory key={c.id} categoryId={c.id} categoryName={c.name} />)
           )}
         </div>
-        <div className="create-new">
-          <h3>Skapa en ny kategori</h3>
-          <label htmlFor="categoryname">Nytt kategorinamn</label>
-          <input
-            type="text"
-            id="categoryname"
-            required
-            value={newCategoryName}
-            onChange={(e) => setNewCategoryName(e.target.value)}
-          />
+        <div className="create-edit">
+          <div className="label-and-input">
+            <label htmlFor="categoryname">Nytt kategorinamn</label>
+            <input
+              type="text"
+              id="categoryname"
+              required
+              value={newCategoryName}
+              onChange={(e) => setNewCategoryName(e.target.value)}
+            />
+          </div>
           <button className="confirm-button" onClick={() => handleCreateNewCategory(newCategoryName)}>
             OK
           </button>

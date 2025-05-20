@@ -107,7 +107,7 @@ const ProductAdminView = () => {
         productSex: newProductSex,
         imageUrl: newImageUrl,
         color: newProductColor,
-        description: newProductDescription
+        description: newProductDescription,
       };
 
       try {
@@ -189,156 +189,191 @@ const ProductAdminView = () => {
     <div className="main-container">
       <Nav />
       <div className="product">
-        <h1>{product.name}</h1>
-        <p>{sex}</p>
-        <p>Från {product.startPrice} kr</p>
-        {product.description === "" ? <p>Produkten saknar beskrivning</p> : <p>{product.description}</p>}
-        <img src={product.imageUrl} alt={product.name} className="product-large" />
-
-        {!showEditProduct && (
-          <div className="press-to-create-new">
-            <button onClick={handleShowEditProduct}>Redigera produkt</button>
+        <div className="admin-detailed-product">
+          <img src={product.imageUrl} alt={product.name} className="product-large" />
+          <div className="admin-detailed-product-information">
+            <h1>{product.name}</h1>
+            <p>{sex}</p>
+            <p>Färg: {product.color}</p>
+            <p>Från {product.startPrice} kr</p>
+            {product.description === "" ? (
+              <p>Produkten saknar beskrivning</p>
+            ) : (
+              <p className="description">{product.description}</p>
+            )}
           </div>
-        )}
-        {showEditProduct && (
-          <div className="create-new">
-            <label htmlFor="newproductname">Nytt produktnamn</label>
-            <input
-              type="text"
-              id="newproductname"
-              value={newProductName}
-              onChange={(e) => setNewProductName(e.target.value)}
-            />
-
-            <label>
-              <input type="radio" name="option" value="0" checked={newProductSex === 0} onChange={handleChange} />
-              Unisex
-            </label>
-            <label>
-              <input type="radio" name="option" value="1" checked={newProductSex === 1} onChange={handleChange} />
-              Man
-            </label>
-            <label>
-              <input type="radio" name="option" value="2" checked={newProductSex === 2} onChange={handleChange} />
-              Kvinna
-            </label>
-
-            <label htmlFor="newproductdescription">Ny valfri beskrivning av produkten</label>
-            <textarea
-              id="newproductdescription"
-              value={newProductDescription}
-              onChange={(e) => setNewProductDescription(e.target.value)}
-            />
-
-            <label htmlFor="newimageurl">Ny URL för produktens bild</label>
-            <input type="text" id="newimageurl" value={newImageUrl} onChange={(e) => setNewImageUrl(e.target.value)} />
-
-            <label htmlFor="newproductcolor">Ny produktfärg</label>
-            <input
-              type="text"
-              id="newproductcolor"
-              value={newProductColor}
-              onChange={(e) => setNewProductColor(e.target.value)}
-            />
-            <div className="confirm-or-cancel">
-              <button
-                className="confirm-button"
-                onClick={() =>
-                  handleEditProduct(newProductName, newProductSex, newProductDescription, newImageUrl, newProductColor)
-                }
-              >
-                OK
+          <div className="edit-product">
+            {!showEditProduct && (
+              <button className="press-to-create-edit" onClick={handleShowEditProduct}>
+                Redigera produkt
               </button>
-              <button className="cancel-button" onClick={handleCloseEditProduct}>
-                AVBRYT
-              </button>
-            </div>
+            )}
+            {showEditProduct && (
+              <div className="create-edit">
+                <div className="label-and-input">
+                  <label htmlFor="newproductname">Nytt produktnamn</label>
+                  <input
+                    type="text"
+                    id="newproductname"
+                    value={newProductName}
+                    onChange={(e) => setNewProductName(e.target.value)}
+                  />
+                </div>
+                <label className="radio-label">
+                  <input type="radio" name="option" value="0" checked={newProductSex === 0} onChange={handleChange} />
+                  Unisex
+                </label>
+                <label className="radio-label">
+                  <input type="radio" name="option" value="1" checked={newProductSex === 1} onChange={handleChange} />
+                  Man
+                </label>
+                <label className="radio-label">
+                  <input type="radio" name="option" value="2" checked={newProductSex === 2} onChange={handleChange} />
+                  Kvinna
+                </label>
+                <div className="label-and-input">
+                  <label htmlFor="newproductdescription">Ny valfri beskrivning av produkten</label>
+                  <textarea
+                    id="newproductdescription"
+                    value={newProductDescription}
+                    onChange={(e) => setNewProductDescription(e.target.value)}
+                  />
+                </div>
+
+                <div className="label-and-input">
+                  <label htmlFor="newimageurl">Ny URL för produktens bild</label>
+                  <input
+                    type="text"
+                    id="newimageurl"
+                    value={newImageUrl}
+                    onChange={(e) => setNewImageUrl(e.target.value)}
+                  />
+                </div>
+
+                <div className="label-and-input">
+                  <label htmlFor="newproductcolor">Ny produktfärg</label>
+                  <input
+                    type="text"
+                    id="newproductcolor"
+                    value={newProductColor}
+                    onChange={(e) => setNewProductColor(e.target.value)}
+                  />
+                </div>
+
+                <div className="confirm-or-cancel">
+                  <button
+                    className="confirm-button"
+                    onClick={() =>
+                      handleEditProduct(
+                        newProductName,
+                        newProductSex,
+                        newProductDescription,
+                        newImageUrl,
+                        newProductColor
+                      )
+                    }
+                  >
+                    OK
+                  </button>
+                  <button className="cancel-button" onClick={handleCloseEditProduct}>
+                    AVBRYT
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-        <p>Antal storlekar: {product.productVariants.length}</p>
-        <div className="records-container">
-          {product.productVariants.length === 0 ? (
-            <div className="no-records">
-              <p>Inga storlekar har lagts in för produkten</p>
+        </div>
+        <div className="admin-product-sizes">
+          <p>Antal storlekar: {product.productVariants.length}</p>
+          <div className="records-container">
+            {product.productVariants.length === 0 ? (
+              <div className="no-records">
+                <p>Inga storlekar har lagts in för produkten</p>
+              </div>
+            ) : (
+              product.productVariants.map((v) => (
+                <AdminProductVariant
+                  productVariantId={v.productVariantId}
+                  size={v.size}
+                  SKU={v.SKU}
+                  price={v.price}
+                  stock={v.stock}
+                  productId={id}
+                  setUseEffectTrigger={setUseEffectTrigger}
+                />
+              ))
+            )}
+          </div>
+          {!showEnterNewProductVariant && (
+            <button className="press-to-create-edit" onClick={() => setShowEnterNewProductVariant(true)}>
+              Skapa ny storlek
+            </button>
+          )}
+          {showEnterNewProductVariant && (
+            <div className="create-edit">
+              <h3>Skapa en ny storlek</h3>
+              <div className="label-and-input">
+                <label htmlFor="productvariantsize">Ny storlek</label>
+                <input
+                  type="text"
+                  id="productvariantsize"
+                  required
+                  value={productVariantSize}
+                  onChange={(e) => setProductVariantSize(e.target.value)}
+                />
+              </div>
+              <div className="label-and-input">
+                <label htmlFor="productvariantsku">SKU</label>
+                <input
+                  type="text"
+                  id="productvariantsku"
+                  required
+                  value={productVariantSKU}
+                  onChange={(e) => setProductVariantSKU(e.target.value)}
+                />
+              </div>
+              <div className="label-and-input">
+                <label htmlFor="productvariantprice">Pris i kr</label>
+                <input
+                  type="text"
+                  id="productvariantprice"
+                  required
+                  value={productVariantPriceAsString}
+                  onChange={(e) => setProductVariantPriceAsString(e.target.value)}
+                />
+              </div>
+              <div className="label-and-input">
+                <label htmlFor="productvariantstock">Lagersaldo</label>
+                <input
+                  type="text"
+                  id="productvariantstock"
+                  required
+                  value={productVariantStockAsString}
+                  onChange={(e) => setProductVariantStockAsString(e.target.value)}
+                />
+              </div>
+
+              <div className="confirm-or-cancel">
+                <button
+                  className="confirm-button"
+                  onClick={() =>
+                    handleCreateNewProductVariant(
+                      productVariantSize,
+                      productVariantSKU,
+                      productVariantPriceAsString,
+                      productVariantStockAsString
+                    )
+                  }
+                >
+                  OK
+                </button>
+                <button className="cancel-button" onClick={handleCloseEnterNewProductVariant}>
+                  AVBRYT
+                </button>
+              </div>
             </div>
-          ) : (
-            product.productVariants.map((v) => (
-              <AdminProductVariant
-                productVariantId={v.productVariantId}
-                size={v.size}
-                SKU={v.SKU}
-                price={v.price}
-                stock={v.stock}
-                productId={id}
-                setUseEffectTrigger={setUseEffectTrigger}
-              />
-            ))
           )}
         </div>
-        {!showEnterNewProductVariant && (
-          <div className="press-to-create-new">
-            <h4>Tryck för att skapa ny storlek</h4>
-            <button onClick={() => setShowEnterNewProductVariant(true)}>Skapa</button>
-          </div>
-        )}
-        {showEnterNewProductVariant && (
-          <div className="create-new">
-            <h3>Skapa en ny storlek</h3>
-            <label htmlFor="productvariantsize">Ny storlek</label>
-            <input
-              type="text"
-              id="productvariantsize"
-              required
-              value={productVariantSize}
-              onChange={(e) => setProductVariantSize(e.target.value)}
-            />
-
-            <label htmlFor="productvariantsku">SKU</label>
-            <input
-              type="text"
-              id="productvariantsku"
-              required
-              value={productVariantSKU}
-              onChange={(e) => setProductVariantSKU(e.target.value)}
-            />
-
-            <label htmlFor="productvariantprice">Pris i kr</label>
-            <input
-              type="text"
-              id="productvariantprice"
-              required
-              value={productVariantPriceAsString}
-              onChange={(e) => setProductVariantPriceAsString(e.target.value)}
-            />
-
-            <label htmlFor="productvariantstock">Lagersaldo</label>
-            <input
-              type="text"
-              id="productvariantstock"
-              required
-              value={productVariantStockAsString}
-              onChange={(e) => setProductVariantStockAsString(e.target.value)}
-            />
-            <div className="confirm-or-cancel">
-              <button
-                className="confirm-button"
-                onClick={() =>
-                  handleCreateNewProductVariant(
-                    productVariantSize,
-                    productVariantSKU,
-                    productVariantPriceAsString,
-                    productVariantStockAsString
-                  )
-                }
-              >
-                OK
-              </button>
-              <button className="cancel-button" onClick={handleCloseEnterNewProductVariant}>
-                AVBRYT
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

@@ -75,8 +75,8 @@ const CategoryAdminView = () => {
       productSex: productSex,
       imageUrl: productImageUrl,
       color: productColor,
-      description: productDescription
-    };    
+      description: productDescription,
+    };
 
     try {
       await apiService.createNewProductAsync(id, newProductRequest);
@@ -130,57 +130,68 @@ const CategoryAdminView = () => {
           )}
         </div>
         {!showEnterNewProduct && (
-          <div className="press-to-create-new">
-            <button onClick={() => setShowEnterNewProduct(true)}>Skapa ny produkt</button>
-          </div>
+          <button className="press-to-create-edit" onClick={() => setShowEnterNewProduct(true)}>
+            Skapa ny produkt
+          </button>
         )}
         {showEnterNewProduct && (
-          <div className="create-new">
-            <h3>Skapa en ny produkt</h3>
-            <label htmlFor="productname">Nytt produktnamn</label>
-            <input
-              type="text"
-              id="productname"
-              required
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
-            />
+          <div className="create-edit">
+            <h3>Skapa ny produkt</h3>
+            <div className="label-and-input">
+              <label htmlFor="productname">Nytt produktnamn</label>
+              <input
+                type="text"
+                id="productname"
+                required
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+              />
+            </div>
 
-            <label>
+            <label className="radio-label">
               <input type="radio" name="option" value="0" checked={productSex === 0} onChange={handleChange} />
               Unisex
             </label>
-            <label>
+            <label className="radio-label">
               <input type="radio" name="option" value="1" checked={productSex === 1} onChange={handleChange} />
               Man
             </label>
-            <label>
+            <label className="radio-label">
               <input type="radio" name="option" value="2" checked={productSex === 2} onChange={handleChange} />
               Kvinna
             </label>
 
-            <label htmlFor="productimageurl">URL för produktens bild</label>
-            <input
-              type="text"
-              id="productimageurl"
-              required
-              value={productImageUrl}
-              onChange={(e) => setProductImageUrl(e.target.value)}
-            />
-            <label htmlFor="color">Produktfärg</label>
-            <input
-              type="text"
-              id="color"
-              required
-              value={productColor}
-              onChange={(e) => setProductColor(e.target.value)}
-            />
-            <label htmlFor="productdescription">Valfri beskrivning av produkten</label>
-            <textarea
-              id="productdescription"
-              value={productDescription}
-              onChange={(e) => setProductDescription(e.target.value)}
-            />
+            <div className="label-and-input">
+              <label htmlFor="productimageurl">URL för produktens bild</label>
+              <input
+                type="text"
+                id="productimageurl"
+                required
+                value={productImageUrl}
+                onChange={(e) => setProductImageUrl(e.target.value)}
+              />
+            </div>
+
+            <div className="label-and-input">
+              <label htmlFor="color">Produktfärg</label>
+              <input
+                type="text"
+                id="color"
+                required
+                value={productColor}
+                onChange={(e) => setProductColor(e.target.value)}
+              />
+            </div>
+
+            <div className="label-and-input">
+              <label htmlFor="productdescription">Valfri beskrivning av produkten</label>
+              <textarea
+                id="productdescription"
+                value={productDescription}
+                onChange={(e) => setProductDescription(e.target.value)}
+              />
+            </div>
+
             <div className="confirm-or-cancel">
               <button
                 className="confirm-button"

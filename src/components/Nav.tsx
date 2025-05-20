@@ -16,15 +16,21 @@ const Nav = () => {
       <h2>Fashion Store</h2>
       {userRole ? (
         <>
-          <p>Inloggad som: {loggedInUserFirstName}</p>
-          {userRole === "Admin" && <button onClick={() => navigate("/admindashboard")}>Admin Dashboard</button>}
-          <button onClick={logout}>Logga ut</button>
+          {userRole === "Admin" && <button className="nav-option" onClick={() => navigate("/admindashboard")}>Admin Dashboard</button>}
+          <div className="logged-in-info-and-logout-button">
+            <p>Inloggad som: {loggedInUserFirstName}</p>
+            <button className="logout-button" onClick={logout}>Logga ut</button>
+          </div>
         </>
       ) : (
-        <>
-          <button onClick={() => setLoginWindowOpen(true)}>Logga in</button>
-          <button onClick={() => setRegisterWindowOpen(true)}>Skapa ett konto</button>
-        </>
+        <div className="login-register-buttons">
+          <button className="nav-option" onClick={() => setLoginWindowOpen(true)}>
+            Logga in
+          </button>
+          <button className="register-button" onClick={() => setRegisterWindowOpen(true)}>
+            Skapa ett konto
+          </button>
+        </div>
       )}
       {loginWindowOpen && <Login setLoginWindowOpen={setLoginWindowOpen} />}
       {registerWindowOpen && <Register setRegisterWindowOpen={setRegisterWindowOpen} />}

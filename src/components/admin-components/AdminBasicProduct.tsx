@@ -16,12 +16,16 @@ const AdminBasicProduct = ({ productId, productName, productSex, imageUrl, start
   const sex = productSex === 0 ? "Unisex" : productSex === 1 ? "Man" : "Kvinna";
 
   return (
-    <div className="admin-basic-product">
+    <div className="admin-record">
       <h3>{productName}</h3>
       <p>{sex}</p>
       <p>Från {startPrice} kr</p>
-      <img src={imageUrl} alt={productName} className="product-small" />
-      <button onClick={() => navigate(`/productadmin/${productId}`)}>Mer info</button>
+      <img
+        src={imageUrl}
+        alt={productName}
+        className="product-small"
+        onClick={() => navigate(`/productadmin/${productId}`)}
+      />      
     </div>
   );
 };
