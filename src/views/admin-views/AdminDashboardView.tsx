@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Nav from "../../components/Nav";
 import type { BasicCategoryResponse } from "../../models/BasicCategoryResponse";
 import apiService from "../../services/api-service";
 import AdminCategory from "../../components/admin-components/AdminCategory";
 import type { CreateNewCategoryRequest } from "../../models/CreateNewCategoryRequest";
+import NavAdmin from "../../components/admin-components/NavAdmin";
 
 const AdminDashboardView = () => {
   const [allCategories, setAllCategories] = useState<BasicCategoryResponse[]>([]);
@@ -73,7 +73,7 @@ const AdminDashboardView = () => {
 
   return (
     <div className="main-container">
-      <Nav />
+      <NavAdmin />
       <div className="admin-dashboard">
         <h1>Admin Dashboard</h1>
         <h2>Alla kategorier</h2>

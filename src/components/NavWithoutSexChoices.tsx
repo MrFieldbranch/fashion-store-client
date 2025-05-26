@@ -1,16 +1,15 @@
-import { useState } from "react";
-import Login from "./Login";
-import Register from "./Register";
+import { useNavigate } from "react-router-dom";
+import { useSex } from "../contexts/SexContext";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate, useParams } from "react-router-dom";
-import { useSex, type Sex } from "../contexts/SexContext";
+import { useState } from "react";
 import type { BasicCategoryResponse } from "../models/BasicCategoryResponse";
 import apiService from "../services/api-service";
+import Login from "./Login";
+import Register from "./Register";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
 
-const Nav = () => {
-  const { sex, setSex } = useSex();
-  const { categoryId } = useParams<{ categoryId: string }>();
+const NavWithoutSexChoices = () => {
+  const { sex } = useSex();
   const { loggedInUserFirstName, userRole, logout } = useAuth();
   const { likedProductsCountInNav } = useLikedProducts();
   const [loginWindowOpen, setLoginWindowOpen] = useState<boolean>(false);
@@ -19,7 +18,6 @@ const Nav = () => {
   const [allCategoriesBasedOnSex, setAllCategoriesBasedOnSex] = useState<BasicCategoryResponse[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const navigate = useNavigate();
 
   const handleShowCategories = async () => {
@@ -41,14 +39,6 @@ const Nav = () => {
       }
     }
     setShowCategories(true);
-  };
-
-  const handleSexChange = (newSex: Sex) => {
-    //Här?
-    setSex(newSex); // keep context in sync
-    if (categoryId) {
-      navigate(`/category/${categoryId}/sex/${newSex}`);
-    }
   };
 
   const handleNavigateToCategory = (categoryId: number) => {
@@ -78,32 +68,9 @@ const Nav = () => {
 
   return (
     <nav>
-      <div className="brand-name-and-sex-choices">
-        <h2 id="home-link" onClick={() => navigate("/start")}>
-          Fashion Store
-        </h2>
-        <div className="sex-choices">
-          <button
-            className={`sex-choice-button ${sex === "Male" ? "selected-sex" : ""}`}
-            onClick={() => handleSexChange("Male")}
-          >
-            Man
-          </button>
-          <button
-            className={`sex-choice-button ${sex === "Female" ? "selected-sex" : ""}`}
-            onClick={() => handleSexChange("Female")}
-          >
-            Kvinna
-          </button>
-          <button
-            className={`sex-choice-button ${sex === "Unisex" ? "selected-sex" : ""}`}
-            onClick={() => handleSexChange("Unisex")}
-          >
-            Unisex
-          </button>
-        </div>
-      </div>
-
+      <h2 id="home-link" onClick={() => navigate("/start")}>
+        Fashion Store
+      </h2>
       {sex && !showCategories && (
         <button className="button-to-open-categories" onClick={handleShowCategories}>
           Kategorier
@@ -163,4 +130,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default NavWithoutSexChoices;

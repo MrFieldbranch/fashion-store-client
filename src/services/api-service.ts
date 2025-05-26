@@ -10,6 +10,7 @@ import type { ProductVariantResponse } from "../models/ProductVariantResponse";
 import type { TokenResponse } from "../models/TokenResponse";
 import type { UpdateProductVariantRequest } from "../models/UpdateProductVariantRequest";
 import type { UpdateExistingProductRequest } from "../models/UpdateExistingProductRequest";
+import type { BasicProductResponse } from "../models/BasicProductResponse";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
@@ -58,6 +59,42 @@ export class ApiService {
     }
     const tokenResponse: TokenResponse = await response.json();
     return tokenResponse;
+  }
+
+  async getAllCategoriesBySexAsync(sex: string, signal?: AbortSignal): Promise<BasicCategoryResponse[]> {
+    const response = await fetch(`${this.baseUrl}/categories/sex/${sex}/allcategories`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta kategorierna. ${errorMessage}`);
+    }
+
+    const interestsBasedOnSex: BasicCategoryResponse[] = await response.json();
+    return interestsBasedOnSex;
+  }
+
+  async getProductsByCategoryBasedOnSexAsync(
+    categoryId: number,
+    sex: string,
+    signal?: AbortSignal
+  ): Promise<DetailedCategoryResponse> {
+    const response = await fetch(`${this.baseUrl}/categories/${categoryId}/sex/${sex}/products`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta kategorin. ${errorMessage}`);
+    }
+
+    const categoryWithProductsBasedOnSex: DetailedCategoryResponse = await response.json();
+    return categoryWithProductsBasedOnSex;
   }
 
   async getAllCategoriesAsync(signal?: AbortSignal): Promise<BasicCategoryResponse[]> {
@@ -195,6 +232,46 @@ export class ApiService {
 
     const updatedProductVariant: ProductVariantResponse = await response.json();
     return updatedProductVariant;
+  }
+
+  async addProductToLikedAsync(productId: number): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/likedproducts/${productId}`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att gilla produkten. ${errorMessage}`);
+    }
+  }
+
+  async removeProductFromLikedAsync(productId: number): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/likedproducts/${productId}`, {
+      method: "DELETE",
+      headers: { ...this.requestHeaders },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att sluta gilla produkten. ${errorMessage}`);
+    }
+  }
+
+  async getLikedProductsAsync(signal?: AbortSignal): Promise<BasicProductResponse[]> {
+    const response = await fetch(`${this.baseUrl}/likedproducts`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta de gillade produkterna. ${errorMessage}`);
+    }
+
+    const products: BasicProductResponse[] = await response.json();
+    return products;
   }
 }
 

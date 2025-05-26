@@ -4,4 +4,5 @@ export interface BasicProductResponse {
   productSex: number;
   imageUrl: string;
   startPrice: number;
+  isLiked?: boolean;
 }

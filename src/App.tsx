@@ -5,6 +5,9 @@ import AdminDashboardView from "./views/admin-views/AdminDashboardView";
 import { useAuth } from "./contexts/AuthContext";
 import CategoryAdminView from "./views/admin-views/CategoryAdminView";
 import ProductAdminView from "./views/admin-views/ProductAdminView";
+import CategoryView from "./views/CategoryView";
+import ProductView from "./views/ProductView";
+import LikedProductsView from "./views/LikedProductsView";
 
 const App = () => {
   const { userRole } = useAuth();
@@ -12,6 +15,9 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Navigate to="/start" />} />
       <Route path="/start" element={<StartView />} />
+      <Route path="/category/:categoryId/sex/:sex" element={<CategoryView />} />
+      <Route path="/product/:productId" element={<ProductView />} />
+      <Route path="/likedproducts" element={<LikedProductsView />} />
       <Route
         path="/admindashboard"
         element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />}

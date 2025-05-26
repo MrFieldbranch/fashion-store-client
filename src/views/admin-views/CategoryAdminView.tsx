@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import type { DetailedCategoryResponse } from "../../models/DetailedCategoryResponse";
 import apiService from "../../services/api-service";
 import AdminBasicProduct from "../../components/admin-components/AdminBasicProduct";
-import Nav from "../../components/Nav";
 import type { CreateNewProductRequest } from "../../models/CreateNewProductRequest";
+import NavAdmin from "../../components/admin-components/NavAdmin";
 
 const CategoryAdminView = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -107,7 +107,7 @@ const CategoryAdminView = () => {
 
   return (
     <div className="main-container">
-      <Nav />
+      <NavAdmin />
       <div className="category-with-products">
         <h1>{categoryWithProducts.name}</h1>
         <p>Antal produkter: {categoryWithProducts.productCount}</p>
@@ -124,7 +124,7 @@ const CategoryAdminView = () => {
                 productName={p.name}
                 productSex={p.productSex}
                 imageUrl={p.imageUrl}
-                startPrice={p.startPrice ? p.startPrice : 0}
+                startPrice={p.startPrice}
               />
             ))
           )}

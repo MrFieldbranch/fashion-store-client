@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
-import Nav from "../../components/Nav";
 import type { DetailedProductResponse } from "../../models/DetailedProductResponse";
 import { useEffect, useState } from "react";
 import AdminProductVariant from "../../components/admin-components/AdminProductVariant";
 import apiService from "../../services/api-service";
 import type { CreateNewProductVariantRequest } from "../../models/CreateNewProductVariantRequest";
 import type { UpdateExistingProductRequest } from "../../models/UpdateExistingProductRequest";
+import NavAdmin from "../../components/admin-components/NavAdmin";
 
 const ProductAdminView = () => {
   const { productId } = useParams<{ productId: string }>();
@@ -187,11 +187,11 @@ const ProductAdminView = () => {
 
   return (
     <div className="main-container">
-      <Nav />
+      <NavAdmin />
       <div className="product">
-        <div className="admin-detailed-product">
-          <img src={product.imageUrl} alt={product.name} className="product-large" />
-          <div className="admin-detailed-product-information">
+        <div className="detailed-product">
+          <img src={product.imageUrl} alt={product.name} className="product-large-img" />
+          <div className="detailed-product-information">
             <h1>{product.name}</h1>
             <p>{sex}</p>
             <p>Färg: {product.color}</p>

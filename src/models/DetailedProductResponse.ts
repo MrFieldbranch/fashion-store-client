@@ -9,4 +9,5 @@ export interface DetailedProductResponse {
   description: string;
   color: string;
   productVariants: ProductVariantResponse[];
+  isLiked?: boolean;
 }

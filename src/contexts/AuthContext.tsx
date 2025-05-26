@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import apiService from "../services/api-service";
 
 interface AuthContextType {
   loggedInUserId: string | null;
@@ -34,6 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoggedInUserId(storedUserId);
       setLoggedInUserFirstName(storedUserName);
       setUserRole(storedUserRole);
+      apiService.setAuthorizationHeader(storedToken);
     }
   }, []);
 
@@ -55,6 +57,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoggedInUserId(null);
     setLoggedInUserFirstName(null);
     setUserRole(null);
+    apiService.removeAuthorizationHeader();
   };
 
   return (
