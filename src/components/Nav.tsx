@@ -7,12 +7,14 @@ import { useSex, type Sex } from "../contexts/SexContext";
 import type { BasicCategoryResponse } from "../models/BasicCategoryResponse";
 import apiService from "../services/api-service";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
+import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 
 const Nav = () => {
   const { sex, setSex } = useSex();
   const { categoryId } = useParams<{ categoryId: string }>();
   const { loggedInUserFirstName, userRole, logout } = useAuth();
   const { likedProductsCountInNav } = useLikedProducts();
+  const { numberOfItemsInShoppingBasketInNav } = useShoppingBasket();
   const [loginWindowOpen, setLoginWindowOpen] = useState<boolean>(false);
   const [registerWindowOpen, setRegisterWindowOpen] = useState<boolean>(false);
   const [showCategories, setShowCategories] = useState<boolean>(false);
@@ -141,6 +143,10 @@ const Nav = () => {
           <div className="heart-icon-nav-wrapper" onClick={() => navigate("/likedproducts")}>
             <img src="/images/heart-for-nav.png" alt="heart for nav" className="heart-icon-nav" />
             <p className="heart-icon-nav-number">{likedProductsCountInNav}</p>
+          </div>
+          <div className="shopping-basket-icon-nav-wrapper" onClick={() => navigate("/shoppingbasket")}>
+            <img src="/images/shopping-basket.png" alt="shopping basket for nav" className="shopping-basket-nav" />
+            <p className="shopping-basket-nav-number">{numberOfItemsInShoppingBasketInNav}</p>
           </div>
           <p>Inloggad som: {loggedInUserFirstName}</p>
           <button className="logout-button" onClick={logout}>

@@ -7,11 +7,13 @@ import apiService from "../services/api-service";
 import Login from "./Login";
 import Register from "./Register";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
+import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 
 const NavWithoutSexChoices = () => {
   const { sex } = useSex();
   const { loggedInUserFirstName, userRole, logout } = useAuth();
   const { likedProductsCountInNav } = useLikedProducts();
+  const { numberOfItemsInShoppingBasketInNav } = useShoppingBasket();
   const [loginWindowOpen, setLoginWindowOpen] = useState<boolean>(false);
   const [registerWindowOpen, setRegisterWindowOpen] = useState<boolean>(false);
   const [showCategories, setShowCategories] = useState<boolean>(false);
@@ -108,6 +110,10 @@ const NavWithoutSexChoices = () => {
           <div className="heart-icon-nav-wrapper" onClick={() => navigate("/likedproducts")}>
             <img src="/images/heart-for-nav.png" alt="heart for nav" className="heart-icon-nav" />
             <p className="heart-icon-nav-number">{likedProductsCountInNav}</p>
+          </div>
+          <div className="shopping-basket-icon-nav-wrapper" onClick={() => navigate("/shoppingbasket")}>
+            <img src="/images/shopping-basket.png" alt="shopping basket for nav" className="shopping-basket-nav" />
+            <p className="shopping-basket-nav-number">{numberOfItemsInShoppingBasketInNav}</p>
           </div>
           <p>Inloggad som: {loggedInUserFirstName}</p>
           <button className="logout-button" onClick={logout}>

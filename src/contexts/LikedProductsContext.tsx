@@ -19,7 +19,7 @@ export const useLikedProducts = (): LikedProductsContextType => {
 };
 
 export const LikedProductsProvider = ({ children }: { children: ReactNode }) => {
-	const { loggedInUserId } = useAuth();
+  const { loggedInUserId } = useAuth();
   const [likedProductsCountInNav, setLikedProductsCountInNav] = useState<number>(0);
 
   useEffect(() => {
@@ -27,10 +27,10 @@ export const LikedProductsProvider = ({ children }: { children: ReactNode }) => 
 
     const fetchProducts = async () => {
       try {
-		if (!loggedInUserId) {
-			setLikedProductsCountInNav(0);
-			return;
-		}
+        if (!loggedInUserId) {
+          setLikedProductsCountInNav(0);
+          return;
+        }
         const response = await apiService.getLikedProductsAsync(abortCont.signal);
         if (!abortCont.signal.aborted) {
           setLikedProductsCountInNav(response.length);

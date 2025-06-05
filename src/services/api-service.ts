@@ -11,6 +11,9 @@ import type { TokenResponse } from "../models/TokenResponse";
 import type { UpdateProductVariantRequest } from "../models/UpdateProductVariantRequest";
 import type { UpdateExistingProductRequest } from "../models/UpdateExistingProductRequest";
 import type { BasicProductResponse } from "../models/BasicProductResponse";
+import type { AddItemToShoppingBasketRequest } from "../models/AddItemToShoppingBasketRequest";
+import type { RemoveItemFromShoppingBasketRequest } from "../models/RemoveItemFromShoppingBasketRequest";
+import type { ShoppingBasketItemResponse } from "../models/ShoppingBasketItemResponse";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
@@ -272,6 +275,48 @@ export class ApiService {
 
     const products: BasicProductResponse[] = await response.json();
     return products;
+  }
+
+  async addItemToShoppingBasketAsync(request: AddItemToShoppingBasketRequest): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/shoppingbasket/items`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att lägga till varan i varukorgen. ${errorMessage}`);
+    }
+  }
+
+  async removeItemFromShoppingBasketAsync(request: RemoveItemFromShoppingBasketRequest): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/shoppingbasket/items`, {
+      method: "DELETE",
+      headers: { ...this.requestHeaders },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att ta bort varan från varukorgen. ${errorMessage}`);
+    }
+  }
+
+  async getShoppingBasketItemsAsync(signal?: AbortSignal): Promise<ShoppingBasketItemResponse[]> {
+    const response = await fetch(`${this.baseUrl}/shoppingbasket/items`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta varorna i varukorgen. ${errorMessage}`);
+    }
+
+    const items: ShoppingBasketItemResponse[] = await response.json();
+    return items;
   }
 }
 
