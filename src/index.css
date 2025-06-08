@@ -485,9 +485,7 @@ textarea {
 }
 
 .shopping-basket-table {
-  width: 75vw;
-  border-bottom: 2px solid white;
-  margin-bottom: 2rem;
+  width: 75vw;    
 }
 
 .row-in-shopping-basket-table {
@@ -531,9 +529,25 @@ textarea {
 }
 
 .total-amount {
-  width: 75vw;
+  border-top: 2px solid white;
+  padding-top: 2rem;  
   display: flex;
   justify-content: space-between;
+}
+
+.go-to-payment {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.go-to-payment-button {
+  background-color: rgb(115, 177, 115);
+  color: white;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
 }
 
 .heart-icon {

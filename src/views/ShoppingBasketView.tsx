@@ -5,6 +5,7 @@ import apiService from "../services/api-service";
 import type { RemoveItemFromShoppingBasketRequest } from "../models/RemoveItemFromShoppingBasketRequest";
 import type { ShoppingBasketItemResponse } from "../models/ShoppingBasketItemResponse";
 import type { ChangeQuantityRequest } from "../models/ChangeQuantityRequest";
+import { useNavigate } from "react-router-dom";
 
 const quantityChoices = [1, 2, 3, 4, 5];
 
@@ -15,6 +16,8 @@ const ShoppingBasketView = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [useEffectTrigger, setUseEffectTrigger] = useState<number>(1);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -91,41 +94,46 @@ const ShoppingBasketView = () => {
           {items.length === 0 ? (
             <p>Du har inga varor i varukorgen</p>
           ) : (
-            items.map((i) => (
-              <div className="row-in-shopping-basket-table" key={i.productVariantId}>
-                <div className="shopping-basket-item-left">
-                  <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
-                  <div className="name-color-size">
-                    <p>{i.productName}</p>
-                    <p>{i.color}</p>
-                    <p>{i.size}</p>
+            <>
+              {items.map((i) => (
+                <div className="row-in-shopping-basket-table" key={i.productVariantId}>
+                  <div className="shopping-basket-item-left">
+                    <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
+                    <div className="name-color-size">
+                      <p>{i.productName}</p>
+                      <p>{i.color}</p>
+                      <p>{i.size}</p>
+                    </div>
                   </div>
+                  <p>{i.price} kr</p>
+                  <select
+                    className="quantity-dropdown"
+                    value={i.quantity}
+                    onChange={(e) => handleChangeQuantity(e, i.productVariantId)}
+                  >
+                    {quantityChoices.map((q) => (
+                      <option key={q} value={q}>
+                        {q}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    className="remove-item-from-shopping-basket"
+                    onClick={() => handleRemoveItem(i.productVariantId)}
+                  >
+                    X
+                  </button>
                 </div>
-                <p>{i.price} kr</p>
-                <select
-                  className="quantity-dropdown"
-                  value={i.quantity}
-                  onChange={(e) => handleChangeQuantity(e, i.productVariantId)}
-                >
-                  {quantityChoices.map((q) => (
-                    <option key={q} value={q}>
-                      {q}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  className="remove-item-from-shopping-basket"
-                  onClick={() => handleRemoveItem(i.productVariantId)}
-                >
-                  X
-                </button>
+              ))}
+              <div className="total-amount">
+                <h2>TOTALT</h2>
+                <p>{totalAmount} kr</p>
               </div>
-            ))
+              <div className="go-to-payment">
+                <button className="go-to-payment-button" onClick={() => navigate("/payment")}>Gå till betalning</button>
+              </div>
+            </>
           )}
-        </div>
-        <div className="total-amount">
-          <h2>TOTALT</h2>
-          {items.length === 0 ? <p>0 kr</p> : <p>{totalAmount} kr</p>}
         </div>
       </div>
     </div>
@@ -133,9 +141,3 @@ const ShoppingBasketView = () => {
 };
 
 export default ShoppingBasketView;
-// Hur ska jag få med quantity? Att det ska vara 1 från början, och att det ska ändras
-// för varje productVariant när användaren ändrar.
-// Hur och var räknar jag ut totalsumman (som bara är till för klienten, för att visa användaren, skickas alltså inte till API:et)?
-// Jag vet inte om det skulle underlätta att ha med quantity för ShoppingBasketItem, att det sätts till 1 från början, när man lägger i varukorgen.
-// Undersök detta. Det kanske gör allt mycket enklare.
-// Det måste vara någon slags onClick (eller onChange, som det är nu). När detta sker så ska en request skickas till backend.

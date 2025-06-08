@@ -15,6 +15,7 @@ import type { AddItemToShoppingBasketRequest } from "../models/AddItemToShopping
 import type { RemoveItemFromShoppingBasketRequest } from "../models/RemoveItemFromShoppingBasketRequest";
 import type { ShoppingBasketResponse } from "../models/ShoppingBasketResponse";
 import type { ChangeQuantityRequest } from "../models/ChangeQuantityRequest";
+import type { OrderResponse } from "../models/OrderResponse";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
@@ -309,7 +310,7 @@ export class ApiService {
       method: "GET",
       headers: { ...this.requestHeaders },
       signal,
-    }); 
+    });
 
     if (!response.ok) {
       const errorMessage = await response.text();
@@ -317,7 +318,7 @@ export class ApiService {
     }
 
     const basket: ShoppingBasketResponse = await response.json();
-    return basket;    
+    return basket;
   }
 
   async changeQuantityAsync(productVariantId: number, request: ChangeQuantityRequest): Promise<void> {
@@ -333,43 +334,51 @@ export class ApiService {
     }
   }
 
-  // Ändra i denna fil för shopping basket
+  async createOrderAsync(): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/orders`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att skapa en order. ${errorMessage}`);
+    }
+  }
+
+  async getAllOrdersAsync(signal?: AbortSignal): Promise<OrderResponse[]> {
+    const response = await fetch(`${this.baseUrl}/orders/allorders`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta dina beställningar. ${errorMessage}`);
+    }
+
+    const listOfOrders: OrderResponse[] = await response.json();
+    return listOfOrders;
+  }
+
+  async getOrder(orderId: number, signal?: AbortSignal): Promise<OrderResponse> {
+    const response = await fetch(`${this.baseUrl}/orders/${orderId}`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta din beställning. ${errorMessage}`);
+    }
+
+    const order: OrderResponse = await response.json();
+    return order;
+  }
 }
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiService = new ApiService(apiUrl); /* Singleton */
 export default apiService;
-
-/* items.map((i) => (
-  <div className="row-in-shopping-basket-table" key={i.productVariantId}>
-    <div className="shopping-basket-item-left">
-      <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
-      <div className="name-color-size">
-        <p>{i.productName}</p>
-        <p>{i.color}</p>
-        <p>{i.size}</p>
-      </div>
-    </div>
-    <p>{i.price} kr</p>
-    <select
-      className="quantity-dropdown"
-      value={i.quantity}
-      onChange={(e) =>
-        setItemsFromApi((prev) =>
-          prev.map((item) =>
-            item.productVariantId === i.productVariantId ? { ...item, quantity: Number(e.target.value) } : item
-          )
-        )
-      }
-    >
-      {[1, 2, 3, 4, 5].map((q) => (
-        <option key={q} value={q}>
-          {q}
-        </option>
-      ))}
-    </select>
-    <button className="remove-item-from-shopping-basket" onClick={() => handleRemoveItem(i.productVariantId)}>
-      X
-    </button>
-  </div>
-)); */

@@ -9,6 +9,7 @@ import CategoryView from "./views/CategoryView";
 import ProductView from "./views/ProductView";
 import LikedProductsView from "./views/LikedProductsView";
 import ShoppingBasketView from "./views/ShoppingBasketView";
+import PaymentView from "./views/PaymentView";
 
 const App = () => {
   const { userRole } = useAuth();
@@ -20,6 +21,7 @@ const App = () => {
       <Route path="/product/:productId" element={<ProductView />} />
       <Route path="/likedproducts" element={<LikedProductsView />} />
       <Route path="/shoppingbasket" element={<ShoppingBasketView />} />
+      <Route path="/payment" element={<PaymentView />} />
       <Route
         path="/admindashboard"
         element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />}
