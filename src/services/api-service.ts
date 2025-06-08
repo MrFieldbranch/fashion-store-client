@@ -13,7 +13,8 @@ import type { UpdateExistingProductRequest } from "../models/UpdateExistingProdu
 import type { BasicProductResponse } from "../models/BasicProductResponse";
 import type { AddItemToShoppingBasketRequest } from "../models/AddItemToShoppingBasketRequest";
 import type { RemoveItemFromShoppingBasketRequest } from "../models/RemoveItemFromShoppingBasketRequest";
-import type { ShoppingBasketItemResponse } from "../models/ShoppingBasketItemResponse";
+import type { ShoppingBasketResponse } from "../models/ShoppingBasketResponse";
+import type { ChangeQuantityRequest } from "../models/ChangeQuantityRequest";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
@@ -303,23 +304,72 @@ export class ApiService {
     }
   }
 
-  async getShoppingBasketItemsAsync(signal?: AbortSignal): Promise<ShoppingBasketItemResponse[]> {
+  async getShoppingBasketAsync(signal?: AbortSignal): Promise<ShoppingBasketResponse> {
     const response = await fetch(`${this.baseUrl}/shoppingbasket/items`, {
       method: "GET",
       headers: { ...this.requestHeaders },
       signal,
-    });
+    }); 
 
     if (!response.ok) {
       const errorMessage = await response.text();
       throw new Error(`Det gick inte att hämta varorna i varukorgen. ${errorMessage}`);
     }
 
-    const items: ShoppingBasketItemResponse[] = await response.json();
-    return items;
+    const basket: ShoppingBasketResponse = await response.json();
+    return basket;    
   }
+
+  async changeQuantityAsync(productVariantId: number, request: ChangeQuantityRequest): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/shoppingbasket/items/${productVariantId}/quantity`, {
+      method: "PUT",
+      headers: { ...this.requestHeaders },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att ändra antalet. ${errorMessage}`);
+    }
+  }
+
+  // Ändra i denna fil för shopping basket
 }
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiService = new ApiService(apiUrl); /* Singleton */
 export default apiService;
+
+/* items.map((i) => (
+  <div className="row-in-shopping-basket-table" key={i.productVariantId}>
+    <div className="shopping-basket-item-left">
+      <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
+      <div className="name-color-size">
+        <p>{i.productName}</p>
+        <p>{i.color}</p>
+        <p>{i.size}</p>
+      </div>
+    </div>
+    <p>{i.price} kr</p>
+    <select
+      className="quantity-dropdown"
+      value={i.quantity}
+      onChange={(e) =>
+        setItemsFromApi((prev) =>
+          prev.map((item) =>
+            item.productVariantId === i.productVariantId ? { ...item, quantity: Number(e.target.value) } : item
+          )
+        )
+      }
+    >
+      {[1, 2, 3, 4, 5].map((q) => (
+        <option key={q} value={q}>
+          {q}
+        </option>
+      ))}
+    </select>
+    <button className="remove-item-from-shopping-basket" onClick={() => handleRemoveItem(i.productVariantId)}>
+      X
+    </button>
+  </div>
+)); */

@@ -3,9 +3,8 @@ import { useAuth } from "./AuthContext";
 import apiService from "../services/api-service";
 
 interface ShoppingBasketContextType {
-  numberOfItemsInShoppingBasketInNav: number;
-  increaseNumberOfItemsInBasketByOne: () => void;
-  decreaseNumberOfItemsInBasketByOne: () => void;
+  totalQuantityInShoppingBasket: number;
+  triggerRefresh: () => void;
 }
 
 const ShoppingBasketContext = createContext<ShoppingBasketContextType | undefined>(undefined);
@@ -20,48 +19,58 @@ export const useShoppingBasket = (): ShoppingBasketContextType => {
 
 export const ShoppingBasketProvider = ({ children }: { children: ReactNode }) => {
   const { loggedInUserId } = useAuth();
-  const [numberOfItemsInShoppingBasketInNav, setNumberOfItemsInShoppingBasketInNav] = useState<number>(0);
+  const [totalQuantityInShoppingBasket, setTotalQuantityInShoppingBasket] = useState<number>(0);
+  const [refreshTrigger, setRefreshTrigger] = useState<number>(0);
 
   useEffect(() => {
     const abortCont = new AbortController();
 
-    const fetchShoppingBasketItems = async () => {
+    const fetchShoppingBasket = async () => {
       try {
         if (!loggedInUserId) {
-          setNumberOfItemsInShoppingBasketInNav(0);
+          setTotalQuantityInShoppingBasket(0);
           return;
         }
-        const response = await apiService.getShoppingBasketItemsAsync(abortCont.signal);
+        const response = await apiService.getShoppingBasketAsync(abortCont.signal);
         if (!abortCont.signal.aborted) {
-          setNumberOfItemsInShoppingBasketInNav(response.length);
+          setTotalQuantityInShoppingBasket(response.totalQuantity);
         }
       } catch (err: any) {
         if (err.name !== "AbortError") {
-          setNumberOfItemsInShoppingBasketInNav(0);
+          setTotalQuantityInShoppingBasket(0);
         }
       }
     };
-    fetchShoppingBasketItems();
+    fetchShoppingBasket();
     return () => abortCont.abort();
-  }, [loggedInUserId]);
+  }, [loggedInUserId, refreshTrigger]);
 
-  const increaseNumberOfItemsInBasketByOne = () => {
-    setNumberOfItemsInShoppingBasketInNav((prev) => prev + 1);
-  };
-
-  const decreaseNumberOfItemsInBasketByOne = () => {
-    setNumberOfItemsInShoppingBasketInNav((prev) => Math.max(0, prev - 1));
+  const triggerRefresh = () => {
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   return (
     <ShoppingBasketContext.Provider
       value={{
-        numberOfItemsInShoppingBasketInNav,
-        increaseNumberOfItemsInBasketByOne,
-        decreaseNumberOfItemsInBasketByOne,
+        totalQuantityInShoppingBasket,
+        triggerRefresh,
       }}
     >
       {children}
     </ShoppingBasketContext.Provider>
   );
 };
+
+// increaseNumberOfItemsInBasketByOne: () => void;
+// decreaseNumberOfItemsInBasketByOne: () => void;
+// Här börjar jag ändra
+/* setUseEffectTriggerInShoppingBasketContext: React.Dispatch<React.SetStateAction<number>>; */
+/* const [useEffectTriggerInShoppingBasketContext, setUseEffectTriggerInShoppingBasketContext] = useState<number>(0); */
+
+/* const increaseNumberOfItemsInBasketByOne = () => {
+    setTotalQuantityInShoppingBasket((prev) => prev + 1);
+  };
+
+  const decreaseNumberOfItemsInBasketByOne = () => {
+    setTotalQuantityInShoppingBasket((prev) => Math.max(0, prev - 1));
+  }; */

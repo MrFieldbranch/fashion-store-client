@@ -6,6 +6,7 @@ import apiService from "../services/api-service";
 import { useAuth } from "../contexts/AuthContext";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
 import type { AddItemToShoppingBasketRequest } from "../models/AddItemToShoppingBasketRequest";
+import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 
 type ChosenProduct = {
   size: string;
@@ -17,6 +18,7 @@ const ProductView = () => {
   const id = Number(productId);
   const { userRole } = useAuth();
   const { increaseLikedInNavByOne, decreaseLikedInNavByOne } = useLikedProducts();
+  const { triggerRefresh } = useShoppingBasket();
   const [product, setProduct] = useState<DetailedProductResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showSizes, setShowSizes] = useState<boolean>(false);
@@ -61,7 +63,7 @@ const ProductView = () => {
 
       try {
         await apiService.addItemToShoppingBasketAsync(request);
-        /* increaseShoppingBasketAmountInNavByOne(); */
+        triggerRefresh();
       } catch (err: any) {
         setError(err.message || "Ett oväntat fel inträffade. Det gick inte att lägga varan i varukorgen.");
       }
@@ -179,7 +181,7 @@ const ProductView = () => {
                       >
                         <p>{v.size}</p>
                         {isOutOfStock && <p>Slutsåld</p>}
-                        {v.stock <= 3 && v.stock > 1 && <p className="low-stock">Endast ett fåtal kvar!</p>}
+                        {v.stock <= 5 && v.stock > 1 && <p className="low-stock">Endast ett fåtal kvar!</p>}
                         {v.stock === 1 && <p className="low-stock">Endast 1 ex kvar!</p>}
                         <p>{v.price} kr</p>
                       </div>
