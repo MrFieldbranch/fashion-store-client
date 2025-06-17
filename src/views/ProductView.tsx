@@ -17,8 +17,8 @@ const ProductView = () => {
   const { productId } = useParams<{ productId: string }>();
   const id = Number(productId);
   const { userRole } = useAuth();
-  const { increaseLikedInNavByOne, decreaseLikedInNavByOne } = useLikedProducts();
-  const { triggerRefresh } = useShoppingBasket();
+  const { refreshLikedProductsInNav } = useLikedProducts();
+  const { refreshShoppingBasketInNav } = useShoppingBasket();
   const [product, setProduct] = useState<DetailedProductResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showSizes, setShowSizes] = useState<boolean>(false);
@@ -63,7 +63,7 @@ const ProductView = () => {
 
       try {
         await apiService.addItemToShoppingBasketAsync(request);
-        triggerRefresh();
+        refreshShoppingBasketInNav();
       } catch (err: any) {
         setError(err.message || "Ett oväntat fel inträffade. Det gick inte att lägga varan i varukorgen.");
       }
@@ -75,7 +75,7 @@ const ProductView = () => {
   const handleLiking = async (productId: number) => {
     try {
       await apiService.addProductToLikedAsync(productId);
-      increaseLikedInNavByOne();
+      refreshLikedProductsInNav();
       setUseEffectTrigger((prev) => prev + 1);
     } catch (err: any) {
       setError(err.message || "Ett oväntat fel inträffade. Det gick inte att gilla produkten.");
@@ -85,7 +85,7 @@ const ProductView = () => {
   const handleUnLiking = async (productId: number) => {
     try {
       await apiService.removeProductFromLikedAsync(productId);
-      decreaseLikedInNavByOne();
+      refreshLikedProductsInNav();
       setUseEffectTrigger((prev) => prev + 1);
     } catch (err: any) {
       setError(err.message || "Ett oväntat fel inträffade. Det gick inte att sluta gilla produkten.");

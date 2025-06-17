@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const quantityChoices = [1, 2, 3, 4, 5];
 
 const ShoppingBasketView = () => {
-  const { triggerRefresh } = useShoppingBasket();
+  const { refreshShoppingBasketInNav } = useShoppingBasket();
   const [items, setItems] = useState<ShoppingBasketItemResponse[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
@@ -47,7 +47,7 @@ const ShoppingBasketView = () => {
     };
     try {
       await apiService.removeItemFromShoppingBasketAsync(request);
-      triggerRefresh();
+      refreshShoppingBasketInNav();
       setUseEffectTrigger((prev) => prev + 1);
     } catch (err: any) {
       setError(err.message || "Ett oväntat fel inträffade. Det gick inte att ta bort varan från varukorgen.");
@@ -62,7 +62,7 @@ const ShoppingBasketView = () => {
     try {
       await apiService.changeQuantityAsync(productVariantId, request);
       setUseEffectTrigger((prev) => prev + 1);
-      triggerRefresh();
+      refreshShoppingBasketInNav();
     } catch (err: any) {
       setError(err.message || "Ett fel inträffade. Det gick inte att ändra antalet.");
     }

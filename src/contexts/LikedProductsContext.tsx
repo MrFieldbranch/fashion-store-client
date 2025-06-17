@@ -4,8 +4,9 @@ import { useAuth } from "./AuthContext";
 
 interface LikedProductsContextType {
   likedProductsCountInNav: number;
-  increaseLikedInNavByOne: () => void;
-  decreaseLikedInNavByOne: () => void;
+  /* increaseLikedInNavByOne: () => void;
+  decreaseLikedInNavByOne: () => void; */
+  refreshLikedProductsInNav: () => void;
 }
 
 const LikedProductsContext = createContext<LikedProductsContextType | undefined>(undefined);
@@ -21,6 +22,7 @@ export const useLikedProducts = (): LikedProductsContextType => {
 export const LikedProductsProvider = ({ children }: { children: ReactNode }) => {
   const { loggedInUserId } = useAuth();
   const [likedProductsCountInNav, setLikedProductsCountInNav] = useState<number>(0);
+  const [refreshTrigger, setRefreshTrigger] = useState<number>(0);
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -43,19 +45,23 @@ export const LikedProductsProvider = ({ children }: { children: ReactNode }) => 
     };
     fetchProducts();
     return () => abortCont.abort();
-  }, [loggedInUserId]);
+  }, [loggedInUserId, refreshTrigger]);
 
-  const increaseLikedInNavByOne = () => {
+  const refreshLikedProductsInNav = () => {
+    setRefreshTrigger((prev) => prev + 1);
+  };
+
+  /* const increaseLikedInNavByOne = () => {
     setLikedProductsCountInNav((prev) => prev + 1);
   };
 
   const decreaseLikedInNavByOne = () => {
     setLikedProductsCountInNav((prev) => Math.max(0, prev - 1));
-  };
+  }; */
 
   return (
     <LikedProductsContext.Provider
-      value={{ likedProductsCountInNav, increaseLikedInNavByOne, decreaseLikedInNavByOne }}
+      value={{ likedProductsCountInNav, refreshLikedProductsInNav }}
     >
       {children}
     </LikedProductsContext.Provider>

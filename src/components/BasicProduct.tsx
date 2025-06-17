@@ -24,14 +24,14 @@ const BasicProduct = ({
   setError,
 }: BasicProductProps) => {
   const { userRole } = useAuth();
-  const { increaseLikedInNavByOne, decreaseLikedInNavByOne } = useLikedProducts();
+  const { refreshLikedProductsInNav } = useLikedProducts();
   const navigate = useNavigate();
   const sex = productSex === 0 ? "Unisex" : productSex === 1 ? "Man" : "Kvinna";
 
   const handleLiking = async (productId: number) => {
     try {
       await apiService.addProductToLikedAsync(productId);
-      increaseLikedInNavByOne(); 
+      refreshLikedProductsInNav(); 
       setUseEffectTrigger((prev) => prev + 1);
     } catch (err: any) {
       setError(err.message || "Ett oväntat fel inträffade. Det gick inte att gilla produkten.");
@@ -41,7 +41,7 @@ const BasicProduct = ({
   const handleUnLiking = async (productId: number) => {
     try {
       await apiService.removeProductFromLikedAsync(productId);
-      decreaseLikedInNavByOne(); 
+      refreshLikedProductsInNav(); 
       setUseEffectTrigger((prev) => prev + 1);
     } catch (err: any) {
       setError(err.message || "Ett oväntat fel inträffade. Det gick inte att sluta gilla produkten.");

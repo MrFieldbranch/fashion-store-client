@@ -4,7 +4,7 @@ import apiService from "../services/api-service";
 
 interface ShoppingBasketContextType {
   totalQuantityInShoppingBasket: number;
-  triggerRefresh: () => void;
+  refreshShoppingBasketInNav: () => void;
 }
 
 const ShoppingBasketContext = createContext<ShoppingBasketContextType | undefined>(undefined);
@@ -45,7 +45,7 @@ export const ShoppingBasketProvider = ({ children }: { children: ReactNode }) =>
     return () => abortCont.abort();
   }, [loggedInUserId, refreshTrigger]);
 
-  const triggerRefresh = () => {
+  const refreshShoppingBasketInNav = () => {
     setRefreshTrigger((prev) => prev + 1);
   };
 
@@ -53,7 +53,7 @@ export const ShoppingBasketProvider = ({ children }: { children: ReactNode }) =>
     <ShoppingBasketContext.Provider
       value={{
         totalQuantityInShoppingBasket,
-        triggerRefresh,
+        refreshShoppingBasketInNav,
       }}
     >
       {children}
