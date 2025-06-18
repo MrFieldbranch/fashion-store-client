@@ -4,8 +4,9 @@ import apiService from "../services/api-service";
 interface AuthContextType {
   loggedInUserId: string | null;
   loggedInUserFirstName: string | null;
+  loggedInUserLastName: string | null;
   userRole: string | null;
-  login: (userId: string, userName: string, token: string, role: string) => void;
+  login: (userId: string, userFirstName: string, userLastName: string, token: string, role: string) => void;
   logout: () => void;
 }
 
@@ -22,46 +23,53 @@ export const useAuth = (): AuthContextType => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
   const [loggedInUserFirstName, setLoggedInUserFirstName] = useState<string | null>(null);
+  const [loggedInUserLastName, setLoggedInUserLastName] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
 
   // Initialize state from localStorage
   useEffect(() => {
     const storedUserId = localStorage.getItem("loggedInUserId");
-    const storedUserName = localStorage.getItem("loggedInUserFirstName");
+    const storedUserFirstName = localStorage.getItem("loggedInUserFirstName");
+    const storedUserLastName = localStorage.getItem("loggedInUserLastName");
     const storedToken = localStorage.getItem("token");
     const storedUserRole = localStorage.getItem("userRole");
 
-    if (storedUserId && storedUserName && storedToken && storedUserRole) {
+    if (storedUserId && storedUserFirstName && storedUserLastName && storedToken && storedUserRole) {
       setLoggedInUserId(storedUserId);
-      setLoggedInUserFirstName(storedUserName);
+      setLoggedInUserFirstName(storedUserFirstName);
+      setLoggedInUserLastName(storedUserLastName);
       setUserRole(storedUserRole);
       apiService.setAuthorizationHeader(storedToken);
     }
   }, []);
 
-  const login = (userId: string, userName: string, token: string, role: string) => {
+  const login = (userId: string, userFirstName: string, userLastName: string, token: string, role: string) => {
     localStorage.setItem("loggedInUserId", userId);
-    localStorage.setItem("loggedInUserFirstName", userName);
+    localStorage.setItem("loggedInUserFirstName", userFirstName);
+    localStorage.setItem("loggedInUserLastName", userLastName);
     localStorage.setItem("token", token);
     localStorage.setItem("userRole", role);
     setLoggedInUserId(userId);
-    setLoggedInUserFirstName(userName);
+    setLoggedInUserFirstName(userFirstName);
+    setLoggedInUserLastName(userLastName);
     setUserRole(role);
   };
 
   const logout = () => {
     localStorage.removeItem("loggedInUserId");
     localStorage.removeItem("loggedInUserFirstName");
+    localStorage.removeItem("loggedInUserLastName");
     localStorage.removeItem("token");
     localStorage.removeItem("userRole");
     setLoggedInUserId(null);
     setLoggedInUserFirstName(null);
+    setLoggedInUserLastName(null);
     setUserRole(null);
     apiService.removeAuthorizationHeader();
   };
 
   return (
-    <AuthContext.Provider value={{ loggedInUserId, loggedInUserFirstName, userRole, login, logout }}>
+    <AuthContext.Provider value={{ loggedInUserId, loggedInUserFirstName, loggedInUserLastName, userRole, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -28,11 +28,12 @@ const Login = ({ setLoginWindowOpen }: LoginProps) => {
       apiService.setAuthorizationHeader(loginResponse.token);
       const decodedToken: any = jwtDecode(loginResponse.token);
       const userId = decodedToken.nameid;
-      const userName = loginResponse.firstName;
+      const userFirstName = loginResponse.firstName;
+      const userLastName = loginResponse.lastName;
       const role = decodedToken.role; /* Skippar || "User" eftersom det finns väl i role? */
-      login(userId, userName, loginResponse.token, role);      
+      login(userId, userFirstName, userLastName, loginResponse.token, role);
       if (role === "Admin") navigate("/admindashboard");
-      else setLoginWindowOpen(false);      
+      else setLoginWindowOpen(false);
     } catch (err: any) {
       setLoginWindowOpen(false);
       setError(err.message || "Ett oväntat fel inträffade. Inloggningen misslyckades.");

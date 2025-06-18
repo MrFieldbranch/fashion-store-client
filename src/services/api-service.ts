@@ -15,7 +15,9 @@ import type { AddItemToShoppingBasketRequest } from "../models/AddItemToShopping
 import type { RemoveItemFromShoppingBasketRequest } from "../models/RemoveItemFromShoppingBasketRequest";
 import type { ShoppingBasketResponse } from "../models/ShoppingBasketResponse";
 import type { ChangeQuantityRequest } from "../models/ChangeQuantityRequest";
-import type { OrderResponse } from "../models/OrderResponse";
+import type { DetailedOrderResponse } from "../models/DetailedOrderResponse";
+import type { ShoppingBasketTotalAmountResponse } from "../models/ShoppingBasketTotalAmountResponse";
+import type { BasicOrderResponse } from "../models/BasicOrderResponse";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
@@ -334,7 +336,23 @@ export class ApiService {
     }
   }
 
-  async createOrderAsync(): Promise<void> {
+  async getShoppingBasketTotalAmountAsync(signal?: AbortSignal): Promise<ShoppingBasketTotalAmountResponse> {
+    const response = await fetch(`${this.baseUrl}/shoppingBasket/items/totalprice`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta totalbeloppet för beställningen. ${errorMessage}`);
+    }
+
+    const totalAmount: ShoppingBasketTotalAmountResponse = await response.json();
+    return totalAmount;
+  }
+
+  async createOrderAsync(): Promise<DetailedOrderResponse> {
     const response = await fetch(`${this.baseUrl}/orders`, {
       method: "POST",
       headers: { ...this.requestHeaders },
@@ -344,9 +362,12 @@ export class ApiService {
       const errorMessage = await response.text();
       throw new Error(`Det gick inte att skapa en order. ${errorMessage}`);
     }
+
+    const newOrder: DetailedOrderResponse = await response.json();
+    return newOrder;
   }
 
-  async getAllOrdersAsync(signal?: AbortSignal): Promise<OrderResponse[]> {
+  async getAllOrdersForUserAsync(signal?: AbortSignal): Promise<BasicOrderResponse[]> {
     const response = await fetch(`${this.baseUrl}/orders/allorders`, {
       method: "GET",
       headers: { ...this.requestHeaders },
@@ -358,11 +379,11 @@ export class ApiService {
       throw new Error(`Det gick inte att hämta dina beställningar. ${errorMessage}`);
     }
 
-    const listOfOrders: OrderResponse[] = await response.json();
+    const listOfOrders: BasicOrderResponse[] = await response.json();
     return listOfOrders;
   }
 
-  async getOrder(orderId: number, signal?: AbortSignal): Promise<OrderResponse> {
+  async getOrderByIdAsync(orderId: number, signal?: AbortSignal): Promise<DetailedOrderResponse> {
     const response = await fetch(`${this.baseUrl}/orders/${orderId}`, {
       method: "GET",
       headers: { ...this.requestHeaders },
@@ -374,7 +395,7 @@ export class ApiService {
       throw new Error(`Det gick inte att hämta din beställning. ${errorMessage}`);
     }
 
-    const order: OrderResponse = await response.json();
+    const order: DetailedOrderResponse = await response.json();
     return order;
   }
 }

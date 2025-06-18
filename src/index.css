@@ -24,6 +24,7 @@ h3 {
 
 p {
   font-size: 1.4rem;
+  /* Ange färg? */
 }
 
 button {
@@ -485,7 +486,7 @@ textarea {
 }
 
 .shopping-basket-table {
-  width: 75vw;    
+  width: 75vw;
 }
 
 .row-in-shopping-basket-table {
@@ -530,7 +531,7 @@ textarea {
 
 .total-amount {
   border-top: 2px solid white;
-  padding-top: 2rem;  
+  padding-top: 2rem;
   display: flex;
   justify-content: space-between;
 }
@@ -645,4 +646,81 @@ textarea {
 
 .admin-product-sizes {
   margin-top: 3rem;
+}
+
+.payment {
+  width: 65%;
+}
+
+.payment-upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.go-back {
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.total-amount-payment {
+  font-size: 1.8rem;
+}
+
+.credit-card-description {
+  font-size: 1.4rem;  
+}
+
+.credit-card {
+  border: 3px solid white;
+  border-radius: 1rem;
+  width: 50%;
+  margin: 1rem 0;
+}
+
+.credit-card-larger-text {
+  font-size: 1.8rem;
+}
+
+#credit-card-row-1 {
+  padding: 3rem 2rem;
+  border-bottom: 1px solid white;
+}
+
+#credit-card-row-2 {
+  padding: 3rem 2rem;
+  border-bottom: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+}
+
+#credit-card-row-3 {
+  padding: 3rem 2rem;
+}
+
+.credit-card-label {
+  font-size: 1rem;
+}
+
+.separate-label-and-value {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  text-align: center;
+}
+
+.confirm-purchase {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confirm-purchase-button {
+  background-color: rgb(115, 177, 115);
+  color: white;
+  padding: 1rem 2rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
 }

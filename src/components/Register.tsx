@@ -62,9 +62,10 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
       apiService.setAuthorizationHeader(loginResponse.token);
       const decodedToken: any = jwtDecode(loginResponse.token);
       const userId = decodedToken.nameid;
-      const userName = loginResponse.firstName;
+      const userFirstName = loginResponse.firstName;
+      const userLastName = loginResponse.lastName;
       const role = decodedToken.role;
-      login(userId, userName, loginResponse.token, role);
+      login(userId, userFirstName, userLastName, loginResponse.token, role);
       /* Behöver inte ha någon check här om användaren är Admin, eftersom admin registreras manuellt i db */
       setRegisterWindowOpen(false);
     } catch (err: any) {
@@ -81,7 +82,6 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
     setError(null);
   };
 
-  
   if (error)
     return (
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>

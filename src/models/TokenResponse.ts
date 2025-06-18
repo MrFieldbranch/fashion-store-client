@@ -1,4 +1,5 @@
 export interface TokenResponse {
-	token: string;
-	firstName: string;
+  token: string;
+  firstName: string;
+  lastName: string;
 }
