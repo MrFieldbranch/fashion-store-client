@@ -3,8 +3,12 @@ import NavWithoutSexChoices from "../components/NavWithoutSexChoices";
 import { useNavigate } from "react-router-dom";
 import apiService from "../services/api-service";
 import { useAuth } from "../contexts/AuthContext";
+import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
+import { useLikedProducts } from "../contexts/LikedProductsContext";
 
 const PaymentView = () => {
+  const { refreshShoppingBasketInNav } = useShoppingBasket();
+  const { refreshLikedProductsInNav } = useLikedProducts();
   const { loggedInUserFirstName, loggedInUserLastName } = useAuth();
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
@@ -36,6 +40,8 @@ const PaymentView = () => {
   const handleConfirmPurchase = async () => {
     try {
       const order = await apiService.createOrderAsync();
+      refreshShoppingBasketInNav();
+      refreshLikedProductsInNav();
       navigate("/confirmation", { state: { order } });
     } catch (err: any) {
       setError(err.message || "Ett fel inträffade. Det gick inte att bekräfta köpet.");

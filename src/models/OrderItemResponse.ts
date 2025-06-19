@@ -1,5 +1,5 @@
 export interface OrderItemResponse {
-  orderItemId: number;
+  productVariantId: number;
   productName: string;
   size: string;
   priceAtPurchaseTime: number;

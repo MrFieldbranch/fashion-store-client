@@ -363,7 +363,13 @@ export class ApiService {
       throw new Error(`Det gick inte att skapa en order. ${errorMessage}`);
     }
 
-    const newOrder: DetailedOrderResponse = await response.json();
+    const rawOrder = await response.json();
+
+    const newOrder: DetailedOrderResponse = {
+      ...rawOrder,
+      orderDate: new Date(rawOrder.orderDate),
+    };
+
     return newOrder;
   }
 
@@ -379,7 +385,13 @@ export class ApiService {
       throw new Error(`Det gick inte att hämta dina beställningar. ${errorMessage}`);
     }
 
-    const listOfOrders: BasicOrderResponse[] = await response.json();
+    const rawListOfOrders = await response.json();
+
+    const listOfOrders: BasicOrderResponse[] = rawListOfOrders.map((rawOrder: any) => ({
+      ...rawOrder,
+      orderDate: new Date(rawOrder.orderDate),
+    }));
+
     return listOfOrders;
   }
 
@@ -395,7 +407,13 @@ export class ApiService {
       throw new Error(`Det gick inte att hämta din beställning. ${errorMessage}`);
     }
 
-    const order: DetailedOrderResponse = await response.json();
+    const rawOrder = await response.json();
+
+    const order: DetailedOrderResponse = {
+      ...rawOrder,
+      orderDate: new Date(rawOrder.orderDate),
+    };
+
     return order;
   }
 }
