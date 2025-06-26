@@ -49,6 +49,11 @@ const NavWithoutSexChoices = () => {
     navigate(`/category/${categoryId}/sex/${sex}`);
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/start");
+  };
+
   const sexCategory = sex === "Male" ? "män" : sex === "Female" ? "kvinnor" : sex === "Unisex" ? "unisex" : "ditt val";
 
   if (isLoading)
@@ -116,7 +121,7 @@ const NavWithoutSexChoices = () => {
             <p className="shopping-basket-nav-number">{totalQuantityInShoppingBasket}</p>
           </div>
           <p>Inloggad som: {loggedInUserFirstName}</p>
-          <button className="logout-button" onClick={logout}>
+          <button className="logout-button" onClick={handleLogout}>
             Logga ut
           </button>
         </div>

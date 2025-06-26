@@ -90,14 +90,14 @@ const ShoppingBasketView = () => {
       <NavWithoutSexChoices />
       <div className="shopping-basket">
         <h1>Varukorg</h1>
-        <div className="shopping-basket-table">
+        <div className="table">
           {items.length === 0 ? (
             <p>Du har inga varor i varukorgen</p>
           ) : (
             <>
               {items.map((i) => (
-                <div className="row-in-shopping-basket-table" key={i.productVariantId}>
-                  <div className="shopping-basket-item-left">
+                <div className="row-in-table" key={i.productVariantId}>
+                  <div className="row-in-table-left-side">
                     <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
                     <div className="name-color-size">
                       <p>{i.productName}</p>

@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
   const [loggedInUserFirstName, setLoggedInUserFirstName] = useState<string | null>(null);
   const [loggedInUserLastName, setLoggedInUserLastName] = useState<string | null>(null);
-  const [userRole, setUserRole] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);  
 
   // Initialize state from localStorage
   useEffect(() => {
@@ -65,11 +65,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoggedInUserFirstName(null);
     setLoggedInUserLastName(null);
     setUserRole(null);
-    apiService.removeAuthorizationHeader();
+    apiService.removeAuthorizationHeader();    
   };
 
   return (
-    <AuthContext.Provider value={{ loggedInUserId, loggedInUserFirstName, loggedInUserLastName, userRole, login, logout }}>
+    <AuthContext.Provider
+      value={{ loggedInUserId, loggedInUserFirstName, loggedInUserLastName, userRole, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -485,18 +485,18 @@ textarea {
   font-weight: bold;
 }
 
-.shopping-basket-table {
-  width: 75vw;
+.table {
+  width: 70vw;
 }
 
-.row-in-shopping-basket-table {
+.row-in-table {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
 }
 
-.shopping-basket-item-left {
+.row-in-table-left-side {
   display: flex;
   gap: 2rem;
 }
@@ -723,4 +723,8 @@ textarea {
   font-weight: bold;
   border-radius: 0.5rem;
   font-size: 1.8rem;
+}
+
+.order-summary {
+  margin-bottom: 4rem;
 }

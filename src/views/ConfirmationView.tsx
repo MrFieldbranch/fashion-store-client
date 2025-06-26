@@ -14,20 +14,22 @@ const ConfirmationView = () => {
       </div>
     );
 
-// Byt namn på tabellen och innehållet, på båda ställena.
+  // Byt namn på tabellen och innehållet, på båda ställena.
 
   return (
     <div className="main-container">
       <NavWithoutSexChoices />
       <div className="confirmation">
         <h1>Allt klart! Tack för ditt köp!</h1>
-        <p>Ordernummer: {order.orderId}</p>
-        <p>Totalbelopp: {order.totalAmount} kr</p>
-        <p>Beställningsdatum: {order.orderDate.toISOString().split("T")[0]}</p>
-        <div className="shopping-basket-table">
+        <div className="order-summary">
+          <p>Ordernummer: {order.orderId}</p>
+          <p>Totalbelopp: {order.totalAmount} kr</p>
+          <p>Beställningsdatum: {order.orderDate.toISOString().split("T")[0]}</p>
+        </div>
+        <div className="table">
           {order.items.map((i) => (
-            <div className="row-in-shopping-basket-table" key={i.productVariantId}>
-              <div className="shopping-basket-item-left">
+            <div className="row-in-table" key={i.productVariantId}>
+              <div className="row-in-table-left-side">
                 <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
                 <div className="name-color-size">
                   <p>{i.productName}</p>
@@ -36,7 +38,7 @@ const ConfirmationView = () => {
                 </div>
               </div>
               <p>{i.priceAtPurchaseTime} kr/st</p>
-			  <p>{i.quantity} st</p>
+              <p>{i.quantity} st</p>
             </div>
           ))}
         </div>
