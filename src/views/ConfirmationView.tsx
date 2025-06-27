@@ -14,8 +14,7 @@ const ConfirmationView = () => {
       </div>
     );
 
-  // Byt namn på tabellen och innehållet, på båda ställena.
-
+  // Bryta ut till komponent?
   return (
     <div className="main-container">
       <NavWithoutSexChoices />

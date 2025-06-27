@@ -153,7 +153,10 @@ const Nav = () => {
             <img src="/images/shopping-basket.png" alt="shopping basket for nav" className="shopping-basket-nav" />
             <p className="shopping-basket-nav-number">{totalQuantityInShoppingBasket}</p>
           </div>
-          <p>Inloggad som: {loggedInUserFirstName}</p>
+          <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
+            <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
+            <span className="avatar-tooltip">{loggedInUserFirstName}</span>
+          </div>
           <button className="logout-button" onClick={handleLogout}>
             Logga ut
           </button>

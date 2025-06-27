@@ -69,13 +69,13 @@ const PaymentView = () => {
     <div className="main-container">
       <NavWithoutSexChoices />
       <div className="payment">
-        <div className="payment-upper">
+        <div className="separate-horizontally">
           <h1>Avsluta köp</h1>
           <button className="go-back" onClick={() => navigate("/shoppingbasket")}>
             Tillbaka till varukorgen
           </button>
         </div>
-        <div className="payment-upper">
+        <div className="separate-horizontally">
           <h2 className="total-amount-payment">Totalbelopp</h2>
           <p className="total-amount-payment">{totalAmount} kr</p>
         </div>

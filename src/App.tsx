@@ -11,6 +11,8 @@ import LikedProductsView from "./views/LikedProductsView";
 import ShoppingBasketView from "./views/ShoppingBasketView";
 import PaymentView from "./views/PaymentView";
 import ConfirmationView from "./views/ConfirmationView";
+import AllOrdersView from "./views/AllOrdersView";
+import DetailedOrderView from "./views/DetailedOrderView";
 
 const App = () => {
   const { userRole } = useAuth();
@@ -24,6 +26,8 @@ const App = () => {
       <Route path="/shoppingbasket" element={<ShoppingBasketView />} />
       <Route path="/payment" element={<PaymentView />} />
       <Route path="/confirmation" element={<ConfirmationView />} />
+      <Route path="/history/allorders" element={<AllOrdersView />} />
+      <Route path="/history/order/:orderId" element={<DetailedOrderView />} />
       <Route
         path="/admindashboard"
         element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />}
