@@ -75,9 +75,10 @@ const NavWithoutSexChoices = () => {
 
   return (
     <nav>
-      <h2 id="home-link" onClick={() => navigate("/start")}>
+      {/* <h2 id="home-link" onClick={() => navigate("/start")}>
         Fashion Store
-      </h2>
+      </h2> */}
+      <img src="/images/logo.png" alt="Logo för Fancy Fashion" id="home-link" onClick={() => navigate("/start")} />
       {sex && !showCategories && (
         <button className="button-to-open-categories" onClick={handleShowCategories}>
           Kategorier
