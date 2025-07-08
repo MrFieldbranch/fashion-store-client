@@ -131,7 +131,7 @@ const NavWithoutSexChoices = () => {
         </div>
       ) : (
         <div className="login-register-buttons">
-          <button className="nav-option" onClick={() => setLoginWindowOpen(true)}>
+          <button className="login-button" onClick={() => setLoginWindowOpen(true)}>
             Logga in
           </button>
           <button className="register-button" onClick={() => setRegisterWindowOpen(true)}>

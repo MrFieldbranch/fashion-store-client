@@ -89,7 +89,7 @@ const Nav = () => {
         {/* <h2 id="home-link" onClick={() => navigate("/start")}>
           Fashion Store
         </h2> */}
-        <img src="/images/Logo.png" alt="Logo för Fancy Fashion" id="home-link" onClick={() => navigate("/start")} />
+        <img src="/images/logo.png" alt="Logo för Fancy Fashion" id="home-link" onClick={() => navigate("/start")} />
         <div className="sex-choices">
           <button
             className={`sex-choice-button ${sex === "Male" ? "selected-sex" : ""}`}
@@ -164,7 +164,7 @@ const Nav = () => {
         </div>
       ) : (
         <div className="login-register-buttons">
-          <button className="nav-option" onClick={() => setLoginWindowOpen(true)}>
+          <button className="login-button" onClick={() => setLoginWindowOpen(true)}>
             Logga in
           </button>
           <button className="register-button" onClick={() => setRegisterWindowOpen(true)}>

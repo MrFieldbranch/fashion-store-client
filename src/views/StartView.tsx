@@ -23,6 +23,12 @@ const StartView = () => {
           </div>
           <div className="hero-image-2"></div>
         </div>
+        <div className="popular-products">
+          <h2>Populära produkter just nu</h2>
+          <h3>Män</h3>
+          <h3>Kvinnor</h3>
+          <h3>Unisex</h3>
+        </div>
       </div>
     </div>
   );
