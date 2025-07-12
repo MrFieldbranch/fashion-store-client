@@ -274,6 +274,19 @@ nav h2 {
   gap: 2rem;
 }
 
+/* Kanske ska ha grid istället? */
+.records-container-start-view {
+  margin: 2rem 0;
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 4rem; */
+  display: flex;
+  justify-content: space-between; 
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 1rem; */
+}
+
 .item {
   display: flex;
   align-items: center;
@@ -379,8 +392,8 @@ textarea {
   font-weight: bold;
 }
 
-.basic-product {  
-  background-color: rgb(227, 239, 241);  
+.basic-product {    
+  background-color: rgb(236, 241, 241);  
   border: 1px solid lightgray;
   border-radius: 1rem;
   padding: 1rem 2rem;
@@ -390,8 +403,8 @@ textarea {
   cursor: pointer;
 }
 
-.basic-product:hover {  
-  background-color: rgb(191, 229, 241);
+.basic-product:hover {    
+  background-color: rgb(214, 218, 218);
 }
 
 .product-small-img {
