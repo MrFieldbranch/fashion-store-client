@@ -3,6 +3,7 @@ import Nav from "../components/Nav";
 import type { BasicProductResponse } from "../models/BasicProductResponse";
 import apiService from "../services/api-service";
 import BasicProduct from "../components/BasicProduct";
+import Footer from "../components/Footer";
 
 const StartView = () => {
   const [mostPopularMaleProducts, setMostPopularMaleProducts] = useState<BasicProductResponse[]>([]);
@@ -50,7 +51,7 @@ const StartView = () => {
           apiService.getMostPopularProductsBySexAsync("Male", abortCont.signal),
           apiService.getMostPopularProductsBySexAsync("Female", abortCont.signal),
           apiService.getMostPopularProductsBySexAsync("Unisex", abortCont.signal),
-        ]);        
+        ]);
 
         if (!abortCont.signal.aborted) {
           setMostPopularMaleProducts(male);
@@ -68,7 +69,7 @@ const StartView = () => {
 
     /* fetchPopularMaleProducts();
     fetchPopularFemaleProducts();
-    fetchPopularUnisexProducts(); */ 
+    fetchPopularUnisexProducts(); */
     setIsLoading(false);
     return () => abortCont.abort();
   }, [useEffectTrigger]);
@@ -91,92 +92,95 @@ const StartView = () => {
     );
 
   return (
-    <div className="main-container">
+    <>
       <Nav />
-      <div className="start">
-        <div className="hero-section">
-          <div className="hero-image-1"></div>
-          <div className="hero-text">
-            <h2>
-              Tidlös stil möter
-              <br />
-              djärvt självförtroende
-            </h2>
+      <div className="main-container">
+        <div className="start">
+          <div className="hero-section">
+            <div className="hero-image-1"></div>
+            <div className="hero-text">
+              <h2>
+                Tidlös stil möter
+                <br />
+                djärvt självförtroende
+              </h2>
+            </div>
+            <div className="hero-text">
+              <h2>
+                Berätta vem du är
+                <br />
+                genom vad du har på dig
+              </h2>
+            </div>
+            <div className="hero-image-2"></div>
           </div>
-          <div className="hero-text">
-            <h2>
-              Berätta vem du är
-              <br />
-              genom vad du har på dig
-            </h2>
-          </div>
-          <div className="hero-image-2"></div>
-        </div>
-        <div className="popular-products">
-          <h2>Populära produkter just nu</h2>
-          <h3>Män</h3>
-          <div className="records-container-start-view">
-            {mostPopularMaleProducts.length === 0 ? (
-              <p>Antingen finns det inga produkter för män, eller så har ingen blivit köpt</p>
-            ) : (
-              mostPopularMaleProducts.map((p) => (
-                <BasicProduct
-                  key={p.id}
-                  productId={p.id}
-                  productName={p.name}
-                  productSex={p.productSex}
-                  imageUrl={p.imageUrl}
-                  startPrice={p.startPrice}
-                  isLiked={p.isLiked ? p.isLiked : false}
-                  setUseEffectTrigger={setUseEffectTrigger}
-                  setError={setError}
-                />
-              ))
-            )}
-          </div>
-          <h3>Kvinnor</h3>
-          <div className="records-container-start-view">
-            {mostPopularFemaleProducts.length === 0 ? (
-              <p>Antingen finns det inga produkter för kvinnor, eller så har ingen blivit köpt</p>
-            ) : (
-              mostPopularFemaleProducts.map((p) => (
-                <BasicProduct
-                  key={p.id}
-                  productId={p.id}
-                  productName={p.name}
-                  productSex={p.productSex}
-                  imageUrl={p.imageUrl}
-                  startPrice={p.startPrice}
-                  isLiked={p.isLiked ? p.isLiked : false}
-                  setUseEffectTrigger={setUseEffectTrigger}
-                  setError={setError}
-                />
-              ))
-            )}
-          </div>
-          <h3>Unisex</h3>
-          <div className="records-container-start-view">
-            {mostPopularUnisexProducts.length === 0 ? (
-              <p>Antingen finns det inga produkter för unisex, eller så har ingen blivit köpt</p>
-            ) : (
-              mostPopularUnisexProducts.map((p) => (
-                <BasicProduct
-                  key={p.id}
-                  productId={p.id}
-                  productName={p.name}
-                  productSex={p.productSex}
-                  imageUrl={p.imageUrl}
-                  startPrice={p.startPrice}
-                  isLiked={p.isLiked ? p.isLiked : false}
-                  setUseEffectTrigger={setUseEffectTrigger}
-                  setError={setError}
-                />
-              ))
-            )}
+          <div className="popular-products">
+            <h2>Populära produkter just nu</h2>
+            <h3>Män</h3>
+            <div className="records-container-start-view">
+              {mostPopularMaleProducts.length === 0 ? (
+                <p>Antingen finns det inga produkter för män, eller så har ingen produkt blivit köpt</p>
+              ) : (
+                mostPopularMaleProducts.map((p) => (
+                  <BasicProduct
+                    key={p.id}
+                    productId={p.id}
+                    productName={p.name}
+                    productSex={p.productSex}
+                    imageUrl={p.imageUrl}
+                    startPrice={p.startPrice}
+                    isLiked={p.isLiked ? p.isLiked : false}
+                    setUseEffectTrigger={setUseEffectTrigger}
+                    setError={setError}
+                  />
+                ))
+              )}
+            </div>
+            <h3>Kvinnor</h3>
+            <div className="records-container-start-view">
+              {mostPopularFemaleProducts.length === 0 ? (
+                <p>Antingen finns det inga produkter för kvinnor, eller så har ingen produkt blivit köpt</p>
+              ) : (
+                mostPopularFemaleProducts.map((p) => (
+                  <BasicProduct
+                    key={p.id}
+                    productId={p.id}
+                    productName={p.name}
+                    productSex={p.productSex}
+                    imageUrl={p.imageUrl}
+                    startPrice={p.startPrice}
+                    isLiked={p.isLiked ? p.isLiked : false}
+                    setUseEffectTrigger={setUseEffectTrigger}
+                    setError={setError}
+                  />
+                ))
+              )}
+            </div>
+            <h3>Unisex</h3>
+            <div className="records-container-start-view">
+              {mostPopularUnisexProducts.length === 0 ? (
+                <p>Antingen finns det inga produkter för unisex, eller så har ingen produkt blivit köpt</p>
+              ) : (
+                mostPopularUnisexProducts.map((p) => (
+                  <BasicProduct
+                    key={p.id}
+                    productId={p.id}
+                    productName={p.name}
+                    productSex={p.productSex}
+                    imageUrl={p.imageUrl}
+                    startPrice={p.startPrice}
+                    isLiked={p.isLiked ? p.isLiked : false}
+                    setUseEffectTrigger={setUseEffectTrigger}
+                    setError={setError}
+                  />
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
