@@ -100,7 +100,9 @@ const CategoryAdminView = () => {
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
         <div className="pop-up">
           <p>{error}</p>
-          <button onClick={() => setError(null)}>Tillbaka</button>
+          <button className="go-back" onClick={() => setError(null)}>
+            Tillbaka
+          </button>
         </div>
       </div>
     );

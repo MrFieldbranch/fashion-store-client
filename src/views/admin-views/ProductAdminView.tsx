@@ -178,7 +178,9 @@ const ProductAdminView = () => {
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
         <div className="pop-up">
           <p>{error}</p>
-          <button onClick={() => setError(null)}>Tillbaka</button>
+          <button className="go-back" onClick={() => setError(null)}>
+            Tillbaka
+          </button>
         </div>
       </div>
     );
@@ -300,6 +302,7 @@ const ProductAdminView = () => {
                   stock={v.stock}
                   productId={id}
                   setUseEffectTrigger={setUseEffectTrigger}
+                  setError={setError}
                 />
               ))
             )}

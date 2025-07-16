@@ -9,9 +9,10 @@ import { useToast } from "../contexts/ToastContext";
 
 type RegisterProps = {
   setRegisterWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
+const Register = ({ setRegisterWindowOpen, setError }: RegisterProps) => {
   const { login } = useAuth();
   const { showToast } = useToast();
   const [email, setEmail] = useState<string>("");
@@ -19,7 +20,7 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
   const [passwordAgain, setPasswordAgain] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
+  /* const [error, setError] = useState<string | null>(null); */
 
   const handleRegister = async (
     email: string,
@@ -77,15 +78,16 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
     }
   };
 
-  const handleRegisterError = () => {
+  // Nollställs email, password, firstName och lastName när Register demountas?
+  /* const handleRegisterError = () => {
     setEmail("");
     setPassword("");
     setFirstName("");
     setLastName("");
     setError(null);
-  };
+  }; */
 
-  if (error)
+  /* if (error)
     return (
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
         <div className="pop-up">
@@ -93,7 +95,7 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
           <button onClick={handleRegisterError}>Tillbaka</button>
         </div>
       </div>
-    );
+    ); */
 
   return (
     <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>

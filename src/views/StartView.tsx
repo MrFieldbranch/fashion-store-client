@@ -86,7 +86,9 @@ const StartView = () => {
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
         <div className="pop-up">
           <p>{error}</p>
-          <button onClick={() => setError(null)}>Tillbaka</button>
+          <button className="go-back" onClick={() => setError(null)}>
+            Tillbaka
+          </button>
         </div>
       </div>
     );
@@ -97,7 +99,7 @@ const StartView = () => {
       <div className="main-container">
         <div className="start">
           <div className="hero-section">
-            <div className="hero-image-1"></div>
+            <div className="hero-image-1" />
             <div className="hero-text">
               <h2>
                 Tidlös stil möter
@@ -112,7 +114,7 @@ const StartView = () => {
                 genom vad du har på dig
               </h2>
             </div>
-            <div className="hero-image-2"></div>
+            <div className="hero-image-2" />
           </div>
           <div className="popular-products">
             <h2>Populära produkter just nu</h2>

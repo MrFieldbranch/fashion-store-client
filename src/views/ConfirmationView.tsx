@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavWithoutSexChoices from "../components/NavWithoutSexChoices";
 import type { DetailedOrderResponse } from "../models/DetailedOrderResponse";
 import Footer from "../components/Footer";
@@ -6,14 +6,28 @@ import Footer from "../components/Footer";
 const ConfirmationView = () => {
   const location = useLocation();
   const order = location.state?.order as DetailedOrderResponse | undefined;
+  const navigate = useNavigate();
 
   if (!order)
     return (
-      <div className="main-container">
-        <NavWithoutSexChoices />
-        <p>Något gick fel. Ingen beställning kunde hittas.</p>
+      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
+        <div className="pop-up">
+          <p>Något gick fel. Ingen beställning kunde hittas.</p>
+          <button className="go-back" onClick={() => navigate("/start")}>
+            Till startsidan
+          </button>
+        </div>
       </div>
     );
+
+  /* return (
+      <>
+        <NavWithoutSexChoices />
+        <div className="main-container">
+          <p>Något gick fel. Ingen beställning kunde hittas.</p>
+        </div>
+      </>
+    ); */
 
   // Bryta ut till komponent?
   return (

@@ -71,7 +71,9 @@ const NavWithoutSexChoices = () => {
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
         <div className="pop-up">
           <p>{error}</p>
-          <button onClick={() => setError(null)}>Tillbaka</button>
+          <button className="go-back" onClick={() => setError(null)}>
+            Tillbaka
+          </button>
         </div>
       </div>
     );
@@ -142,8 +144,8 @@ const NavWithoutSexChoices = () => {
           </button>
         </div>
       )}
-      {loginWindowOpen && <Login setLoginWindowOpen={setLoginWindowOpen} />}
-      {registerWindowOpen && <Register setRegisterWindowOpen={setRegisterWindowOpen} />}
+      {loginWindowOpen && <Login setLoginWindowOpen={setLoginWindowOpen} setError={setError} />}
+      {registerWindowOpen && <Register setRegisterWindowOpen={setRegisterWindowOpen} setError={setError} />}
     </nav>
   );
 };

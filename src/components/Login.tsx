@@ -9,14 +9,15 @@ import { useToast } from "../contexts/ToastContext";
 
 type LoginProps = {
   setLoginWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const Login = ({ setLoginWindowOpen }: LoginProps) => {
+const Login = ({ setLoginWindowOpen, setError }: LoginProps) => {
   const { login } = useAuth();
   const { showToast } = useToast();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
+  /* const [error, setError] = useState<string | null>(null); */
 
   const navigate = useNavigate();
 
@@ -43,13 +44,14 @@ const Login = ({ setLoginWindowOpen }: LoginProps) => {
     }
   };
 
-  const handleLoginError = () => {
+  // Nollställs email och password när Login demountas?
+  /* const handleLoginError = () => {
     setEmail("");
     setPassword("");
     setError(null);
-  };
+  }; */
 
-  if (error)
+  /* if (error)
     return (
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
         <div className="pop-up">
@@ -57,7 +59,7 @@ const Login = ({ setLoginWindowOpen }: LoginProps) => {
           <button onClick={handleLoginError}>Tillbaka</button>
         </div>
       </div>
-    );
+    ); */
 
   return (
     <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>

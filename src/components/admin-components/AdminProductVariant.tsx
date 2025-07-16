@@ -10,6 +10,7 @@ type AdminProductVariantProps = {
   stock: number;
   productId: number;
   setUseEffectTrigger: React.Dispatch<React.SetStateAction<number>>;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
 // Jag kan antagligen inte ändra pris eller lagersaldo. Ändra till string?
 const AdminProductVariant = ({
@@ -20,11 +21,12 @@ const AdminProductVariant = ({
   stock,
   productId,
   setUseEffectTrigger,
+  setError
 }: AdminProductVariantProps) => {
   const [showEditProductVariant, setShowEditProductVariant] = useState<boolean>(false);
   const [newPriceAsString, setNewPriceAsString] = useState<string>(price.toString());
   const [stockChangeAsString, setStockChangeAsString] = useState<string>("0");
-  const [error, setError] = useState<string | null>(null);
+  /* const [error, setError] = useState<string | null>(null); */
 
   const handleCloseEditProductVariant = () => {
     setNewPriceAsString(price.toString()); // Är detta rätt?
@@ -75,7 +77,7 @@ const AdminProductVariant = ({
     }
   };
 
-  if (error)
+  /* if (error)
     return (
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
         <div className="pop-up">
@@ -83,7 +85,7 @@ const AdminProductVariant = ({
           <button onClick={() => setError(null)}>Tillbaka</button>
         </div>
       </div>
-    );
+    ); */
 
   return (
     <div className="admin-record">
