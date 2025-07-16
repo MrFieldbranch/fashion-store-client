@@ -3,6 +3,7 @@ import type { BasicOrderResponse } from "../models/BasicOrderResponse";
 import apiService from "../services/api-service";
 import NavWithoutSexChoices from "../components/NavWithoutSexChoices";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const AllOrdersView = () => {
   const [allOrdersForUser, setAllOrdersForUser] = useState<BasicOrderResponse[]>([]);
@@ -49,30 +50,60 @@ const AllOrdersView = () => {
     );
 
   return (
-    <div className="main-container">
+    <>
       <NavWithoutSexChoices />
-      <div className="all-orders">
-        <h1>Dina beställningar</h1>
-        <div className="table-narrow">
-          {allOrdersForUser.length === 0 ? (
-            <p>Du har inte gjort några beställningar</p>
-          ) : (
-            allOrdersForUser.map((o) => (
-              <div
-                className="row-in-narrow-table"
-                key={o.orderId}
-                onClick={() => navigate(`/history/order/${o.orderId}`)}
-              >
-                <p>Beställningsnummer: {o.orderId}</p>
-                <p>Datum: {o.orderDate.toISOString().split("T")[0]}</p>
-                <p>Antal artiklar: {o.totalQuantity}</p>
-                <p>Totalbelopp: {o.totalAmount} kr</p>
-              </div>
-            ))
-          )}
+      <div className="main-container">
+        <div className="all-orders">
+          <h1>Dina beställningar</h1>
+
+          <table className="table-narrow">
+            <thead>
+              <tr>
+                <th>Beställningsnummer</th>
+                <th>Datum</th>
+                <th>Antal artiklar</th>
+                <th>Totalbelopp (kr)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allOrdersForUser.length === 0 ? (
+                <p>Du har inte gjort några beställningar</p>
+              ) : (
+                allOrdersForUser.map((o) => (
+                  <tr key={o.orderId} onClick={() => navigate(`/history/order/${o.orderId}`)}>
+                    <td>{o.orderId}</td>
+                    <td>{o.orderDate.toISOString().split("T")[0]}</td>
+                    <td>{o.totalQuantity}</td>
+                    <td>{o.totalAmount}</td>
+                  </tr>
+                ))
+              )}
+            </tbody>            
+          </table>
+
+          {/* <div className="table-narrow">
+            {allOrdersForUser.length === 0 ? (
+              <p>Du har inte gjort några beställningar</p>
+            ) : (
+              allOrdersForUser.map((o) => (
+                <div
+                  className="row-in-narrow-table"
+                  key={o.orderId}
+                  onClick={() => navigate(`/history/order/${o.orderId}`)}
+                >
+                  <p>Beställningsnummer: {o.orderId}</p>
+                  <p>Datum: {o.orderDate.toISOString().split("T")[0]}</p>
+                  <p>Antal artiklar: {o.totalQuantity}</p>
+                  <p>Totalbelopp: {o.totalAmount} kr</p>
+                </div>
+              ))
+            )}
+          </div> */}
+
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

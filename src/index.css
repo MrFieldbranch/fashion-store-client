@@ -832,11 +832,29 @@ textarea {
   margin-bottom: 4rem;
 }
 
-/* .table-narrow {
-  width: 50vw;
-} */
+.table-narrow th {
+  border-bottom: 1px solid rgb(26, 1, 40);
+  padding: 0.4rem 2rem 0.4rem 0.4rem;
+  text-align: left;
+}
 
-.row-in-narrow-table {
+th {
+  font-size: 1.6rem;
+}
+
+/* Obs: Man kanske inte kan klicka på raderna, i alla tabeller,
+om jag väljer att ha table på fler ställen. */
+td {
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.4rem 2rem 0.4rem 0.4rem;
+}
+
+.table-narrow tbody tr:hover {
+  background-color: rgb(227, 239, 241);
+}
+
+/* .row-in-narrow-table {
   display: flex;
   gap: 5rem;
   align-items: center;
@@ -846,7 +864,7 @@ textarea {
 
 .row-in-narrow-table:hover {
   background-color: rgb(227, 239, 241);
-}
+} */
 
 footer {
   width: 100%;

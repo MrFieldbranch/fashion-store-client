@@ -7,6 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
 import type { AddItemToShoppingBasketRequest } from "../models/AddItemToShoppingBasketRequest";
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
+import Footer from "../components/Footer";
 
 type ChosenProduct = {
   size: string;
@@ -116,89 +117,92 @@ const ProductView = () => {
   const sex = product.productSex === 0 ? "Unisex" : product.productSex === 1 ? "Man" : "Kvinna";
   // Ska jag skapa komponenter här nere?
   return (
-    <div className="main-container">
+    <>
       <NavWithoutSexChoices />
-      <div className="detailed-product">
-        <div className="product-large-img-wrapper">
-          <img src={product.imageUrl} alt={product.name} className="product-large-img" />
-          {userRole && product.isLiked === false && (
-            <img
-              src="/images/heart-hollow.png"
-              alt="hollow heart"
-              className="heart-icon"
-              onClick={() => handleLiking(product.id)}
-            />
-          )}
-          {userRole && product.isLiked === true && (
-            <img
-              src="/images/heart-filled.png"
-              alt="filled-heart"
-              className="heart-icon"
-              onClick={() => handleUnLiking(product.id)}
-            />
-          )}
-          {!userRole && (
-            <img
-              src="/images/heart-hollow.png"
-              alt="hollow heart"
-              className="heart-icon"
-              onClick={handleLikingWhenNotLoggedIn}
-            />
-          )}
-        </div>
-
-        <div className="product-information-and-sizes">
-          <div className="detailed-product-information">
-            <h1>{product.name}</h1>
-            <p>{sex}</p>
-            <p>Färg: {product.color}</p>
-            <p>Från {product.startPrice} kr</p>
-            {product.description === "" ? (
-              <p>Produkten saknar beskrivning</p>
-            ) : (
-              <p className="description">{product.description}</p>
+      <div className="main-container">
+        <div className="detailed-product">
+          <div className="product-large-img-wrapper">
+            <img src={product.imageUrl} alt={product.name} className="product-large-img" />
+            {userRole && product.isLiked === false && (
+              <img
+                src="/images/heart-hollow.png"
+                alt="hollow heart"
+                className="heart-icon"
+                onClick={() => handleLiking(product.id)}
+              />
+            )}
+            {userRole && product.isLiked === true && (
+              <img
+                src="/images/heart-filled.png"
+                alt="filled-heart"
+                className="heart-icon"
+                onClick={() => handleUnLiking(product.id)}
+              />
+            )}
+            {!userRole && (
+              <img
+                src="/images/heart-hollow.png"
+                alt="hollow heart"
+                className="heart-icon"
+                onClick={handleLikingWhenNotLoggedIn}
+              />
             )}
           </div>
-          <div className="sizes-section">
-            {!showSizes && (
-              <div className="show-sizes" onClick={() => setShowSizes(true)}>
-                {!productChosen && <p className="no-size-chosen">Välj storlek</p>}
-                {productChosen && <p className="size-shosen">{productChosen.size}</p>}
-              </div>
-            )}
-            {showSizes && (
-              <>
-                <div className="clickable-background" onClick={() => setShowSizes(false)} />
-                <div className="dropdown-sizes">
-                  {product.productVariants.map((v) => {
-                    const isOutOfStock = v.stock === 0;
 
-                    return (
-                      <div
-                        key={v.productVariantId}
-                        className={isOutOfStock ? "out-of-stock" : "product-variant"}
-                        onClick={isOutOfStock ? undefined : () => handleChooseSize(v.productVariantId, v.size)}
-                      >
-                        <p>{v.size}</p>
-                        {isOutOfStock && <p>Slutsåld</p>}
-                        {v.stock <= 5 && v.stock > 1 && <p className="low-stock">Endast ett fåtal kvar!</p>}
-                        {v.stock === 1 && <p className="low-stock">Endast 1 ex kvar!</p>}
-                        <p>{v.price} kr</p>
-                      </div>
-                    );
-                  })}
+          <div className="product-information-and-sizes">
+            <div className="detailed-product-information">
+              <h1>{product.name}</h1>
+              <p>{sex}</p>
+              <p>Färg: {product.color}</p>
+              <p>Från {product.startPrice} kr</p>
+              {product.description === "" ? (
+                <p>Produkten saknar beskrivning</p>
+              ) : (
+                <p className="description">{product.description}</p>
+              )}
+            </div>
+            <div className="sizes-section">
+              {!showSizes && (
+                <div className="show-sizes" onClick={() => setShowSizes(true)}>
+                  {!productChosen && <p className="no-size-chosen">Välj storlek</p>}
+                  {productChosen && <p className="size-shosen">{productChosen.size}</p>}
                 </div>
-              </>
-            )}
-            {productChosen && (
-              <button className="add-to-shopping-basket" onClick={handleAddToBasket}>
-                Lägg i varukorgen
-              </button>
-            )}
+              )}
+              {showSizes && (
+                <>
+                  <div className="clickable-background" onClick={() => setShowSizes(false)} />
+                  <div className="dropdown-sizes">
+                    {product.productVariants.map((v) => {
+                      const isOutOfStock = v.stock === 0;
+
+                      return (
+                        <div
+                          key={v.productVariantId}
+                          className={isOutOfStock ? "out-of-stock" : "product-variant"}
+                          onClick={isOutOfStock ? undefined : () => handleChooseSize(v.productVariantId, v.size)}
+                        >
+                          <p>{v.size}</p>
+                          {isOutOfStock && <p>Slutsåld</p>}
+                          {v.stock <= 5 && v.stock > 1 && <p className="low-stock">Endast ett fåtal kvar!</p>}
+                          {v.stock === 1 && <p className="low-stock">Endast 1 ex kvar!</p>}
+                          <p>{v.price} kr</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+              {productChosen && (
+                <button className="add-to-shopping-basket" onClick={handleAddToBasket}>
+                  Lägg i varukorgen
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
