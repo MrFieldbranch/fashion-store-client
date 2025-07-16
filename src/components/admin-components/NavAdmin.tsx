@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { useToast } from "../../contexts/ToastContext";
 
 const NavAdmin = () => {
   const { loggedInUserFirstName, logout } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const handleAdminLogout = () => {
     logout();
     navigate("/start");
+    showToast("Du är nu utloggad. Välkommen åter.");
   };
 
   return (

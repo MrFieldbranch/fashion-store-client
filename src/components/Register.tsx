@@ -5,6 +5,7 @@ import type { LoginRequest } from "../models/LoginRequest";
 import type { TokenResponse } from "../models/TokenResponse";
 import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../contexts/AuthContext";
+import { useToast } from "../contexts/ToastContext";
 
 type RegisterProps = {
   setRegisterWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,6 +13,7 @@ type RegisterProps = {
 
 const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
   const { login } = useAuth();
+  const { showToast } = useToast();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordAgain, setPasswordAgain] = useState<string>("");
@@ -66,6 +68,7 @@ const Register = ({ setRegisterWindowOpen }: RegisterProps) => {
       const userLastName = loginResponse.lastName;
       const role = decodedToken.role;
       login(userId, userFirstName, userLastName, loginResponse.token, role);
+      showToast(`Välkommen ${userFirstName}!`);
       /* Behöver inte ha någon check här om användaren är Admin, eftersom admin registreras manuellt i db */
       setRegisterWindowOpen(false);
     } catch (err: any) {

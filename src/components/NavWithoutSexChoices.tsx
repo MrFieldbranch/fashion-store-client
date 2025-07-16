@@ -8,9 +8,11 @@ import Login from "./Login";
 import Register from "./Register";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
+import { useToast } from "../contexts/ToastContext";
 
 const NavWithoutSexChoices = () => {
   const { sex } = useSex();
+  const { showToast } = useToast();
   const { loggedInUserFirstName, userRole, logout } = useAuth();
   const { likedProductsCountInNav } = useLikedProducts();
   const { totalQuantityInShoppingBasket } = useShoppingBasket();
@@ -52,6 +54,7 @@ const NavWithoutSexChoices = () => {
   const handleLogout = () => {
     logout();
     navigate("/start");
+    showToast("Du är nu utloggad. Välkommen åter.");
   };
 
   const sexCategory = sex === "Male" ? "män" : sex === "Female" ? "kvinnor" : sex === "Unisex" ? "unisex" : "ditt val";

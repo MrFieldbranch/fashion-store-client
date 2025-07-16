@@ -8,6 +8,7 @@ import { useLikedProducts } from "../contexts/LikedProductsContext";
 import type { AddItemToShoppingBasketRequest } from "../models/AddItemToShoppingBasketRequest";
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 import Footer from "../components/Footer";
+import { useToast } from "../contexts/ToastContext";
 
 type ChosenProduct = {
   size: string;
@@ -18,6 +19,7 @@ const ProductView = () => {
   const { productId } = useParams<{ productId: string }>();
   const id = Number(productId);
   const { userRole } = useAuth();
+  const { showToast } = useToast();
   const { refreshLikedProductsInNav } = useLikedProducts();
   const { refreshShoppingBasketInNav } = useShoppingBasket();
   const [product, setProduct] = useState<DetailedProductResponse | null>(null);
@@ -65,6 +67,7 @@ const ProductView = () => {
       try {
         await apiService.addItemToShoppingBasketAsync(request);
         refreshShoppingBasketInNav();
+        showToast("Produkt tillagd i varukorg");
       } catch (err: any) {
         setError(err.message || "Ett oväntat fel inträffade. Det gick inte att lägga varan i varukorgen.");
       }

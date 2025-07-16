@@ -8,9 +8,11 @@ import type { BasicCategoryResponse } from "../models/BasicCategoryResponse";
 import apiService from "../services/api-service";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
+import { useToast } from "../contexts/ToastContext";
 
 const Nav = () => {
   const { sex, setSex } = useSex();
+  const { showToast } = useToast();
   const { categoryId } = useParams<{ categoryId: string }>();
   const { loggedInUserFirstName, userRole, logout } = useAuth();
   const { likedProductsCountInNav } = useLikedProducts();
@@ -62,6 +64,7 @@ const Nav = () => {
   const handleLogout = () => {
     logout();
     navigate("/start");
+    showToast("Du är nu utloggad. Välkommen åter.");
   };
 
   const sexCategory = sex === "Male" ? "män" : sex === "Female" ? "kvinnor" : sex === "Unisex" ? "unisex" : "ditt val";

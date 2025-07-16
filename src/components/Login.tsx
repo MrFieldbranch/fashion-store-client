@@ -5,6 +5,7 @@ import apiService from "../services/api-service";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useToast } from "../contexts/ToastContext";
 
 type LoginProps = {
   setLoginWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,6 +13,7 @@ type LoginProps = {
 
 const Login = ({ setLoginWindowOpen }: LoginProps) => {
   const { login } = useAuth();
+  const { showToast } = useToast();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -32,6 +34,7 @@ const Login = ({ setLoginWindowOpen }: LoginProps) => {
       const userLastName = loginResponse.lastName;
       const role = decodedToken.role; /* Skippar || "User" eftersom det finns väl i role? */
       login(userId, userFirstName, userLastName, loginResponse.token, role);
+      showToast(`Välkommen ${userFirstName}!`);
       if (role === "Admin") navigate("/admindashboard");
       else setLoginWindowOpen(false);
     } catch (err: any) {

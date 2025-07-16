@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Engagement&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Engagement&display=swap");
 
 * {
   margin: 0;
@@ -167,6 +167,39 @@ nav h2 {
 
 .start h1 {
   font-size: 3rem;
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: rgb(26, 1, 40);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  opacity: 0;
+  z-index: 1000; /* Är detta bra? */
+  font-size: 1.5rem;
+  animation: fadeInOut 5s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
 }
 
 .non-clickable-background {

@@ -14,6 +14,7 @@ type BasicProductProps = {
   setUseEffectTrigger: React.Dispatch<React.SetStateAction<number>>;
   setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
+
 const BasicProduct = ({
   productId,
   productName,
