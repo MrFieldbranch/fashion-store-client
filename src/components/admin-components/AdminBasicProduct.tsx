@@ -19,7 +19,9 @@ const AdminBasicProduct = ({ productId, productName, productSex, imageUrl, start
     <div className="basic-product" onClick={() => navigate(`/productadmin/${productId}`)}>
       <h3>{productName}</h3>
       <p>{sex}</p>
-      <img src={imageUrl} alt={productName} className="product-small-img" />
+      <div className="product-small-img-wrapper">
+        <img src={imageUrl} alt={productName} className="product-small-img" />
+      </div>
       <p>Från {startPrice} kr</p>
     </div>
   );

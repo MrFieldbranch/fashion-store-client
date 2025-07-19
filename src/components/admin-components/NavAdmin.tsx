@@ -15,10 +15,10 @@ const NavAdmin = () => {
 
   return (
     <nav>
-      <button className="nav-option" onClick={() => navigate("/admindashboard")}>
+      <button className="go-back" onClick={() => navigate("/admindashboard")}>
         Admin Dashboard
       </button>
-      <div className="logged-in-info-and-logout-button">
+      <div className="user-info-and-logout-button">
         <p>Inloggad som: {loggedInUserFirstName}</p>
         <button className="logout-button" onClick={handleAdminLogout}>
           Logga ut

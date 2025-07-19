@@ -74,37 +74,39 @@ const AdminDashboardView = () => {
     );
 
   return (
-    <div className="main-container">
+    <>
       <NavAdmin />
-      <div className="admin-dashboard">
-        <h1>Admin Dashboard</h1>
-        <h2>Alla kategorier</h2>
-        <div className="records-container">
-          {allCategories.length === 0 ? (
-            <div className="no-records">
-              <p>Inga kategorier finns</p>
-            </div>
-          ) : (
-            allCategories.map((c) => <AdminCategory key={c.id} categoryId={c.id} categoryName={c.name} />)
-          )}
-        </div>
-        <div className="create-edit">
-          <div className="label-and-input">
-            <label htmlFor="categoryname">Nytt kategorinamn</label>
-            <input
-              type="text"
-              id="categoryname"
-              required
-              value={newCategoryName}
-              onChange={(e) => setNewCategoryName(e.target.value)}
-            />
+      <div className="main-container">
+        <div className="admin-dashboard">
+          <h1>Admin Dashboard</h1>
+          <h2>Alla kategorier</h2>
+          <div className="records-container">
+            {allCategories.length === 0 ? (
+              <div className="no-records">
+                <p>Inga kategorier finns</p>
+              </div>
+            ) : (
+              allCategories.map((c) => <AdminCategory key={c.id} categoryId={c.id} categoryName={c.name} />)
+            )}
           </div>
-          <button className="confirm-button" onClick={() => handleCreateNewCategory(newCategoryName)}>
-            OK
-          </button>
+          <div className="create-edit">
+            <div className="label-and-input">
+              <label htmlFor="categoryname">Nytt kategorinamn</label>
+              <input
+                type="text"
+                id="categoryname"
+                required
+                value={newCategoryName}
+                onChange={(e) => setNewCategoryName(e.target.value)}
+              />
+            </div>
+            <button className="confirm-button" onClick={() => handleCreateNewCategory(newCategoryName)}>
+              OK
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
