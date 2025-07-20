@@ -40,7 +40,7 @@ const CategoryView = () => {
     fetchCategoryWithProductsBasedOnSex();
 
     return () => abortCont.abort();
-  }, [sex, useEffectTrigger]);
+  }, [sex, categoryId, useEffectTrigger]);
 
   if (!categoryWithProducts)
     return (
