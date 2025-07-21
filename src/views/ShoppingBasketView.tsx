@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import NavWithoutSexChoices from "../components/NavWithoutSexChoices";
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 import apiService from "../services/api-service";
 import type { RemoveItemFromShoppingBasketRequest } from "../models/RemoveItemFromShoppingBasketRequest";
 import type { ShoppingBasketItemResponse } from "../models/ShoppingBasketItemResponse";
 import type { ChangeQuantityRequest } from "../models/ChangeQuantityRequest";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
 
 const quantityChoices = [1, 2, 3, 4, 5];
 
@@ -89,62 +87,56 @@ const ShoppingBasketView = () => {
     );
 
   return (
-    <>
-      <NavWithoutSexChoices />
-      <div className="main-container">
-        <div className="shopping-basket">
-          <h1>Varukorg</h1>
-          <div className="table">
-            {items.length === 0 ? (
-              <p>Du har inga varor i varukorgen</p>
-            ) : (
-              <>
-                {items.map((i) => (
-                  <div className="row-in-table" key={i.productVariantId}>
-                    <div className="row-in-table-left-side">
-                      <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
-                      <div className="name-color-size">
-                        <p>{i.productName}</p>
-                        <p>{i.color}</p>
-                        <p>{i.size}</p>
-                      </div>
-                    </div>
-                    <p>{i.price} kr</p>
-                    <select
-                      className="quantity-dropdown"
-                      value={i.quantity}
-                      onChange={(e) => handleChangeQuantity(e, i.productVariantId)}
-                    >
-                      {quantityChoices.map((q) => (
-                        <option key={q} value={q}>
-                          {q}
-                        </option>
-                      ))}
-                    </select>
-                    <button
-                      className="remove-item-from-shopping-basket"
-                      onClick={() => handleRemoveItem(i.productVariantId)}
-                    >
-                      X
-                    </button>
+    <div className="shopping-basket">
+      <h1>Varukorg</h1>
+      <div className="table">
+        {items.length === 0 ? (
+          <p>Du har inga varor i varukorgen</p>
+        ) : (
+          <>
+            {items.map((i) => (
+              <div className="row-in-table" key={i.productVariantId}>
+                <div className="row-in-table-left-side">
+                  <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
+                  <div className="name-color-size">
+                    <p>{i.productName}</p>
+                    <p>{i.color}</p>
+                    <p>{i.size}</p>
                   </div>
-                ))}
-                <div className="total-amount">
-                  <h2>TOTALT</h2>
-                  <p>{totalAmount} kr</p>
                 </div>
-                <div className="go-to-payment">
-                  <button className="go-to-payment-button" onClick={() => navigate("/payment")}>
-                    Gå till betalning
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
+                <p>{i.price} kr</p>
+                <select
+                  className="quantity-dropdown"
+                  value={i.quantity}
+                  onChange={(e) => handleChangeQuantity(e, i.productVariantId)}
+                >
+                  {quantityChoices.map((q) => (
+                    <option key={q} value={q}>
+                      {q}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  className="remove-item-from-shopping-basket"
+                  onClick={() => handleRemoveItem(i.productVariantId)}
+                >
+                  X
+                </button>
+              </div>
+            ))}
+            <div className="total-amount">
+              <h2>TOTALT</h2>
+              <p>{totalAmount} kr</p>
+            </div>
+            <div className="go-to-payment">
+              <button className="go-to-payment-button" onClick={() => navigate("/payment")}>
+                Gå till betalning
+              </button>
+            </div>
+          </>
+        )}
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 

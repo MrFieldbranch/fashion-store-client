@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import NavWithoutSexChoices from "../components/NavWithoutSexChoices";
 import { useNavigate } from "react-router-dom";
 import apiService from "../services/api-service";
 import { useAuth } from "../contexts/AuthContext";
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
-import Footer from "../components/Footer";
 
 const PaymentView = () => {
   const { refreshShoppingBasketInNav } = useShoppingBasket();
@@ -69,58 +67,52 @@ const PaymentView = () => {
     );
 
   return (
-    <>
-      <NavWithoutSexChoices />
-      <div className="main-container">
-        <div className="payment">
-          <div className="separate-horizontally">
-            <h1>Avsluta köp</h1>
-            <button className="go-back" onClick={() => navigate("/shoppingbasket")}>
-              Tillbaka till varukorgen
-            </button>
+    <div className="payment">
+      <div className="separate-horizontally">
+        <h1>Avsluta köp</h1>
+        <button className="go-back" onClick={() => navigate("/shoppingbasket")}>
+          Tillbaka till varukorgen
+        </button>
+      </div>
+      <div className="separate-horizontally">
+        <h2 className="total-amount-payment">Totalbelopp</h2>
+        <p className="total-amount-payment">{totalAmount} kr</p>
+      </div>
+      <p className="credit-card-description">OBS: Fiktivt kortnummer</p>
+      <div className="credit-card">
+        <div id="credit-card-row-1">
+          <p className="credit-card-larger-text">1234 5678 1234 5678</p>
+        </div>
+        <div id="credit-card-row-2">
+          <div className="separate-label-and-value">
+            <p className="credit-card-label">
+              VALID
+              <br />
+              THRU
+            </p>
+            <p className="credit-card-larger-text">06/29</p>
           </div>
-          <div className="separate-horizontally">
-            <h2 className="total-amount-payment">Totalbelopp</h2>
-            <p className="total-amount-payment">{totalAmount} kr</p>
-          </div>
-          <p className="credit-card-description">OBS: Fiktivt kortnummer</p>
-          <div className="credit-card">
-            <div id="credit-card-row-1">
-              <p className="credit-card-larger-text">1234 5678 1234 5678</p>
-            </div>
-            <div id="credit-card-row-2">
-              <div className="separate-label-and-value">
-                <p className="credit-card-label">
-                  VALID
-                  <br />
-                  THRU
-                </p>
-                <p className="credit-card-larger-text">06/29</p>
-              </div>
-              <div className="separate-label-and-value">
-                <p className="credit-card-label">
-                  SECURITY
-                  <br />
-                  CODE
-                </p>
-                <p className="credit-card-larger-text">123</p>
-              </div>
-            </div>
-            <div id="credit-card-row-3">
-              <p className="credit-card-larger-text">
-                {loggedInUserFirstName} {loggedInUserLastName}
-              </p>
-            </div>
-          </div>
-          <div className="confirm-purchase">
-            <button className="confirm-purchase-button" onClick={handleConfirmPurchase}>
-              Bekräfta köp
-            </button>
+          <div className="separate-label-and-value">
+            <p className="credit-card-label">
+              SECURITY
+              <br />
+              CODE
+            </p>
+            <p className="credit-card-larger-text">123</p>
           </div>
         </div>
+        <div id="credit-card-row-3">
+          <p className="credit-card-larger-text">
+            {loggedInUserFirstName} {loggedInUserLastName}
+          </p>
+        </div>
       </div>
-      <Footer />
-    </>
+      <div className="confirm-purchase">
+        <button className="confirm-purchase-button" onClick={handleConfirmPurchase}>
+          Bekräfta köp
+        </button>
+      </div>
+    </div>
   );
 };
 

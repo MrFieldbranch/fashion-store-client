@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import apiService from "../services/api-service";
 import type { DetailedOrderResponse } from "../models/DetailedOrderResponse";
-import NavWithoutSexChoices from "../components/NavWithoutSexChoices";
-import Footer from "../components/Footer";
 
 const DetailedOrderView = () => {
   const { orderId } = useParams<{ orderId: string }>();
@@ -54,41 +52,35 @@ const DetailedOrderView = () => {
 
   // Bryta ut till komponent?
   return (
-    <>
-      <NavWithoutSexChoices />
-      <div className="main-container">
-        <div className="detailed-order">
-          <div className="separate-horizontally">
-            <h1>Beställningsinformation</h1>
-            <button className="go-back" onClick={() => navigate("/history/allorders")}>
-              Tillbaka
-            </button>
-          </div>
-          <div className="order-summary">
-            <p>Ordernummer: {order.orderId}</p>
-            <p>Totalbelopp: {order.totalAmount} kr</p>
-            <p>Beställningsdatum: {order.orderDate.toISOString().split("T")[0]}</p>
-          </div>
-          <div className="table">
-            {order.items.map((i) => (
-              <div className="row-in-table" key={i.productVariantId}>
-                <div className="row-in-table-left-side">
-                  <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
-                  <div className="name-color-size">
-                    <p>{i.productName}</p>
-                    <p>{i.color}</p>
-                    <p>{i.size}</p>
-                  </div>
-                </div>
-                <p>{i.priceAtPurchaseTime} kr/st</p>
-                <p>{i.quantity} st</p>
-              </div>
-            ))}
-          </div>
-        </div>
+    <div className="detailed-order">
+      <div className="separate-horizontally">
+        <h1>Beställningsinformation</h1>
+        <button className="go-back" onClick={() => navigate("/history/allorders")}>
+          Tillbaka
+        </button>
       </div>
-      <Footer />
-    </>
+      <div className="order-summary">
+        <p>Ordernummer: {order.orderId}</p>
+        <p>Totalbelopp: {order.totalAmount} kr</p>
+        <p>Beställningsdatum: {order.orderDate.toISOString().split("T")[0]}</p>
+      </div>
+      <div className="table">
+        {order.items.map((i) => (
+          <div className="row-in-table" key={i.productVariantId}>
+            <div className="row-in-table-left-side">
+              <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
+              <div className="name-color-size">
+                <p>{i.productName}</p>
+                <p>{i.color}</p>
+                <p>{i.size}</p>
+              </div>
+            </div>
+            <p>{i.priceAtPurchaseTime} kr/st</p>
+            <p>{i.quantity} st</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

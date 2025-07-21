@@ -1,11 +1,9 @@
 import { useParams } from "react-router-dom";
-import Nav from "../components/Nav";
 import { useSex, type Sex } from "../contexts/SexContext";
 import { useEffect, useState } from "react";
 import type { DetailedCategoryResponse } from "../models/DetailedCategoryResponse";
 import apiService from "../services/api-service";
 import BasicProduct from "../components/BasicProduct";
-import Footer from "../components/Footer";
 
 const CategoryView = () => {
   const { categoryId, sex } = useParams<{ categoryId: string; sex: Sex }>();
@@ -62,34 +60,28 @@ const CategoryView = () => {
     );
 
   return (
-    <>
-      <Nav />
-      <div className="main-container">
-        <div className="category">
-          <h1>{categoryWithProducts.name}</h1>
-          <div className="records-container">
-            {categoryWithProducts.productCount === 0 ? (
-              <p>Inga produkter finns för detta val</p>
-            ) : (
-              categoryWithProducts.productsInCategory.map((p) => (
-                <BasicProduct
-                  key={p.id}
-                  productId={p.id}
-                  productName={p.name}
-                  productSex={p.productSex}
-                  imageUrl={p.imageUrl}
-                  startPrice={p.startPrice}
-                  isLiked={p.isLiked ? p.isLiked : false}
-                  setUseEffectTrigger={setUseEffectTrigger}
-                  setError={setError}
-                />
-              ))
-            )}
-          </div>
-        </div>
+    <div className="category">
+      <h1>{categoryWithProducts.name}</h1>
+      <div className="records-container">
+        {categoryWithProducts.productCount === 0 ? (
+          <p>Inga produkter finns för detta val</p>
+        ) : (
+          categoryWithProducts.productsInCategory.map((p) => (
+            <BasicProduct
+              key={p.id}
+              productId={p.id}
+              productName={p.name}
+              productSex={p.productSex}
+              imageUrl={p.imageUrl}
+              startPrice={p.startPrice}
+              isLiked={p.isLiked ? p.isLiked : false}
+              setUseEffectTrigger={setUseEffectTrigger}
+              setError={setError}
+            />
+          ))
+        )}
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 

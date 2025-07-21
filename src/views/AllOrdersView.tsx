@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import type { BasicOrderResponse } from "../models/BasicOrderResponse";
 import apiService from "../services/api-service";
-import NavWithoutSexChoices from "../components/NavWithoutSexChoices";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
 
 const AllOrdersView = () => {
   const [allOrdersForUser, setAllOrdersForUser] = useState<BasicOrderResponse[]>([]);
@@ -52,38 +50,34 @@ const AllOrdersView = () => {
     );
 
   return (
-    <>
-      <NavWithoutSexChoices />
-      <div className="main-container">
-        <div className="all-orders">
-          <h1>Dina beställningar</h1>
-
-          <table className="table-narrow">
-            <thead>
-              <tr>
-                <th>Beställningsnummer</th>
-                <th>Datum</th>
-                <th>Antal artiklar</th>
-                <th>Totalbelopp (kr)</th>
+    <div className="all-orders">
+      <h1>Dina beställningar</h1>
+      <table className="table-narrow">
+        <thead>
+          <tr>
+            <th>Beställningsnummer</th>
+            <th>Datum</th>
+            <th>Antal artiklar</th>
+            <th>Totalbelopp (kr)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allOrdersForUser.length === 0 ? (
+            <p>Du har inte gjort några beställningar</p>
+          ) : (
+            allOrdersForUser.map((o) => (
+              <tr key={o.orderId} onClick={() => navigate(`/history/order/${o.orderId}`)}>
+                <td>{o.orderId}</td>
+                <td>{o.orderDate.toISOString().split("T")[0]}</td>
+                <td>{o.totalQuantity}</td>
+                <td>{o.totalAmount}</td>
               </tr>
-            </thead>
-            <tbody>
-              {allOrdersForUser.length === 0 ? (
-                <p>Du har inte gjort några beställningar</p>
-              ) : (
-                allOrdersForUser.map((o) => (
-                  <tr key={o.orderId} onClick={() => navigate(`/history/order/${o.orderId}`)}>
-                    <td>{o.orderId}</td>
-                    <td>{o.orderDate.toISOString().split("T")[0]}</td>
-                    <td>{o.totalQuantity}</td>
-                    <td>{o.totalAmount}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>            
-          </table>
+            ))
+          )}
+        </tbody>
+      </table>
 
-          {/* <div className="table-narrow">
+      {/* <div className="table-narrow">
             {allOrdersForUser.length === 0 ? (
               <p>Du har inte gjort några beställningar</p>
             ) : (
@@ -101,11 +95,7 @@ const AllOrdersView = () => {
               ))
             )}
           </div> */}
-
-        </div>
-      </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 
