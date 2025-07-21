@@ -51,11 +51,13 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 43vh 43vh;
+  grid-template-rows: 55vh 55vh;
   /* gap: 1rem; */
 }
 
 .hero-image-1 {
-  background-image: url("/images/hero-image-1.jpg");
+  /* background-image: url("/images/hero-image-1.jpg"); */
+  background-image: url("/images/hero-image-4.png");
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
@@ -63,7 +65,8 @@ button {
 }
 
 .hero-image-2 {
-  background-image: url("/images/hero-image-2.webp");
+  /* background-image: url("/images/hero-image-2.webp"); */
+  background-image: url("/images/hero-image-3.png");
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
@@ -75,12 +78,16 @@ button {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: rgb(26, 1, 40);
+  background-color: rgba(26, 1, 40, 0.6);
+  /* background-color: rgb(191, 229, 241); */ 
+  /* background-color: rgb(221, 234, 247);  */ 
+  /* background-color: rgb(239, 236, 236); */
 }
 
 .hero-text h2 {
   font-size: 2rem;
   color: white;
+  /* color: rgb(26, 1, 40); */
   /* font-family: 'Engagement', cursive; */
 }
 
@@ -155,6 +162,7 @@ nav h2 {
 
 .register-button {
   background-color: rgb(26, 1, 40);
+  background-color: rgb(115, 177, 115);
   color: white;
   font-size: 1.6rem;
   font-weight: bold;
@@ -162,10 +170,10 @@ nav h2 {
   border-radius: 0.5rem;
 }
 
-.register-button:hover {
+/* .register-button:hover {
   background-color: white;
   color: rgb(26, 1, 40);
-}
+} */
 
 .start h1 {
   font-size: 3rem;
@@ -173,8 +181,8 @@ nav h2 {
 
 .toast {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 4rem;
+  right: 4rem;
   background-color: rgb(26, 1, 40);
   color: white;
   padding: 1rem 2rem;
@@ -182,13 +190,13 @@ nav h2 {
   opacity: 0;
   z-index: 1000; /* Är detta bra? */
   font-size: 1.5rem;
-  animation: fadeInOut 5s ease-in-out;
+  animation: fadeInOut 7s ease-in-out;
 }
 
 @keyframes fadeInOut {
   0% {
     opacity: 0;
-    transform: translateY(2rem);
+    transform: translateY(4rem);
   }
   20% {
     opacity: 1;
@@ -200,7 +208,7 @@ nav h2 {
   }
   100% {
     opacity: 0;
-    transform: translateY(2rem);
+    transform: translateY(4rem);
   }
 }
 
@@ -216,9 +224,13 @@ nav h2 {
 
 .button-to-open-categories {
   background-color: inherit;
+  background-color: rgb(26, 1, 40);
   font-size: 1.8rem;
   font-weight: bold;
   color: rgb(26, 1, 40);
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
 }
 
 .clickable-background {
