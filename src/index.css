@@ -11,7 +11,7 @@ html {
 }
 
 :root {
-  /* Backgrounds */  
+  /* Backgrounds */
   --background-1: rgb(239, 236, 236);
   --background-2: rgba(26, 1, 40, 0.6);
   --background-3: rgb(26, 1, 40);
@@ -21,11 +21,20 @@ html {
   --confirm-background: rgb(115, 177, 115);
   --cancel-background: rgb(207, 129, 129);
 
-  /* Text */
-  --text-1: white;
-  --text-2: black;
-  --text-3: gray;
-  --text-4: red;
+  /* Text colors */
+  --text-color-1: white;
+  --text-color-2: black;
+  --text-color-3: gray;
+  --text-color-4: red;
+
+  /* Text sizes */
+  --text-size-XS: 1rem;
+  --text-size-S: 1.2rem;
+  --text-size-M: 1.4rem;
+  --text-size-L: 1.6rem;
+  --text-size-XL: 1.8rem;
+  --text-size-h2: 2rem;
+  --text-size-h1: 2.5rem;
 
   /* Borders */
   --border-1: lightgray;
@@ -45,23 +54,27 @@ html {
 }
 
 body {
-  background-color: var(--background-1);  
-  color: var(--text-2);  
+  background-color: var(--background-1);
+  color: var(--text-color-2);
   font-family: Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
 }
 
 h1 {
+  font-size: var(--text-size-h1);
   margin-bottom: 2rem;
 }
 
+h2 {
+  font-size: var(--text-size-h2);
+}
+
 h3 {
-  font-size: 1.5rem;
+  font-size: var(--text-size-XL);
 }
 
 p {
-  font-size: 1.4rem;
-  /* Ange färg? */
+  font-size: var(--text-size-M);
 }
 
 button {
@@ -76,9 +89,10 @@ button {
 
 .hero-section {
   display: grid;
-  grid-template-columns: 1fr 1fr;  
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 55vh 55vh;
   /* gap: 1rem; */
+  margin-bottom: 2rem;
 }
 
 .hero-image-1 {
@@ -104,12 +118,11 @@ button {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: var(--background-2);  
+  background-color: var(--background-2);
 }
 
-.hero-text h2 {
-  font-size: 2rem;
-  color: var(--text-1);  
+.hero-text h2 {  
+  color: var(--text-color-1);
 }
 
 .popular-products {
@@ -117,8 +130,7 @@ button {
 }
 
 .popular-products h2 {
-  text-align: center;
-  font-size: 2.5rem;
+  text-align: center;  
 }
 
 nav {
@@ -134,10 +146,6 @@ nav {
   z-index: 800;
   background-color: var(--background-1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Variabel? */
-}
-
-nav h2 {
-  font-size: 2rem;
 }
 
 #home-link {
@@ -158,16 +166,16 @@ nav h2 {
 
 .sex-choice-button {
   background-color: var(--background-5);
-  color: var(--text-2);
+  color: var(--text-color-2);
   padding: var(--padding-small);
-  border-radius: var(--radius-small);  
-  font-size: 1.6rem;
+  border-radius: var(--radius-small);
+  font-size: var(--text-size-L);
 }
 
 .selected-sex {
-  text-decoration: underline;  
+  text-decoration: underline;
   background-color: var(--background-2);
-  color: var(--text-1);
+  color: var(--text-color-1);
 }
 
 .login-register-buttons {
@@ -177,35 +185,31 @@ nav h2 {
 
 .login-button {
   background-color: inherit;
-  color: var(--text-2);
-  font-size: 1.6rem;
+  color: var(--text-color-2);
+  font-size: var(--text-size-L);
 }
 
-.register-button {  
+.register-button {
   background-color: var(--confirm-background);
-  color: var(--text-1);
+  color: var(--text-color-1);
   padding: var(--padding-small);
   border-radius: var(--radius-small);
-  font-size: 1.6rem;
+  font-size: var(--text-size-L);
   font-weight: bold;
-  /* padding: 0.5rem 1rem; */  
-}
-
-.start h1 {
-  font-size: 3rem;
+  /* padding: 0.5rem 1rem; */
 }
 
 .toast {
   position: fixed;
   bottom: 4rem;
-  right: 4rem;  
-  background-color: var(--background-4);  
-  color: var(--text-2);
+  right: 4rem;
+  background-color: var(--background-4);
+  color: var(--text-color-2);
   padding: var(--padding-large);
   border-radius: var(--radius-small);
   opacity: 0;
   z-index: 1000; /* Är detta bra? */
-  font-size: 1.5rem;
+  font-size: var(--text-size-L);
   animation: fadeInOut 7s ease-in-out;
 }
 
@@ -234,15 +238,15 @@ nav h2 {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; /* Kanske fit-content  Kan man göra non-scrollable, non-swipable*/  
+  height: 100vh; /* Kanske fit-content  Kan man göra non-scrollable, non-swipable*/
   z-index: 999;
 }
 
-.button-to-open-categories {  
+.button-to-open-categories {
   background-color: var(--background-2);
-  color: var(--text-1);
-  font-size: 1.8rem;
-  font-weight: bold;  
+  color: var(--text-color-1);
+  font-size: var(--text-size-XL);
+  font-weight: bold;
   border-radius: var(--radius-small);
   padding: var(--padding-small);
 }
@@ -253,7 +257,7 @@ nav h2 {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;  
+  height: 100vh;
   z-index: 999;
 }
 
@@ -263,14 +267,14 @@ nav h2 {
   top: 0;
   left: 0;
   width: 100vw;
-  padding: 0;  
+  padding: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Variabel? */
   display: flex;
   z-index: 1000;
 }
 
 .dropdown h2 {
-  color: var(--text-2);
+  color: var(--text-color-2);
   text-align: center;
 }
 
@@ -287,21 +291,21 @@ nav h2 {
 }
 
 .no-categories-exist {
-  color: var(--text-2);
-  font-size: 1.6rem;  
+  color: var(--text-color-2);
+  font-size: var(--text-size-L);
 }
 
 .category-in-dropdown {
-  color: var(--text-2);
+  color: var(--text-color-2);
   padding: var(--padding-small);
-  font-size: 1.8rem;
-  font-weight: bold;  
+  font-size: var(--text-size-XL);
+  font-weight: bold;
   cursor: pointer;
 }
 
 .category-in-dropdown:hover {
   background-color: var(--background-2);
-  color: var(--text-1);
+  color: var(--text-color-1);
 }
 
 .dropdown-right-side {
@@ -315,14 +319,14 @@ nav h2 {
 
 .close-dropdown {
   background: none;
-  font-size: 1.8rem;
-  font-weight: bold;    
+  font-size: var(--text-size-XL);
+  font-weight: bold;
 }
 
-.pop-up {  
+.pop-up {
   background-color: var(--background-4);
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */  
-  color: var(--text-2);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  color: var(--text-color-2);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -334,7 +338,7 @@ nav h2 {
   gap: 2rem;
   /* padding: 2rem; */
   padding: var(--padding-large);
-  border-radius: var(--radius-large);  
+  border-radius: var(--radius-large);
   z-index: 1001;
 }
 
@@ -346,7 +350,8 @@ nav h2 {
 }
 
 /* Kanske ska ha grid istället? */
-.records-container-start-view { /* FIXA HÄR */
+.records-container-start-view {
+  /* FIXA HÄR */
   padding: 2rem 0;
   /* display: flex;
   flex-wrap: wrap;
@@ -365,15 +370,15 @@ nav h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--padding-small);  
+  padding: var(--padding-small);
   cursor: pointer;
   /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); */
 }
 
 .item p {
-  color: var(--text-2);
-  font-size: 1.6rem;
-  font-weight: bold;  
+  color: var(--text-color-2);
+  font-size: var(--text-size-L);
+  font-weight: bold;
 }
 
 .item:hover {
@@ -391,10 +396,10 @@ nav h2 {
 
 .press-to-create-edit {
   background-color: var(--background-2);
-  color: var(--text-1);
+  color: var(--text-color-1);
   border-radius: var(--radius-small);
   padding: var(--padding-small);
-  font-size: 1.5rem;
+  font-size: var(--text-size-L);
 }
 
 .create-edit {
@@ -412,20 +417,20 @@ nav h2 {
 }
 
 label {
-  font-size: 1.4rem;
+  font-size: var(--text-size-M);
 }
 
 input {
   height: 2.5rem;
   border: none;
   padding-left: 0.7rem;
-  font-size: 1.4rem;
+  font-size: var(--text-size-M);
 }
 
 textarea {
   height: 10rem;
   padding: var(--padding-small);
-  font-size: 1.4rem;
+  font-size: var(--text-size-M);
   line-height: 1.3;
 }
 
@@ -442,18 +447,18 @@ textarea {
 
 .confirm-button {
   background-color: var(--confirm-background);
-  color: var(--text-1);
+  color: var(--text-color-1);
   border-radius: var(--radius-small);
   padding: var(--padding-small);
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 .cancel-button {
   background-color: var(--cancel-background);
-  color: var(--text-2);
-  border-radius: var(--radius-small);  
+  color: var(--text-color-2);
+  border-radius: var(--radius-small);
   padding: var(--padding-small);
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 .user-info-and-logout-button {
@@ -464,14 +469,14 @@ textarea {
 
 .logout-button {
   background-color: var(--cancel-background);
-  color: var(--text-2);
-  border-radius: var(--radius-small);   
+  color: var(--text-color-2);
+  border-radius: var(--radius-small);
   padding: var(--padding-small);
-  font-size: 1.4rem;
+  font-size: var(--text-size-L);
   font-weight: bold;
 }
 
-.basic-product {  
+.basic-product {
   border: 1px solid var(--border-1);
   border-radius: var(--radius-small);
   padding: 1rem;
@@ -482,9 +487,9 @@ textarea {
   cursor: pointer;
 }
 
-.basic-product:hover {  
+.basic-product:hover {
   background-color: var(--background-2);
-  color: var(--text-1);
+  color: var(--text-color-1);
 }
 
 .product-small-img-wrapper {
@@ -505,7 +510,6 @@ textarea {
 
 .from-price {
   text-align: center;
-  font-size: 1.3rem;
 }
 
 .detailed-product {
@@ -545,19 +549,19 @@ textarea {
 .show-sizes {
   background-color: var(--background-5);
   width: 40rem;
-  cursor: pointer;  
+  cursor: pointer;
   padding: 0.8rem 3rem; /* Variabel? */
 }
 
 .no-size-chosen {
-  color: var(--text-3);
-  font-size: 1.8rem;  
+  color: var(--text-color-3);
+  font-size: var(--text-size-XL);
 }
 
 .size-shosen {
-  color: var(--text-2);
-  font-size: 1.8rem;
-  font-weight: bold;  
+  color: var(--text-color-2);
+  font-size: var(--text-size-XL);
+  font-weight: bold;
 }
 
 .dropdown-sizes {
@@ -573,17 +577,17 @@ textarea {
 /* Varför syns det inte? SVAR: När det inte finns några varianter/storlekar syns inget.*/
 .product-variant {
   background-color: var(--background-5);
-  color: var(--text-2);
+  color: var(--text-color-2);
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: var(--padding-small-more-vertical);  
+  padding: var(--padding-small-more-vertical);
   cursor: pointer;
 }
 
 .product-variant:hover {
   background-color: var(--background-2);
-  color: var(--text-1);
+  color: var(--text-color-1);
 }
 
 .out-of-stock {
@@ -591,17 +595,17 @@ textarea {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: var(--padding-small-more-vertical);  
+  padding: var(--padding-small-more-vertical);
   cursor: not-allowed; /* Kanske */
   pointer-events: none; /* Kanske */
 }
 
 .out-of-stock p {
-  color: var(--text-3); /* Kanske kan skriva denna för out-of-stock */
+  color: var(--text-color-3); /* Kanske kan skriva denna för out-of-stock */
 }
 
 .low-stock {
-  color: var(--text-4);
+  color: var(--text-color-4);
 }
 
 .detailed-product-information {
@@ -617,12 +621,12 @@ textarea {
 
 .add-to-shopping-basket {
   background-color: var(--confirm-background);
-  color: var(--text-1);
+  color: var(--text-color-1);
   border-radius: var(--radius-small);
   width: 40rem;
-  margin-top: 2rem;  
+  margin-top: 2rem;
   padding: var(--padding-large);
-  font-size: 1.6rem;
+  font-size: var(--text-size-L);
   font-weight: bold;
 }
 
@@ -656,19 +660,19 @@ textarea {
 }
 
 .quantity-dropdown {
-  padding: var(--padding-small);   /* Blir detta för litet på mobiler? */
+  padding: var(--padding-small); /* Blir detta för litet på mobiler? */
 }
 
 .remove-item-from-shopping-basket {
-  color: var(--text-2);
+  color: var(--text-color-2);
   background-color: inherit;
-  font-size: 2rem;
+  font-size: var(--text-size-h2);
   padding: var(--padding-small);
 }
 
 .remove-item-from-shopping-basket:hover {
   background-color: var(--background-5);
-  color: var(--text-4);
+  color: var(--text-color-4);
 }
 
 .total-amount {
@@ -686,11 +690,11 @@ textarea {
 
 .go-to-payment-button {
   background-color: var(--confirm-background);
-  color: var(--text-1);
+  color: var(--text-color-1);
   border-radius: var(--radius-small);
   padding: var(--padding-large);
-  font-weight: bold;  
-  font-size: 1.8rem;
+  font-size: var(--text-size-XL);
+  font-weight: bold;
 }
 
 .heart-icon {
@@ -729,12 +733,12 @@ textarea {
 }
 
 .heart-icon-nav-number {
-  color: var(--text-1);
+  color: var(--text-color-1);
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);  
-  font-size: 1.2rem;
+  transform: translate(-50%, -50%);
+  font-size: var(--text-size-S);
   font-weight: bold;
   pointer-events: none; /* Optional: allows clicks to pass through the number */
 }
@@ -756,13 +760,13 @@ textarea {
 
 .shopping-basket-nav-number {
   background-color: var(--background-3);
-  color: var(--text-1);
+  color: var(--text-color-1);
   border-radius: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);  
-  font-size: 1.2rem;
+  transform: translate(-50%, -50%);
+  font-size: var(--text-size-S);
   font-weight: bold;
   pointer-events: none; /* Optional: allows clicks to pass through the number */
   /* padding: 1rem; */
@@ -788,11 +792,11 @@ textarea {
   visibility: hidden;
   opacity: 0;
   background-color: var(--background-3);
-  color: var(--text-1);
+  color: var(--text-color-1);
   border-radius: var(--radius-small);
-  font-size: 1.5rem;
+  font-size: var(--text-size-L);
   text-align: center;
-  padding: var(--padding-small);  
+  padding: var(--padding-small);
   position: absolute;
   top: 110%;
   left: 50%;
@@ -834,24 +838,24 @@ textarea {
   margin-bottom: 3rem;
 }
 
-.go-back {  
+.go-back {
   background-color: var(--background-5);
-  color: var(--text-2);
+  color: var(--text-color-2);
   border-radius: var(--radius-small);
   border: 1px solid var(--border-1);
-  padding: 1rem;  
+  padding: 1rem;
 }
 
 .total-amount-payment {
-  font-size: 1.8rem;
+  font-size: var(--text-size-XL);
 }
 
 .credit-card-description {
-  font-size: 1.4rem;
+  font-size: var(--text-size-M);
 }
 
-.credit-card {  
-  background-color: var(--background-4);  
+.credit-card {
+  background-color: var(--background-4);
   border: 3px solid var(--border-2);
   border-radius: var(--radius-large);
   width: 50%;
@@ -859,7 +863,7 @@ textarea {
 }
 
 .credit-card-larger-text {
-  font-size: 1.8rem;
+  font-size: var(--text-size-XL);
 }
 
 #credit-card-row-1 {
@@ -879,7 +883,7 @@ textarea {
 }
 
 .credit-card-label {
-  font-size: 1rem;
+  font-size: var(--text-size-XS);
 }
 
 .separate-label-and-value {
@@ -897,11 +901,11 @@ textarea {
 
 .confirm-purchase-button {
   background-color: var(--confirm-background);
-  color: var(--text-1);
+  color: var(--text-color-1);
   border-radius: var(--radius-small);
   padding: var(--padding-large);
-  font-weight: bold;  
-  font-size: 1.8rem;
+  font-size: var(--text-size-XL);
+  font-weight: bold;
 }
 
 .order-summary {
@@ -910,25 +914,25 @@ textarea {
 
 .table-narrow th {
   border-bottom: 1px solid var(--border-2);
-  padding: 0.4rem 2rem 0.4rem 0.4rem;  /* Variabel? */
+  padding: 0.4rem 2rem 0.4rem 0.4rem; /* Variabel? */
   text-align: left;
 }
 
 th {
-  font-size: 1.6rem;
+  font-size: var(--text-size-L);
 }
 
 /* Obs: Man kanske inte kan klicka på raderna, i alla tabeller,
 om jag väljer att ha table på fler ställen. */
 td {
-  font-size: 1.4rem;
+  font-size: var(--text-size-M);
   cursor: pointer;
-  padding: 0.4rem 2rem 0.4rem 0.4rem;  /* Variabel? */
+  padding: 0.4rem 2rem 0.4rem 0.4rem; /* Variabel? */
 }
 
-.table-narrow tbody tr:hover {  
+.table-narrow tbody tr:hover {
   background-color: var(--background-2);
-  color: var(--text-1);
+  color: var(--text-color-1);
 }
 
 footer {
@@ -936,7 +940,7 @@ footer {
   height: 25vh;
   padding: 2rem 11rem;
   background-color: var(--background-1);
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);  /* Variabel? */
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3); /* Variabel? */
 }
 
 .footer-column-section {
@@ -971,6 +975,6 @@ footer {
 }
 
 .footer-information {
-  font-size: 1.1rem;
+  font-size: var(--text-size-XS);
   text-align: center;
 }
