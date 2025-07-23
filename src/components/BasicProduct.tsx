@@ -111,7 +111,7 @@ const BasicProduct = ({
           />
         )}
       </div>
-      <p>Från {startPrice} kr</p>
+      <p className="from-price">Från {startPrice} kr</p>
     </div>
   );
 };
