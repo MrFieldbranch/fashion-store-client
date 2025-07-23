@@ -941,6 +941,10 @@ footer {
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3); /* Variabel? */
 }
 
+footer h3 {
+  font-size: var(--text-size-M);
+}
+
 .footer-column-section {
   display: flex;
   justify-content: space-between;
