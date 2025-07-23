@@ -22,7 +22,7 @@ const AdminBasicProduct = ({ productId, productName, productSex, imageUrl, start
       <div className="product-small-img-wrapper">
         <img src={imageUrl} alt={productName} className="product-small-img" />
       </div>
-      <p>Från {startPrice} kr</p>
+      <p className="from-price">Från {startPrice} kr</p>
     </div>
   );
 };
