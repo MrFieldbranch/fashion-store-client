@@ -67,13 +67,11 @@ const DetailedOrderView = () => {
       <div className="table">
         {order.items.map((i) => (
           <div className="row-in-table" key={i.productVariantId}>
-            <div className="row-in-table-left-side">
-              <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
-              <div className="name-color-size">
-                <p>{i.productName}</p>
-                <p>{i.color}</p>
-                <p>{i.size}</p>
-              </div>
+            <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
+            <div className="name-color-size">
+              <p>{i.productName}</p>
+              <p>{i.color}</p>
+              <p>{i.size}</p>
             </div>
             <p>{i.priceAtPurchaseTime} kr/st</p>
             <p>{i.quantity} st</p>

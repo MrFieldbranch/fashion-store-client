@@ -342,24 +342,18 @@ nav {
 }
 
 .records-container {
-  margin: 2rem 0 4rem;
+  margin: 3rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.categories-container-admin {
+  margin: 2rem 0;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-}
-
-/* Kanske ska ha grid istället? */
-.records-container-start-view {
-  /* FIXA HÄR */
-  padding: 2rem 0;
-  /* display: flex;
-  flex-wrap: wrap;
-  gap: 4rem; */
-  display: flex;
-  justify-content: space-between;
-  /* display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 1rem; */
 }
 
 .item {
@@ -476,9 +470,10 @@ textarea {
 }
 
 .basic-product {
+  width: 100%;
+  max-width: 22rem;
   border: 1px solid var(--border-1);
-  border-radius: var(--radius-small);
-  padding: 1rem;
+  border-radius: var(--radius-small);  
   padding: var(--padding-large);
   display: flex;
   flex-direction: column;
@@ -493,8 +488,8 @@ textarea {
 
 .product-small-img-wrapper {
   position: relative;
-  width: 12vw;
-  height: 18vw;
+  width: 100%;
+  aspect-ratio: 2 / 3;
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -519,10 +514,11 @@ textarea {
 
 .product-large-img-wrapper {
   position: relative;
-  width: 22vw;
-  height: 33vw;
+  width: 100%;
+  max-width: 37rem;
+  aspect-ratio: 2 / 3;  
   border: 1px solid var(--border-1);
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-large);
   overflow: hidden;
 }
 
@@ -630,7 +626,7 @@ textarea {
 }
 
 .table {
-  width: 70vw;
+  width: 70%;
 }
 
 .row-in-table {
@@ -640,14 +636,9 @@ textarea {
   margin-bottom: 2rem;
 }
 
-.row-in-table-left-side {
-  display: flex;
-  gap: 2rem;
-}
-
 .product-tiny-img {
-  width: 4vw;
-  height: 6vw;
+  width: 12%;
+  aspect-ratio: 2 / 3;
   border: 1px solid var(--border-1);
   border-radius: var(--radius-tiny);
 }
@@ -655,7 +646,7 @@ textarea {
 .name-color-size {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 1rem;
 }
 
 .quantity-dropdown {

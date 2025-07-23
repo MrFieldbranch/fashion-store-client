@@ -114,7 +114,7 @@ const StartView = () => {
       <div className="popular-products">
         <h2>Populära produkter just nu</h2>
         <h3>Män</h3>
-        <div className="records-container-start-view">
+        <div className="records-container">
           {mostPopularMaleProducts.length === 0 ? (
             <p>Antingen finns det inga produkter för män, eller så har ingen produkt blivit köpt</p>
           ) : (
@@ -134,7 +134,7 @@ const StartView = () => {
           )}
         </div>
         <h3>Kvinnor</h3>
-        <div className="records-container-start-view">
+        <div className="records-container">
           {mostPopularFemaleProducts.length === 0 ? (
             <p>Antingen finns det inga produkter för kvinnor, eller så har ingen produkt blivit köpt</p>
           ) : (
@@ -154,7 +154,7 @@ const StartView = () => {
           )}
         </div>
         <h3>Unisex</h3>
-        <div className="records-container-start-view">
+        <div className="records-container">
           {mostPopularUnisexProducts.length === 0 ? (
             <p>Antingen finns det inga produkter för unisex, eller så har ingen produkt blivit köpt</p>
           ) : (
