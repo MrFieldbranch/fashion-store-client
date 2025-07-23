@@ -13,10 +13,9 @@ html {
 :root {
   /* Backgrounds */
   --background-1: rgb(239, 236, 236);
-  --background-2: rgba(26, 1, 40, 0.6);
-  --background-3: rgb(26, 1, 40);
-  --background-4: rgb(191, 229, 241);
-  --background-5: white;
+  --background-2: rgba(26, 1, 40, 0.6);  
+  --background-3: rgb(191, 229, 241);
+  --background-4: white;
   --background-no-click: rgba(0, 0, 0, 0.5);
   --confirm-background: rgb(115, 177, 115);
   --cancel-background: rgb(207, 129, 129);
@@ -165,7 +164,7 @@ nav {
 }
 
 .sex-choice-button {
-  background-color: var(--background-5);
+  background-color: var(--background-4);
   color: var(--text-color-2);
   padding: var(--padding-small);
   border-radius: var(--radius-small);
@@ -203,7 +202,7 @@ nav {
   position: fixed;
   bottom: 4rem;
   right: 4rem;
-  background-color: var(--background-4);
+  background-color: var(--background-3);
   color: var(--text-color-2);
   padding: var(--padding-large);
   border-radius: var(--radius-small);
@@ -324,7 +323,7 @@ nav {
 }
 
 .pop-up {
-  background-color: var(--background-4);
+  background-color: var(--background-3);
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
   color: var(--text-color-2);
   position: fixed;
@@ -364,7 +363,7 @@ nav {
 }
 
 .item {
-  background-color: var(--background-5);
+  background-color: var(--background-4);
   border: 1px solid var(--border-1);
   border-radius: var(--radius-small);
   display: flex;
@@ -382,7 +381,7 @@ nav {
 }
 
 .item:hover {
-  background-color: var(--background-4);
+  background-color: var(--background-3);
 }
 
 .admin-record {
@@ -547,7 +546,7 @@ textarea {
 }
 
 .show-sizes {
-  background-color: var(--background-5);
+  background-color: var(--background-4);
   width: 40rem;
   cursor: pointer;
   padding: 0.8rem 3rem; /* Variabel? */
@@ -576,7 +575,7 @@ textarea {
 
 /* Varför syns det inte? SVAR: När det inte finns några varianter/storlekar syns inget.*/
 .product-variant {
-  background-color: var(--background-5);
+  background-color: var(--background-4);
   color: var(--text-color-2);
   width: 100%;
   display: flex;
@@ -591,7 +590,7 @@ textarea {
 }
 
 .out-of-stock {
-  background-color: var(--background-5);
+  background-color: var(--background-4);
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -671,7 +670,7 @@ textarea {
 }
 
 .remove-item-from-shopping-basket:hover {
-  background-color: var(--background-5);
+  background-color: var(--background-4);
   color: var(--text-color-4);
 }
 
@@ -759,7 +758,7 @@ textarea {
 }
 
 .shopping-basket-nav-number {
-  background-color: var(--background-3);
+  background-color: var(--confirm-background);
   color: var(--text-color-1);
   border-radius: 100%;
   position: absolute;
@@ -768,13 +767,12 @@ textarea {
   transform: translate(-50%, -50%);
   font-size: var(--text-size-S);
   font-weight: bold;
-  pointer-events: none; /* Optional: allows clicks to pass through the number */
-  /* padding: 1rem; */
+  pointer-events: none; /* Optional: allows clicks to pass through the number */  
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
 }
 
 .avatar-wrapper {
@@ -792,7 +790,7 @@ textarea {
   visibility: hidden;
   opacity: 0;
   background-color: var(--background-3);
-  color: var(--text-color-1);
+  color: var(--text-color-2);
   border-radius: var(--radius-small);
   font-size: var(--text-size-L);
   text-align: center;
@@ -839,7 +837,7 @@ textarea {
 }
 
 .go-back {
-  background-color: var(--background-5);
+  background-color: var(--background-4);
   color: var(--text-color-2);
   border-radius: var(--radius-small);
   border: 1px solid var(--border-1);
@@ -855,7 +853,7 @@ textarea {
 }
 
 .credit-card {
-  background-color: var(--background-4);
+  background-color: var(--background-3);
   border: 3px solid var(--border-2);
   border-radius: var(--radius-large);
   width: 50%;

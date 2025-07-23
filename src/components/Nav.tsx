@@ -152,7 +152,7 @@ const Nav = () => {
       {userRole ? (
         <div className="user-info-and-logout-button">
           <div className="heart-icon-nav-wrapper" onClick={() => navigate("/likedproducts")}>
-            <img src="/images/heart-for-nav.png" alt="heart for nav" className="heart-icon-nav" />
+            <img src="/images/heart-filled-2.png" alt="heart for nav" className="heart-icon-nav" />
             <p className="heart-icon-nav-number">{likedProductsCountInNav}</p>
           </div>
           <div className="shopping-basket-icon-nav-wrapper" onClick={() => navigate("/shoppingbasket")}>

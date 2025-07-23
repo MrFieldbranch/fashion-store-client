@@ -125,7 +125,7 @@ const ProductView = () => {
         <img src={product.imageUrl} alt={product.name} className="product-large-img" />
         {userRole && product.isLiked === false && (
           <img
-            src="/images/heart-hollow.png"
+            src="/images/heart-hollow-2.png"
             alt="hollow heart"
             className="heart-icon"
             onClick={() => handleLiking(product.id)}
@@ -133,7 +133,7 @@ const ProductView = () => {
         )}
         {userRole && product.isLiked === true && (
           <img
-            src="/images/heart-filled.png"
+            src="/images/heart-filled-2.png"
             alt="filled-heart"
             className="heart-icon"
             onClick={() => handleUnLiking(product.id)}
@@ -141,7 +141,7 @@ const ProductView = () => {
         )}
         {!userRole && (
           <img
-            src="/images/heart-hollow.png"
+            src="/images/heart-hollow-2.png"
             alt="hollow heart"
             className="heart-icon"
             onClick={handleLikingWhenNotLoggedIn}
