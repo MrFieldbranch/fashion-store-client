@@ -93,7 +93,7 @@ const StartView = () => {
 
   return (
     <div className="start">
-      <div className="hero-section">
+      <div className="hero-section-wide-screen">
         <div className="hero-image-1" />
         <div className="hero-text">
           <h2>
@@ -110,6 +110,24 @@ const StartView = () => {
           </h2>
         </div>
         <div className="hero-image-2" />
+      </div>
+      <div className="hero-section-narrow-screen">
+        <div className="hero-image-1" />
+        <div className="hero-text">
+          <h2>
+            Tidlös stil möter
+            <br />
+            djärvt självförtroende
+          </h2>
+        </div>
+        <div className="hero-image-2" />
+        <div className="hero-text">
+          <h2>
+            Berätta vem du är
+            <br />
+            genom vad du har på dig
+          </h2>
+        </div>
       </div>
       <div className="popular-products">
         <h2>Populära produkter just nu</h2>

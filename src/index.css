@@ -13,7 +13,7 @@ html {
 :root {
   /* Backgrounds */
   --background-1: rgb(239, 236, 236);
-  --background-2: rgba(26, 1, 40, 0.6);  
+  --background-2: rgba(26, 1, 40, 0.6);
   --background-3: rgb(191, 229, 241);
   --background-4: white;
   --background-no-click: rgba(0, 0, 0, 0.5);
@@ -86,7 +86,7 @@ button {
   min-height: 75vh;
 }
 
-.hero-section {
+.hero-section-wide-screen {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 55vh 55vh;
@@ -120,8 +120,12 @@ button {
   background-color: var(--background-2);
 }
 
-.hero-text h2 {  
+.hero-text h2 {
   color: var(--text-color-1);
+}
+
+.hero-section-narrow-screen {
+  display: none;
 }
 
 .popular-products {
@@ -129,7 +133,15 @@ button {
 }
 
 .popular-products h2 {
-  text-align: center;  
+  text-align: center;
+}
+
+.nav-admin {
+  height: 11vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4rem;
 }
 
 nav {
@@ -137,17 +149,24 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 11vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 4rem;
   z-index: 800;
   background-color: var(--background-1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Variabel? */
 }
 
-#home-link {
+.nav-wide-screen {
+  height: 11vh; /* , eftersom main-container har en min-height. nav + main-container + footer ska täcka hela höjden. */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4rem;
+}
+
+.nav-narrow-screen {
+  display: none;
+}
+
+.home-link {
   cursor: pointer;
   height: 5rem;
 }
@@ -460,6 +479,12 @@ textarea {
   align-items: center;
 }
 
+.user-info-and-logout-button-admin {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
 .logout-button {
   background-color: var(--cancel-background);
   color: var(--text-color-2);
@@ -473,7 +498,7 @@ textarea {
   width: 100%;
   max-width: 22rem;
   border: 1px solid var(--border-1);
-  border-radius: var(--radius-small);  
+  border-radius: var(--radius-small);
   padding: var(--padding-large);
   display: flex;
   flex-direction: column;
@@ -516,7 +541,7 @@ textarea {
   position: relative;
   width: 100%;
   max-width: 37rem;
-  aspect-ratio: 2 / 3;  
+  aspect-ratio: 2 / 3;
   border: 1px solid var(--border-1);
   border-radius: var(--radius-large);
   overflow: hidden;
@@ -758,7 +783,7 @@ textarea {
   transform: translate(-50%, -50%);
   font-size: var(--text-size-S);
   font-weight: bold;
-  pointer-events: none; /* Optional: allows clicks to pass through the number */  
+  pointer-events: none; /* Optional: allows clicks to pass through the number */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -970,4 +995,100 @@ footer h3 {
 .footer-information {
   font-size: var(--text-size-XS);
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 8px;
+  }
+
+  nav {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-wide-screen {
+    display: none;
+  }
+
+  .nav-narrow-screen {
+    display: block;
+  }
+
+  .nav-narrow-screen-row-1 {
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    height: 10vh;
+  }
+
+  .home-link {
+    margin-right: 4rem;
+    height: 4rem;
+  }
+
+  .user-info-and-logout-button {
+    justify-content: space-around;
+    flex: 1;
+  }
+
+  .login-register-buttons {
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  .login-button {
+    margin-right: 2rem;
+  }
+
+  .register-button {
+    margin-right: 2rem;
+  }
+
+  .nav-narrow-screen-row-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10rem;
+    height: 6vh;
+  }
+
+  .dropdown {
+    min-height: 22vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Variabel? */
+  }
+
+  .main-container {
+    min-height: 64vh;
+    padding: 20vh 4rem 4vh;
+  }
+
+  footer {
+    height: 20vh;
+    padding: 2rem 4rem;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .footer-column {
+    gap: 3vh;
+  }
+
+  footer h3 {
+    font-size: var(--text-size-S);
+  }
+
+  .footer-img-container {    
+    gap: 1.5rem;
+  }
+
+  .hero-section-narrow-screen {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 45vh 10vh 45vh 10vh;
+    /* gap: 1rem; */
+    margin-bottom: 2rem;
+  }
+
+  .hero-section-wide-screen {
+    display: none;
+  }
 }

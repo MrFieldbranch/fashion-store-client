@@ -14,11 +14,11 @@ const NavAdmin = () => {
   };
 
   return (
-    <nav>
+    <nav className="nav-admin">
       <button className="go-back" onClick={() => navigate("/admindashboard")}>
         Admin Dashboard
       </button>
-      <div className="user-info-and-logout-button">
+      <div className="user-info-and-logout-button-admin">
         <p>Inloggad som: {loggedInUserFirstName}</p>
         <button className="logout-button" onClick={handleAdminLogout}>
           Logga ut
