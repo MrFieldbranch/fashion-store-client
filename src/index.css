@@ -1142,7 +1142,7 @@ footer h3 {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 440px) {
   .credit-card {
     border: 2px solid var(--border-2);
     height: 30vh;
