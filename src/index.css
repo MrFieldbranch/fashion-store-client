@@ -49,7 +49,7 @@ html {
   --padding-large: 1rem 2rem;
   --padding-small-more-vertical: 1rem 0.5rem;
   --padding-top: 2rem;
-  --padding-credit-card-row: 3rem 2rem;
+  --padding-credit-card-row: 0 2rem;
 }
 
 body {
@@ -94,7 +94,7 @@ button {
 .hero-section-wide-screen {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 55vh 55vh;  
+  grid-template-rows: 55vh 55vh;
   margin-bottom: 2rem;
 }
 
@@ -851,9 +851,9 @@ textarea {
   border-top: 2px solid var(--border-2);
 }
 
-.payment {
+/* .payment {
   width: 65%;
-}
+} */
 
 .separate-horizontally {
   display: flex;
@@ -872,6 +872,7 @@ textarea {
 
 .total-amount-payment {
   font-size: var(--text-size-XL);
+  margin-bottom: 3rem;
 }
 
 .credit-card-description {
@@ -882,7 +883,8 @@ textarea {
   background-color: var(--background-3);
   border: 3px solid var(--border-2);
   border-radius: var(--radius-large);
-  width: 50%;
+  height: 40vh;
+  aspect-ratio: 1.5 / 1;
   margin: 1rem 0;
 }
 
@@ -891,11 +893,15 @@ textarea {
 }
 
 #credit-card-row-1 {
+  height: 33%;
+  display: flex;
+  align-items: center;
   padding: var(--padding-credit-card-row);
   border-bottom: 1px solid var(--border-2);
 }
 
 #credit-card-row-2 {
+  height: 33%;
   padding: var(--padding-credit-card-row);
   border-bottom: 1px solid var(--border-2);
   display: flex;
@@ -903,6 +909,9 @@ textarea {
 }
 
 #credit-card-row-3 {
+  height: 34%;
+  display: flex;
+  align-items: center;
   padding: var(--padding-credit-card-row);
 }
 
@@ -1099,7 +1108,7 @@ footer h3 {
   .hero-section-narrow-screen {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 40vh 10vh 40vh 10vh;    
+    grid-template-rows: 40vh 10vh 40vh 10vh;
     margin-bottom: 2rem;
   }
 

@@ -74,10 +74,7 @@ const PaymentView = () => {
           Tillbaka till varukorgen
         </button>
       </div>
-      <div className="separate-horizontally">
-        <h2 className="total-amount-payment">Totalbelopp</h2>
-        <p className="total-amount-payment">{totalAmount} kr</p>
-      </div>
+      <h2 className="total-amount-payment">Totalbelopp: {totalAmount} kr</h2>
       <p className="credit-card-description">OBS: Fiktivt kortnummer</p>
       <div className="credit-card">
         <div id="credit-card-row-1">
