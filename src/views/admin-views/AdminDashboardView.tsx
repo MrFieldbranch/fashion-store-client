@@ -76,7 +76,7 @@ const AdminDashboardView = () => {
     <div className="admin-dashboard">
       <h1>Admin Dashboard</h1>
       <h2>Alla kategorier</h2>
-      <div className="categories-container-admin">
+      <div className="wrap-container-admin">
         {allCategories.length === 0 ? (
           <div className="no-records">
             <p>Inga kategorier finns</p>

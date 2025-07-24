@@ -86,11 +86,15 @@ button {
   min-height: 75vh;
 }
 
+.main-container-admin {
+  padding: 15vh 10rem 4vh;
+  min-height: 100vh;
+}
+
 .hero-section-wide-screen {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 55vh 55vh;
-  /* gap: 1rem; */
+  grid-template-rows: 55vh 55vh;  
   margin-bottom: 2rem;
 }
 
@@ -368,7 +372,7 @@ nav {
   justify-items: center;
 }
 
-.categories-container-admin {
+.wrap-container-admin {
   margin: 2rem 0;
   display: flex;
   flex-wrap: wrap;
@@ -825,9 +829,13 @@ textarea {
   opacity: 1;
 }
 
-.edit-product {
+/* .edit-product-wide-screen {
   display: flex;
   align-items: flex-start;
+} */
+
+.edit-product-narrow-screen {
+  display: none;
 }
 
 .description {
@@ -839,6 +847,8 @@ textarea {
 
 .admin-product-sizes {
   margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 2px solid var(--border-2);
 }
 
 .payment {
@@ -930,18 +940,19 @@ textarea {
   border-bottom: 1px solid var(--border-2);
   padding: 0.4rem 2rem 0.4rem 0.4rem; /* Variabel? */
   text-align: left;
-}
-
-th {
   font-size: var(--text-size-L);
 }
+
+/* th {
+  Jag har väl bara 1 table? 
+} */
 
 /* Obs: Man kanske inte kan klicka på raderna, i alla tabeller,
 om jag väljer att ha table på fler ställen. */
 td {
   font-size: var(--text-size-M);
   cursor: pointer;
-  padding: 0.4rem 2rem 0.4rem 0.4rem; /* Variabel? */
+  padding: 1rem 3rem 1rem 0.4rem; /* Variabel? */
 }
 
 .table-narrow tbody tr:hover {
@@ -1058,13 +1069,18 @@ footer h3 {
   }
 
   .main-container {
-    min-height: 64vh;
-    padding: 20vh 4rem 4vh;
+    min-height: 80vh;
+    padding: 20vh 2rem 4vh;
+  }
+
+  .main-container-admin {
+    padding: 15vh 2rem 4vh;
+    min-height: 100vh;
   }
 
   footer {
     height: 20vh;
-    padding: 2rem 4rem;
+    padding: 2rem;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.3);
   }
 
@@ -1076,19 +1092,43 @@ footer h3 {
     font-size: var(--text-size-S);
   }
 
-  .footer-img-container {    
+  .footer-img-container {
     gap: 1.5rem;
   }
 
   .hero-section-narrow-screen {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 45vh 10vh 45vh 10vh;
-    /* gap: 1rem; */
+    grid-template-rows: 40vh 10vh 40vh 10vh;    
     margin-bottom: 2rem;
   }
 
   .hero-section-wide-screen {
     display: none;
+  }
+
+  .detailed-product {
+    gap: 2rem;
+  }
+
+  .edit-product-wide-screen {
+    display: none;
+  }
+
+  .edit-product-narrow-screen {
+    display: block;
+    margin-top: 3rem;
+  }
+
+  .press-to-create-edit {
+    font-size: var(--text-size-M);
+  }
+
+  .table {
+    width: 90%;
+  }
+
+  .product-tiny-img {
+    width: 20%;
   }
 }
