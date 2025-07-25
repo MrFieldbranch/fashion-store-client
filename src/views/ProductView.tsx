@@ -149,7 +149,7 @@ const ProductView = () => {
         )}
       </div>
 
-      <div className="product-information-and-sizes">
+      <div className="to-the-right-of-product-large-img">
         <div className="detailed-product-information">
           <h1>{product.name}</h1>
           <p>{sex}</p>

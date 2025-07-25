@@ -375,6 +375,7 @@ nav {
 .wrap-container-admin {
   margin: 2rem 0;
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 2rem;
 }
@@ -538,6 +539,7 @@ textarea {
 .detailed-product {
   /* Kanske ha olika för vanlig och admin */
   display: flex;
+  align-items: flex-start;
   gap: 5rem;
 }
 
@@ -559,10 +561,11 @@ textarea {
   z-index: 1;
 }
 
-.product-information-and-sizes {
+.to-the-right-of-product-large-img {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  max-width: 30rem;
 }
 
 .sizes-section {
@@ -572,7 +575,7 @@ textarea {
 
 .show-sizes {
   background-color: var(--background-4);
-  width: 40rem;
+  /* max-width: 30rem; */
   cursor: pointer;
   padding: 0.8rem 3rem; /* Variabel? */
 }
@@ -592,7 +595,8 @@ textarea {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 40rem;
+  width: 100%;
+  /* width: 40rem; */
   display: flex;
   flex-direction: column;
   z-index: 1000;
@@ -636,7 +640,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 40rem;
+  /* max-width: 30rem; */
 }
 
 .detailed-product-information h1 {
@@ -829,15 +833,6 @@ textarea {
   opacity: 1;
 }
 
-/* .edit-product-wide-screen {
-  display: flex;
-  align-items: flex-start;
-} */
-
-.edit-product-narrow-screen {
-  display: none;
-}
-
 .description {
   white-space: normal;
   word-break: break-word;
@@ -1017,6 +1012,12 @@ footer h3 {
   text-align: center;
 }
 
+@media (max-width: 950px) {
+  .to-the-right-of-product-large-img {
+    max-width: 20rem;
+  }
+}
+
 @media (max-width: 768px) {
   html {
     font-size: 8px;
@@ -1116,18 +1117,9 @@ footer h3 {
     display: none;
   }
 
-  .detailed-product {
+  /* .detailed-product {
     gap: 2rem;
-  }
-
-  .edit-product-wide-screen {
-    display: none;
-  }
-
-  .edit-product-narrow-screen {
-    display: block;
-    margin-top: 3rem;
-  }
+  } */  
 
   .press-to-create-edit {
     font-size: var(--text-size-M);
