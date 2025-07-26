@@ -20,8 +20,7 @@ const NavWithoutSexChoices = () => {
   const [registerWindowOpen, setRegisterWindowOpen] = useState<boolean>(false);
   const [showCategories, setShowCategories] = useState<boolean>(false);
   const [allCategoriesBasedOnSex, setAllCategoriesBasedOnSex] = useState<BasicCategoryResponse[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);  
   const navigate = useNavigate();
 
   const handleShowCategories = async () => {
@@ -29,11 +28,9 @@ const NavWithoutSexChoices = () => {
       setError("Inget kön är valt.");
       return;
     }
-    const abortCont = new AbortController();
-    setIsLoading(true); // Kommer denna att märkas ens?
+    const abortCont = new AbortController();    
     try {
-      const response = await apiService.getAllCategoriesBySexAsync(sex, abortCont.signal);
-      setIsLoading(false);
+      const response = await apiService.getAllCategoriesBySexAsync(sex, abortCont.signal);      
       if (!abortCont.signal.aborted) {
         setAllCategoriesBasedOnSex(response);
       }
@@ -57,14 +54,7 @@ const NavWithoutSexChoices = () => {
     showToast("Du är nu utloggad. Välkommen åter.");
   };
 
-  const sexCategory = sex === "Male" ? "män" : sex === "Female" ? "kvinnor" : sex === "Unisex" ? "unisex" : "ditt val";
-
-  if (isLoading)
-    return (
-      <div className="loading">
-        <p>Laddar...</p>
-      </div>
-    );
+  const sexCategory = sex === "Male" ? "män" : sex === "Female" ? "kvinnor" : sex === "Unisex" ? "unisex" : "ditt val";  
 
   if (error)
     return (
