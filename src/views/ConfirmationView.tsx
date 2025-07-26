@@ -16,16 +16,7 @@ const ConfirmationView = () => {
           </button>
         </div>
       </div>
-    );
-
-  /* return (
-      <>
-        <NavWithoutSexChoices />
-        <div className="main-container">
-          <p>Något gick fel. Ingen beställning kunde hittas.</p>
-        </div>
-      </>
-    ); */
+    );  
 
   // Bryta ut till komponent?
   return (

@@ -16,8 +16,7 @@ const Login = ({ setLoginWindowOpen, setError }: LoginProps) => {
   const { login } = useAuth();
   const { showToast } = useToast();
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  /* const [error, setError] = useState<string | null>(null); */
+  const [password, setPassword] = useState<string>("");  
 
   const navigate = useNavigate();
 
@@ -43,23 +42,6 @@ const Login = ({ setLoginWindowOpen, setError }: LoginProps) => {
       setError(err.message || "Ett oväntat fel inträffade. Inloggningen misslyckades.");
     }
   };
-
-  // Nollställs email och password när Login demountas?
-  /* const handleLoginError = () => {
-    setEmail("");
-    setPassword("");
-    setError(null);
-  }; */
-
-  /* if (error)
-    return (
-      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
-        <div className="pop-up">
-          <p>{error}</p>
-          <button onClick={handleLoginError}>Tillbaka</button>
-        </div>
-      </div>
-    ); */
 
   return (
     <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>

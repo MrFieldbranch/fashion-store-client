@@ -14,34 +14,7 @@ const StartView = () => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    setIsLoading(true);
-
-    /* const fetchPopularMaleProducts = async () => {
-      try {
-        const response = await apiService.getMostPopularProductsBySexAsync("Male", abortCont.signal);
-        if (!abortCont.signal.aborted) setMostPopularMaleProducts(response);
-      } catch (err: any) {
-        if (err.name !== "AbortError") setError(err.message || "Ett oväntat fel inträffade.");
-      }
-    }; */
-
-    /* const fetchPopularFemaleProducts = async () => {
-      try {
-        const response = await apiService.getMostPopularProductsBySexAsync("Female", abortCont.signal);
-        if (!abortCont.signal.aborted) setMostPopularFemaleProducts(response);
-      } catch (err: any) {
-        if (err.name !== "AbortError") setError(err.message || "Ett oväntat fel inträffade.");
-      }
-    };
-
-    const fetchPopularUnisexProducts = async () => {
-      try {
-        const response = await apiService.getMostPopularProductsBySexAsync("Unisex", abortCont.signal);
-        if (!abortCont.signal.aborted) setMostPopularUnisexProducts(response);
-      } catch (err: any) {
-        if (err.name !== "AbortError") setError(err.message || "Ett oväntat fel inträffade.");
-      }
-    }; */
+    setIsLoading(true);    
 
     const fetchPopularProducts = async () => {
       try {
@@ -63,11 +36,7 @@ const StartView = () => {
       }
     };
 
-    fetchPopularProducts();
-
-    /* fetchPopularMaleProducts();
-    fetchPopularFemaleProducts();
-    fetchPopularUnisexProducts(); */
+    fetchPopularProducts();    
     setIsLoading(false);
     return () => abortCont.abort();
   }, [useEffectTrigger]);

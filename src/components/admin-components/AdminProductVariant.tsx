@@ -25,8 +25,7 @@ const AdminProductVariant = ({
 }: AdminProductVariantProps) => {
   const [showEditProductVariant, setShowEditProductVariant] = useState<boolean>(false);
   const [newPriceAsString, setNewPriceAsString] = useState<string>(price.toString());
-  const [stockChangeAsString, setStockChangeAsString] = useState<string>("0");
-  /* const [error, setError] = useState<string | null>(null); */
+  const [stockChangeAsString, setStockChangeAsString] = useState<string>("0");  
 
   const handleCloseEditProductVariant = () => {
     setNewPriceAsString(price.toString()); // Är detta rätt?
@@ -75,17 +74,7 @@ const AdminProductVariant = ({
     } finally {
       handleCloseEditProductVariant();
     }
-  };
-
-  /* if (error)
-    return (
-      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
-        <div className="pop-up">
-          <p>{error}</p>
-          <button onClick={() => setError(null)}>Tillbaka</button>
-        </div>
-      </div>
-    ); */
+  }; 
 
   return (
     <div className="admin-record">

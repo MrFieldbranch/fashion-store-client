@@ -19,8 +19,7 @@ const Register = ({ setRegisterWindowOpen, setError }: RegisterProps) => {
   const [password, setPassword] = useState<string>("");
   const [passwordAgain, setPasswordAgain] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  /* const [error, setError] = useState<string | null>(null); */
+  const [lastName, setLastName] = useState<string>("");  
 
   const handleRegister = async (
     email: string,
@@ -76,26 +75,7 @@ const Register = ({ setRegisterWindowOpen, setError }: RegisterProps) => {
       setRegisterWindowOpen(false);
       setError(err.message || "Ett oväntat fel inträffade. Inloggningen misslyckades.");
     }
-  };
-
-  // Nollställs email, password, firstName och lastName när Register demountas?
-  /* const handleRegisterError = () => {
-    setEmail("");
-    setPassword("");
-    setFirstName("");
-    setLastName("");
-    setError(null);
-  }; */
-
-  /* if (error)
-    return (
-      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
-        <div className="pop-up">
-          <p>{error}</p>
-          <button onClick={handleRegisterError}>Tillbaka</button>
-        </div>
-      </div>
-    ); */
+  };  
 
   return (
     <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>

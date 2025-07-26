@@ -75,26 +75,7 @@ const AllOrdersView = () => {
             ))
           )}
         </tbody>
-      </table>
-
-      {/* <div className="table-narrow">
-            {allOrdersForUser.length === 0 ? (
-              <p>Du har inte gjort några beställningar</p>
-            ) : (
-              allOrdersForUser.map((o) => (
-                <div
-                  className="row-in-narrow-table"
-                  key={o.orderId}
-                  onClick={() => navigate(`/history/order/${o.orderId}`)}
-                >
-                  <p>Beställningsnummer: {o.orderId}</p>
-                  <p>Datum: {o.orderDate.toISOString().split("T")[0]}</p>
-                  <p>Antal artiklar: {o.totalQuantity}</p>
-                  <p>Totalbelopp: {o.totalAmount} kr</p>
-                </div>
-              ))
-            )}
-          </div> */}
+      </table>      
     </div>
   );
 };
