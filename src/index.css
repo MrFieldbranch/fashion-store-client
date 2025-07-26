@@ -430,7 +430,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  width: 25rem;
+  max-width: 100%;
 }
 
 label {
@@ -467,6 +467,7 @@ textarea {
   color: var(--text-color-1);
   border-radius: var(--radius-small);
   padding: var(--padding-small);
+  font-size: var(--text-size-L);
   font-weight: bold;
 }
 
@@ -475,6 +476,7 @@ textarea {
   color: var(--text-color-2);
   border-radius: var(--radius-small);
   padding: var(--padding-small);
+  font-size: var(--text-size-L);
   font-weight: bold;
 }
 
@@ -520,7 +522,7 @@ textarea {
   position: relative;
   width: 100%;
   aspect-ratio: 2 / 3;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-small);
   overflow: hidden;
 }
 
@@ -528,7 +530,7 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-small);
   z-index: 1;
 }
 
@@ -1121,9 +1123,9 @@ footer h3 {
     display: none;
   }
 
-  /* .detailed-product {
+  .detailed-product {
     gap: 2rem;
-  } */
+  }
 
   .press-to-create-edit {
     font-size: var(--text-size-M);
@@ -1142,5 +1144,17 @@ footer h3 {
   .credit-card {
     border: 2px solid var(--border-2);
     height: 30vh;
+  }
+}
+
+@media (max-width: 400px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 340px) {
+  html {
+    font-size: 6px;
   }
 }
