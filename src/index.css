@@ -94,25 +94,25 @@ button {
 .hero-section-wide-screen {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 55vh 55vh;
+  /* grid-template-rows: 50rem 50rem; */
   margin-bottom: 2rem;
 }
 
-.hero-image-1 {
-  /* background-image: url("/images/hero-image-1.jpg"); */
+.hero-image-1 {  
   background-image: url("/images/hero-image-4.png");
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
+  aspect-ratio: 1.5 / 1;
   /* border-radius: 0.5rem; */
 }
 
-.hero-image-2 {
-  /* background-image: url("/images/hero-image-2.webp"); */
+.hero-image-2 {  
   background-image: url("/images/hero-image-3.png");
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
+  aspect-ratio: 1.5 / 1;
   /* border-radius: 0.5rem; */
 }
 
@@ -650,8 +650,8 @@ textarea {
 .add-to-shopping-basket {
   background-color: var(--confirm-background);
   color: var(--text-color-1);
-  border-radius: var(--radius-small);
-  width: 40rem;
+  border-radius: var(--radius-small);  
+  width: 100%;
   margin-top: 2rem;
   padding: var(--padding-large);
   font-size: var(--text-size-L);
@@ -1012,17 +1012,7 @@ footer h3 {
   text-align: center;
 }
 
-@media (max-width: 950px) {
-  .to-the-right-of-product-large-img {
-    max-width: 20rem;
-  }
-}
-
-@media (max-width: 768px) {
-  html {
-    font-size: 8px;
-  }
-
+@media (max-width: 1000px) {
   nav {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
@@ -1086,7 +1076,7 @@ footer h3 {
   .main-container-admin {
     padding: 15vh 2rem 4vh;
     min-height: 100vh;
-  }
+  }  
 
   footer {
     height: 20vh;
@@ -1106,11 +1096,25 @@ footer h3 {
     gap: 1.5rem;
   }
 
+  .to-the-right-of-product-large-img {
+    max-width: 20rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 8px;
+  }
+
   .hero-section-narrow-screen {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 40vh 10vh 40vh 10vh;
+    /* grid-template-rows: 60vh 10vh 60vh 10vh; */
     margin-bottom: 2rem;
+  }
+
+  .hero-text {
+    padding: 3rem 0;
   }
 
   .hero-section-wide-screen {
@@ -1119,7 +1123,7 @@ footer h3 {
 
   /* .detailed-product {
     gap: 2rem;
-  } */  
+  } */
 
   .press-to-create-edit {
     font-size: var(--text-size-M);
