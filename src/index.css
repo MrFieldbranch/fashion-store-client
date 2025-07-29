@@ -98,7 +98,7 @@ button {
   margin-bottom: 2rem;
 }
 
-.hero-image-1 {  
+.hero-image-1 {
   background-image: url("/images/hero-image-4.png");
   background-size: cover;
   background-position: top;
@@ -107,7 +107,7 @@ button {
   /* border-radius: 0.5rem; */
 }
 
-.hero-image-2 {  
+.hero-image-2 {
   background-image: url("/images/hero-image-3.png");
   background-size: cover;
   background-position: top;
@@ -652,7 +652,7 @@ textarea {
 .add-to-shopping-basket {
   background-color: var(--confirm-background);
   color: var(--text-color-1);
-  border-radius: var(--radius-small);  
+  border-radius: var(--radius-small);
   width: 100%;
   margin-top: 2rem;
   padding: var(--padding-large);
@@ -1014,6 +1014,27 @@ footer h3 {
   text-align: center;
 }
 
+.loading p {
+  text-align: center;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found a {
+  text-decoration: none;
+  background-color: var(--background-4);
+  color: var(--text-color-2);
+  font-size: var(--text-size-M);
+  border-radius: var(--radius-small);
+  border: 1px solid var(--border-1);
+  padding: 1rem;
+}
+
 @media (max-width: 1000px) {
   nav {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -1078,7 +1099,7 @@ footer h3 {
   .main-container-admin {
     padding: 15vh 2rem 4vh;
     min-height: 100vh;
-  }  
+  }
 
   footer {
     height: 20vh;
