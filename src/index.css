@@ -433,6 +433,13 @@ nav {
   max-width: 100%;
 }
 
+.label-and-input-for-login-register {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 30rem;
+}
+
 label {
   font-size: var(--text-size-M);
 }
@@ -1159,6 +1166,10 @@ footer h3 {
   .product-tiny-img {
     width: 20%;
   }
+
+  .label-and-input-for-login-register input {
+    height: 3rem;
+  }  
 }
 
 @media (max-width: 480px) {

@@ -46,7 +46,7 @@ const Login = ({ setLoginWindowOpen, setError }: LoginProps) => {
   return (
     <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
       <div className="pop-up">
-        <div className="label-and-input">
+        <div className="label-and-input-for-login-register">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -57,7 +57,7 @@ const Login = ({ setLoginWindowOpen, setError }: LoginProps) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="label-and-input">
+        <div className="label-and-input-for-login-register">
           <label htmlFor="password">Lösenord</label>
           <input
             type="password"

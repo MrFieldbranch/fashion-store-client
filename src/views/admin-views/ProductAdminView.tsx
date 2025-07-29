@@ -285,7 +285,7 @@ const ProductAdminView = () => {
             )}
           </div>
         </div>
-      </div>      
+      </div>
       <div className="admin-product-sizes">
         <p>Antal storlekar: {product.productVariants.length}</p>
         <div className="wrap-container-admin">
@@ -296,6 +296,7 @@ const ProductAdminView = () => {
           ) : (
             product.productVariants.map((v) => (
               <AdminProductVariant
+                key={v.productVariantId}
                 productVariantId={v.productVariantId}
                 size={v.size}
                 SKU={v.SKU}

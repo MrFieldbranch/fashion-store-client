@@ -80,7 +80,7 @@ const Register = ({ setRegisterWindowOpen, setError }: RegisterProps) => {
   return (
     <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
       <div className="pop-up">
-        <div className="label-and-input">
+        <div className="label-and-input-for-login-register">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -91,7 +91,7 @@ const Register = ({ setRegisterWindowOpen, setError }: RegisterProps) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="label-and-input">
+        <div className="label-and-input-for-login-register">
           <label htmlFor="password">Lösenord</label>
           <input
             type="password"
@@ -101,7 +101,7 @@ const Register = ({ setRegisterWindowOpen, setError }: RegisterProps) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="label-and-input">
+        <div className="label-and-input-for-login-register">
           <label htmlFor="passwordagain">Upprepa lösenord</label>
           <input
             type="password"
@@ -111,11 +111,11 @@ const Register = ({ setRegisterWindowOpen, setError }: RegisterProps) => {
             onChange={(e) => setPasswordAgain(e.target.value)}
           />
         </div>
-        <div className="label-and-input">
+        <div className="label-and-input-for-login-register">
           <label htmlFor="firstname">Förnamn</label>
           <input type="text" id="firstname" value={firstName} required onChange={(e) => setFirstName(e.target.value)} />
         </div>
-        <div className="label-and-input">
+        <div className="label-and-input-for-login-register">
           <label htmlFor="lastname">Efternamn</label>
           <input type="text" id="lastname" value={lastName} required onChange={(e) => setLastName(e.target.value)} />
         </div>
