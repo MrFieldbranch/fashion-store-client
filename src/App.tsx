@@ -16,6 +16,8 @@ import DetailedOrderView from "./views/DetailedOrderView";
 import UserLayoutWithSexChoices from "./layouts/UserLayoutWithSexChoices";
 import UserLayoutWithoutSexChoices from "./layouts/UserLayoutWithoutSexChoices";
 import AdminLayout from "./layouts/AdminLayout";
+import AllCategoriesAdminView from "./views/admin-views/AllCategoriesAdminView";
+import AllCustomersAdminView from "./views/admin-views/AllCustomersAdminView";
 
 const App = () => {
   const { userRole } = useAuth();
@@ -41,12 +43,20 @@ const App = () => {
           element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />}
         />
         <Route
+          path="/allcategoriesadmin"
+          element={userRole === "Admin" ? <AllCategoriesAdminView /> : <Navigate to="/start" />}
+        />
+        <Route
           path="/categoryadmin/:categoryId"
           element={userRole === "Admin" ? <CategoryAdminView /> : <Navigate to="/start" />}
         />
         <Route
           path="/productadmin/:productId"
           element={userRole === "Admin" ? <ProductAdminView /> : <Navigate to="/start" />}
+        />
+        <Route
+          path="/allcustomersadmin"
+          element={userRole === "Admin" ? <AllCustomersAdminView /> : <Navigate to="/start" />}
         />
       </Route>
       <Route path="*" element={<NotFoundView />} />
