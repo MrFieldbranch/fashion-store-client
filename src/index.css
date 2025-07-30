@@ -364,6 +364,10 @@ nav {
   z-index: 1001;
 }
 
+.pop-up p {
+  text-align: center;
+}
+
 .records-container {
   margin: 3rem 0;
   display: grid;
