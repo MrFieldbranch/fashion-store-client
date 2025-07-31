@@ -18,6 +18,8 @@ import type { ChangeQuantityRequest } from "../models/ChangeQuantityRequest";
 import type { DetailedOrderResponse } from "../models/DetailedOrderResponse";
 import type { ShoppingBasketTotalAmountResponse } from "../models/ShoppingBasketTotalAmountResponse";
 import type { BasicOrderResponse } from "../models/BasicOrderResponse";
+import type { UserListResponse } from "../models/UserListResponse";
+import type { OrderListForUserResponse } from "../models/OrderListForUserResponse";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
@@ -421,6 +423,73 @@ export class ApiService {
     if (!response.ok) {
       const errorMessage = await response.text();
       throw new Error(`Det gick inte att hämta din beställning. ${errorMessage}`);
+    }
+
+    const rawOrder = await response.json();
+
+    const order: DetailedOrderResponse = {
+      ...rawOrder,
+      orderDate: new Date(rawOrder.orderDate),
+    };
+
+    return order;
+  }
+
+  async getAllUsersForAdminAsync(signal?: AbortSignal): Promise<UserListResponse> {
+    const response = await fetch(`${this.baseUrl}/users/allusers`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta kunderna. ${errorMessage}`);
+    }
+
+    const userList: UserListResponse = await response.json();
+    return userList;
+  }
+
+  async getOrdersForUserByIdForAdminAsync(userId: number, signal?: AbortSignal): Promise<OrderListForUserResponse> {
+    const response = await fetch(`${this.baseUrl}/users/${userId}`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att kundens beställningar. ${errorMessage}`);
+    }
+
+    const rawUserOrderData = await response.json();
+
+    const userOrderData: OrderListForUserResponse = {
+      ...rawUserOrderData,
+      orders: rawUserOrderData.orders.map((rawOrder: any) => ({
+        ...rawOrder,
+        orderDate: new Date(rawOrder.orderDate),
+      })),
+    };
+
+    return userOrderData;
+  }
+
+  async getOrderByIdForAdminAsync(
+    userId: number,
+    orderId: number,
+    signal?: AbortSignal
+  ): Promise<DetailedOrderResponse> {
+    const response = await fetch(`${this.baseUrl}/users/${userId}/order/${orderId}`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta kundes beställning. ${errorMessage}`);
     }
 
     const rawOrder = await response.json();

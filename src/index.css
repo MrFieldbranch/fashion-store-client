@@ -66,6 +66,7 @@ h1 {
 
 h2 {
   font-size: var(--text-size-h2);
+  margin-bottom: 1rem;
 }
 
 h3 {
@@ -953,6 +954,10 @@ textarea {
   margin-bottom: 4rem;
 }
 
+.order-summary p {
+  font-size: var(--text-size-L);
+}
+
 .table-narrow th {
   border-bottom: 1px solid var(--border-2);
   padding: 0.4rem 2rem 0.4rem 0.4rem; /* Variabel? */
@@ -1173,7 +1178,7 @@ footer h3 {
 
   .label-and-input-for-login-register input {
     height: 3rem;
-  }  
+  }
 }
 
 @media (max-width: 480px) {

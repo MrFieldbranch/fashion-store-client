@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
-import type { BasicOrderResponse } from "../models/BasicOrderResponse";
-import apiService from "../services/api-service";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import type { OrderListForUserResponse } from "../../models/OrderListForUserResponse";
+import apiService from "../../services/api-service";
 
-const AllOrdersView = () => {
-  const [allOrdersForUser, setAllOrdersForUser] = useState<BasicOrderResponse[]>([]);
+const AdminUserView = () => {
+  const { userId } = useParams<{ userId: string }>();
+  const id = Number(userId);
+  const [orderList, setOrderList] = useState<OrderListForUserResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const abortCont = new AbortController();
 
-    const fetchOrders = async () => {
+    const fetchOrderList = async () => {
       try {
-        const response = await apiService.getAllOrdersForUserAsync(abortCont.signal);
-        setIsLoading(false);
+        const response = await apiService.getOrdersForUserByIdForAdminAsync(id, abortCont.signal);
+
         if (!abortCont.signal.aborted) {
-          setAllOrdersForUser(response);
+          setOrderList(response);
         }
       } catch (err: any) {
         if (err.name !== "AbortError") {
@@ -26,11 +27,11 @@ const AllOrdersView = () => {
       }
     };
 
-    fetchOrders();
+    fetchOrderList();
     return () => abortCont.abort();
   }, []);
 
-  if (isLoading)
+  if (!orderList)
     return (
       <div className="loading">
         <p>Laddar...</p>
@@ -50,8 +51,16 @@ const AllOrdersView = () => {
     );
 
   return (
-    <div className="all-orders">
-      <h1>Dina beställningar</h1>
+    <div className="admin-user">
+      <div className="separate-horizontally">
+        <h1>
+          Beställningar för:<br />{orderList.firstName} {orderList.lastName}
+        </h1>
+        <button className="go-back" onClick={() => navigate("/allcustomersadmin")}>
+          Tillbaka
+        </button>
+      </div>
+
       <table className="table-narrow">
         <thead>
           <tr>
@@ -62,11 +71,11 @@ const AllOrdersView = () => {
           </tr>
         </thead>
         <tbody>
-          {allOrdersForUser.length === 0 ? (
-            <p>Du har inte gjort några beställningar</p>
+          {orderList.orders.length === 0 ? (
+            <p>Kunden har inte gjort några beställningar</p>
           ) : (
-            allOrdersForUser.map((o) => (
-              <tr key={o.orderId} onClick={() => navigate(`/history/order/${o.orderId}`)}>
+            orderList.orders.map((o) => (
+              <tr key={o.orderId} onClick={() => navigate(`/admin/user/${id}/order/${o.orderId}`)}>
                 <td>{o.orderId}</td>
                 <td>{o.orderDate.toISOString().split("T")[0]}</td>
                 <td>{o.totalQuantity}</td>
@@ -75,9 +84,9 @@ const AllOrdersView = () => {
             ))
           )}
         </tbody>
-      </table>      
+      </table>
     </div>
   );
 };
 
-export default AllOrdersView;
+export default AdminUserView;
