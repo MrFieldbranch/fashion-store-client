@@ -479,8 +479,7 @@ textarea {
   color: var(--text-color-1);
   border-radius: var(--radius-small);
   padding: var(--padding-small);
-  font-size: var(--text-size-L);
-  font-weight: bold;
+  font-size: var(--text-size-L);  
 }
 
 .cancel-button {
@@ -488,8 +487,7 @@ textarea {
   color: var(--text-color-2);
   border-radius: var(--radius-small);
   padding: var(--padding-small);
-  font-size: var(--text-size-L);
-  font-weight: bold;
+  font-size: var(--text-size-L);  
 }
 
 .user-info-and-logout-button {
