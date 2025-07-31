@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import type { DetailedOrderResponse } from "../models/DetailedOrderResponse";
+import OrderInformation from "../components/OrderInformation";
 
 const ConfirmationView = () => {
   const location = useLocation();
@@ -16,31 +17,13 @@ const ConfirmationView = () => {
           </button>
         </div>
       </div>
-    );  
+    );
 
   // Bryta ut till komponent?
   return (
     <div className="confirmation">
       <h1>Allt klart! Tack för ditt köp!</h1>
-      <div className="order-summary">
-        <p>Ordernummer: {order.orderId}</p>
-        <p>Totalbelopp: {order.totalAmount} kr</p>
-        <p>Beställningsdatum: {order.orderDate.toISOString().split("T")[0]}</p>
-      </div>
-      <div className="table">
-        {order.items.map((i) => (
-          <div className="row-in-table" key={i.productVariantId}>
-            <img src={i.imageUrl} alt={i.productName} className="product-tiny-img" />
-            <div className="name-color-size">
-              <p>{i.productName}</p>
-              <p>{i.color}</p>
-              <p>{i.size}</p>
-            </div>
-            <p>{i.priceAtPurchaseTime} kr/st</p>
-            <p>{i.quantity} st</p>
-          </div>
-        ))}
-      </div>
+      <OrderInformation order={order} />
     </div>
   );
 };
