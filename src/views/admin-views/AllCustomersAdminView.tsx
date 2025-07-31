@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { UserListResponse } from "../../models/UserListResponse";
 import { useNavigate } from "react-router-dom";
 import apiService from "../../services/api-service";
+import ErrorPopup from "../../components/ErrorPopup";
 
 const AllCustomersAdminView = () => {
   const [userList, setUserList] = useState<UserListResponse | null>(null);
@@ -36,47 +37,38 @@ const AllCustomersAdminView = () => {
       </div>
     );
 
-  if (error)
-    return (
-      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
-        <div className="pop-up">
-          <p>{error}</p>
-          <button className="go-back" onClick={() => setError(null)}>
-            Tillbaka
-          </button>
-        </div>
-      </div>
-    );
-
   return (
-    <div className="all-customers-admin">
-      <h1>Alla kunder</h1>
-      <p>Antal: {userList.totalNumberOfUsers}</p>
-      <table className="table-narrow">
-        <thead>
-          <tr>
-            <th>Namn</th>
-            <th>Antal ordrar</th>
-            <th>Totalt ordervärde (kr)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {userList.totalNumberOfUsers === 0 ? (
-            <p>Det finns inga kunder i systemet</p>
-          ) : (
-            userList.users.map((u) => (
-              <tr key={u.userId} onClick={() => navigate(`/admin/user/${u.userId}`)}>
-                <td>
-                  {u.firstName} {u.lastName}
-                </td>
-                <td>{u.orderCount}</td>
-                <td>{u.totalOrderValueForUser}</td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-    </div>
+    <>
+      {error && <ErrorPopup error={error} setError={setError} />}
+      <div className="all-customers-admin">
+        <h1>Alla kunder</h1>
+        <p>Antal: {userList.totalNumberOfUsers}</p>
+        <table className="table-narrow">
+          <thead>
+            <tr>
+              <th>Namn</th>
+              <th>Antal ordrar</th>
+              <th>Totalt ordervärde (kr)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userList.totalNumberOfUsers === 0 ? (
+              <p>Det finns inga kunder i systemet</p>
+            ) : (
+              userList.users.map((u) => (
+                <tr key={u.userId} onClick={() => navigate(`/admin/user/${u.userId}`)}>
+                  <td>
+                    {u.firstName} {u.lastName}
+                  </td>
+                  <td>{u.orderCount}</td>
+                  <td>{u.totalOrderValueForUser}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

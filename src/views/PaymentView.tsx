@@ -4,6 +4,7 @@ import apiService from "../services/api-service";
 import { useAuth } from "../contexts/AuthContext";
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
+import ErrorPopup from "../components/ErrorPopup";
 
 const PaymentView = () => {
   const { refreshShoppingBasketInNav } = useShoppingBasket();
@@ -54,62 +55,53 @@ const PaymentView = () => {
       </div>
     );
 
-  if (error)
-    return (
-      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
-        <div className="pop-up">
-          <p>{error}</p>
-          <button className="go-back" onClick={() => setError(null)}>
-            Tillbaka
+  return (
+    <>
+      {error && <ErrorPopup error={error} setError={setError} />}
+      <div className="payment">
+        <div className="separate-horizontally">
+          <h1>Avsluta köp</h1>
+          <button className="go-back" onClick={() => navigate("/shoppingbasket")}>
+            Tillbaka till varukorgen
+          </button>
+        </div>
+        <h2 className="total-amount-payment">Totalbelopp: {totalAmount} kr</h2>
+        <p className="credit-card-description">OBS: Fiktivt kortnummer</p>
+        <div className="credit-card">
+          <div id="credit-card-row-1">
+            <p className="credit-card-larger-text">1234 5678 1234 5678</p>
+          </div>
+          <div id="credit-card-row-2">
+            <div className="separate-label-and-value">
+              <p className="credit-card-label">
+                VALID
+                <br />
+                THRU
+              </p>
+              <p className="credit-card-larger-text">06/29</p>
+            </div>
+            <div className="separate-label-and-value">
+              <p className="credit-card-label">
+                SECURITY
+                <br />
+                CODE
+              </p>
+              <p className="credit-card-larger-text">123</p>
+            </div>
+          </div>
+          <div id="credit-card-row-3">
+            <p className="credit-card-larger-text">
+              {loggedInUserFirstName} {loggedInUserLastName}
+            </p>
+          </div>
+        </div>
+        <div className="confirm-purchase">
+          <button className="confirm-purchase-button" onClick={handleConfirmPurchase}>
+            Bekräfta köp
           </button>
         </div>
       </div>
-    );
-
-  return (
-    <div className="payment">
-      <div className="separate-horizontally">
-        <h1>Avsluta köp</h1>
-        <button className="go-back" onClick={() => navigate("/shoppingbasket")}>
-          Tillbaka till varukorgen
-        </button>
-      </div>
-      <h2 className="total-amount-payment">Totalbelopp: {totalAmount} kr</h2>
-      <p className="credit-card-description">OBS: Fiktivt kortnummer</p>
-      <div className="credit-card">
-        <div id="credit-card-row-1">
-          <p className="credit-card-larger-text">1234 5678 1234 5678</p>
-        </div>
-        <div id="credit-card-row-2">
-          <div className="separate-label-and-value">
-            <p className="credit-card-label">
-              VALID
-              <br />
-              THRU
-            </p>
-            <p className="credit-card-larger-text">06/29</p>
-          </div>
-          <div className="separate-label-and-value">
-            <p className="credit-card-label">
-              SECURITY
-              <br />
-              CODE
-            </p>
-            <p className="credit-card-larger-text">123</p>
-          </div>
-        </div>
-        <div id="credit-card-row-3">
-          <p className="credit-card-larger-text">
-            {loggedInUserFirstName} {loggedInUserLastName}
-          </p>
-        </div>
-      </div>
-      <div className="confirm-purchase">
-        <button className="confirm-purchase-button" onClick={handleConfirmPurchase}>
-          Bekräfta köp
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 

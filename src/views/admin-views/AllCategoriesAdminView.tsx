@@ -3,6 +3,7 @@ import type { BasicCategoryResponse } from "../../models/BasicCategoryResponse";
 import apiService from "../../services/api-service";
 import type { CreateNewCategoryRequest } from "../../models/CreateNewCategoryRequest";
 import AdminCategory from "../../components/admin-components/AdminCategory";
+import ErrorPopup from "../../components/ErrorPopup";
 
 const AllCategoriesAdminView = () => {
   const [allCategories, setAllCategories] = useState<BasicCategoryResponse[]>([]);
@@ -59,46 +60,37 @@ const AllCategoriesAdminView = () => {
       </div>
     );
 
-  if (error)
-    return (
-      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
-        <div className="pop-up">
-          <p>{error}</p>
-          <button className="go-back" onClick={() => setError(null)}>
-            Tillbaka
+  return (
+    <>
+      {error && <ErrorPopup error={error} setError={setError} />}
+      <div className="all-categories-admin">
+        <h1>Alla kategorier</h1>
+        <div className="wrap-container-admin">
+          {allCategories.length === 0 ? (
+            <div className="no-records">
+              <p>Inga kategorier finns</p>
+            </div>
+          ) : (
+            allCategories.map((c) => <AdminCategory key={c.id} categoryId={c.id} categoryName={c.name} />)
+          )}
+        </div>
+        <div className="create-edit">
+          <div className="label-and-input">
+            <label htmlFor="categoryname">Nytt kategorinamn</label>
+            <input
+              type="text"
+              id="categoryname"
+              required
+              value={newCategoryName}
+              onChange={(e) => setNewCategoryName(e.target.value)}
+            />
+          </div>
+          <button className="confirm-button" onClick={() => handleCreateNewCategory(newCategoryName)}>
+            OK
           </button>
         </div>
       </div>
-    );
-
-  return (
-    <div className="all-categories-admin">
-      <h1>Alla kategorier</h1>
-      <div className="wrap-container-admin">
-        {allCategories.length === 0 ? (
-          <div className="no-records">
-            <p>Inga kategorier finns</p>
-          </div>
-        ) : (
-          allCategories.map((c) => <AdminCategory key={c.id} categoryId={c.id} categoryName={c.name} />)
-        )}
-      </div>
-      <div className="create-edit">
-        <div className="label-and-input">
-          <label htmlFor="categoryname">Nytt kategorinamn</label>
-          <input
-            type="text"
-            id="categoryname"
-            required
-            value={newCategoryName}
-            onChange={(e) => setNewCategoryName(e.target.value)}
-          />
-        </div>
-        <button className="confirm-button" onClick={() => handleCreateNewCategory(newCategoryName)}>
-          OK
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 

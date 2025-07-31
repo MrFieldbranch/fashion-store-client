@@ -4,6 +4,7 @@ import type { DetailedCategoryResponse } from "../../models/DetailedCategoryResp
 import apiService from "../../services/api-service";
 import AdminBasicProduct from "../../components/admin-components/AdminBasicProduct";
 import type { CreateNewProductRequest } from "../../models/CreateNewProductRequest";
+import ErrorPopup from "../../components/ErrorPopup";
 
 const CategoryAdminView = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -94,119 +95,110 @@ const CategoryAdminView = () => {
       </div>
     );
 
-  if (error)
-    return (
-      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
-        <div className="pop-up">
-          <p>{error}</p>
-          <button className="go-back" onClick={() => setError(null)}>
-            Tillbaka
-          </button>
-        </div>
-      </div>
-    );
-
   return (
-    <div className="category-with-products">
-      <h1>{categoryWithProducts.name}</h1>
-      <p>Antal produkter: {categoryWithProducts.productCount}</p>
-      <div className="records-container">
-        {categoryWithProducts.productCount === 0 ? (
-          <div className="no-records">
-            <p>Inga produkter finns i kategorin</p>
+    <>
+      {error && <ErrorPopup error={error} setError={setError} />}
+      <div className="category-with-products">
+        <h1>{categoryWithProducts.name}</h1>
+        <p>Antal produkter: {categoryWithProducts.productCount}</p>
+        <div className="records-container">
+          {categoryWithProducts.productCount === 0 ? (
+            <div className="no-records">
+              <p>Inga produkter finns i kategorin</p>
+            </div>
+          ) : (
+            categoryWithProducts.productsInCategory.map((p) => (
+              <AdminBasicProduct
+                key={p.id}
+                productId={p.id}
+                productName={p.name}
+                productSex={p.productSex}
+                imageUrl={p.imageUrl}
+                startPrice={p.startPrice}
+              />
+            ))
+          )}
+        </div>
+        {!showEnterNewProduct && (
+          <button className="press-to-create-edit" onClick={() => setShowEnterNewProduct(true)}>
+            Skapa ny produkt
+          </button>
+        )}
+        {showEnterNewProduct && (
+          <div className="create-edit">
+            <h3>Skapa ny produkt</h3>
+            <div className="label-and-input">
+              <label htmlFor="productname">Nytt produktnamn</label>
+              <input
+                type="text"
+                id="productname"
+                required
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+              />
+            </div>
+
+            <label className="radio-label">
+              <input type="radio" name="option" value="0" checked={productSex === 0} onChange={handleChange} />
+              Unisex
+            </label>
+            <label className="radio-label">
+              <input type="radio" name="option" value="1" checked={productSex === 1} onChange={handleChange} />
+              Man
+            </label>
+            <label className="radio-label">
+              <input type="radio" name="option" value="2" checked={productSex === 2} onChange={handleChange} />
+              Kvinna
+            </label>
+
+            <div className="label-and-input">
+              <label htmlFor="productimageurl">URL för produktens bild</label>
+              <input
+                type="text"
+                id="productimageurl"
+                required
+                value={productImageUrl}
+                onChange={(e) => setProductImageUrl(e.target.value)}
+              />
+            </div>
+
+            <div className="label-and-input">
+              <label htmlFor="color">Produktfärg</label>
+              <input
+                type="text"
+                id="color"
+                required
+                value={productColor}
+                onChange={(e) => setProductColor(e.target.value)}
+              />
+            </div>
+
+            <div className="label-and-input">
+              <label htmlFor="productdescription">Valfri beskrivning av produkten</label>
+              <textarea
+                id="productdescription"
+                value={productDescription}
+                onChange={(e) => setProductDescription(e.target.value)}
+              />
+            </div>
+
+            <div className="confirm-or-cancel">
+              <button
+                className="confirm-button"
+                onClick={() =>
+                  handleCreateNewProduct(productName, productSex, productImageUrl, productColor, productDescription)
+                }
+              >
+                OK
+              </button>
+              <button className="cancel-button" onClick={handleCloseEnterNewProduct}>
+                AVBRYT
+              </button>
+            </div>
           </div>
-        ) : (
-          categoryWithProducts.productsInCategory.map((p) => (
-            <AdminBasicProduct
-              key={p.id}
-              productId={p.id}
-              productName={p.name}
-              productSex={p.productSex}
-              imageUrl={p.imageUrl}
-              startPrice={p.startPrice}
-            />
-          ))
         )}
       </div>
-      {!showEnterNewProduct && (
-        <button className="press-to-create-edit" onClick={() => setShowEnterNewProduct(true)}>
-          Skapa ny produkt
-        </button>
-      )}
-      {showEnterNewProduct && (
-        <div className="create-edit">
-          <h3>Skapa ny produkt</h3>
-          <div className="label-and-input">
-            <label htmlFor="productname">Nytt produktnamn</label>
-            <input
-              type="text"
-              id="productname"
-              required
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
-            />
-          </div>
-
-          <label className="radio-label">
-            <input type="radio" name="option" value="0" checked={productSex === 0} onChange={handleChange} />
-            Unisex
-          </label>
-          <label className="radio-label">
-            <input type="radio" name="option" value="1" checked={productSex === 1} onChange={handleChange} />
-            Man
-          </label>
-          <label className="radio-label">
-            <input type="radio" name="option" value="2" checked={productSex === 2} onChange={handleChange} />
-            Kvinna
-          </label>
-
-          <div className="label-and-input">
-            <label htmlFor="productimageurl">URL för produktens bild</label>
-            <input
-              type="text"
-              id="productimageurl"
-              required
-              value={productImageUrl}
-              onChange={(e) => setProductImageUrl(e.target.value)}
-            />
-          </div>
-
-          <div className="label-and-input">
-            <label htmlFor="color">Produktfärg</label>
-            <input
-              type="text"
-              id="color"
-              required
-              value={productColor}
-              onChange={(e) => setProductColor(e.target.value)}
-            />
-          </div>
-
-          <div className="label-and-input">
-            <label htmlFor="productdescription">Valfri beskrivning av produkten</label>
-            <textarea
-              id="productdescription"
-              value={productDescription}
-              onChange={(e) => setProductDescription(e.target.value)}
-            />
-          </div>
-
-          <div className="confirm-or-cancel">
-            <button
-              className="confirm-button"
-              onClick={() =>
-                handleCreateNewProduct(productName, productSex, productImageUrl, productColor, productDescription)
-              }
-            >
-              OK
-            </button>
-            <button className="cancel-button" onClick={handleCloseEnterNewProduct}>
-              AVBRYT
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 

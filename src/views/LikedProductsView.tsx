@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { BasicProductResponse } from "../models/BasicProductResponse";
 import apiService from "../services/api-service";
 import BasicProduct from "../components/BasicProduct";
+import ErrorPopup from "../components/ErrorPopup";
 
 const LikedProductsView = () => {
   const [listOfProducts, setListOfProducts] = useState<BasicProductResponse[]>([]);
@@ -37,41 +38,32 @@ const LikedProductsView = () => {
       </div>
     );
 
-  if (error)
-    return (
-      <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
-        <div className="pop-up">
-          <p>{error}</p>
-          <button className="go-back" onClick={() => setError(null)}>
-            Tillbaka
-          </button>
+  return (
+    <>
+      {error && <ErrorPopup error={error} setError={setError} />}
+      <div className="liked-products">
+        <h1>Gillade produkter</h1>
+        <div className="records-container">
+          {listOfProducts.length === 0 ? (
+            <p>Du har inga gillade produkter</p>
+          ) : (
+            listOfProducts.map((p) => (
+              <BasicProduct
+                key={p.id}
+                productId={p.id}
+                productName={p.name}
+                productSex={p.productSex}
+                imageUrl={p.imageUrl}
+                startPrice={p.startPrice}
+                isLiked={p.isLiked ? p.isLiked : false}
+                setUseEffectTrigger={setUseEffectTrigger}
+                setError={setError}
+              />
+            ))
+          )}
         </div>
       </div>
-    );
-
-  return (
-    <div className="liked-products">
-      <h1>Gillade produkter</h1>
-      <div className="records-container">
-        {listOfProducts.length === 0 ? (
-          <p>Du har inga gillade produkter</p>
-        ) : (
-          listOfProducts.map((p) => (
-            <BasicProduct
-              key={p.id}
-              productId={p.id}
-              productName={p.name}
-              productSex={p.productSex}
-              imageUrl={p.imageUrl}
-              startPrice={p.startPrice}
-              isLiked={p.isLiked ? p.isLiked : false}
-              setUseEffectTrigger={setUseEffectTrigger}
-              setError={setError}
-            />
-          ))
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 
