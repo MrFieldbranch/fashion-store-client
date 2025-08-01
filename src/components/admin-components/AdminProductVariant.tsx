@@ -5,7 +5,7 @@ import apiService from "../../services/api-service";
 type AdminProductVariantProps = {
   productVariantId: number;
   size: string;
-  SKU: string;
+  sku: string;
   price: number;
   stock: number;
   productId: number;
@@ -16,7 +16,7 @@ type AdminProductVariantProps = {
 const AdminProductVariant = ({
   productVariantId,
   size,
-  SKU,
+  sku,
   price,
   stock,
   productId,
@@ -79,7 +79,7 @@ const AdminProductVariant = ({
   return (
     <div className="admin-record">
       <h3>{size}</h3>
-      <p>{SKU}</p>
+      <p>{sku}</p>
       <p>{price} kr</p>
       <p>Antal i lager: {stock}</p>
       {!showEditProductVariant && (

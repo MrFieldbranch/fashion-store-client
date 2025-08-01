@@ -21,7 +21,7 @@ const ProductAdminView = () => {
   const [newProductColor, setNewProductColor] = useState<string>("");
   const [showEnterNewProductVariant, setShowEnterNewProductVariant] = useState<boolean>(false);
   const [productVariantSize, setProductVariantSize] = useState<string>("");
-  const [productVariantSKU, setProductVariantSKU] = useState<string>("");
+  /* const [productVariantSKU, setProductVariantSKU] = useState<string>(""); */
   const [productVariantPriceAsString, setProductVariantPriceAsString] = useState<string>("");
   const [productVariantStockAsString, setProductVariantStockAsString] = useState<string>("");
   const [useEffectTrigger, setUseEffectTrigger] = useState<number>(1);
@@ -124,7 +124,7 @@ const ProductAdminView = () => {
 
   const handleCloseEnterNewProductVariant = () => {
     setProductVariantSize("");
-    setProductVariantSKU("");
+    /* setProductVariantSKU(""); */
     setProductVariantPriceAsString("");
     setProductVariantStockAsString("");
     setShowEnterNewProductVariant(false);
@@ -132,7 +132,7 @@ const ProductAdminView = () => {
 
   const handleCreateNewProductVariant = async (
     productVariantSize: string,
-    productVariantSKU: string,
+    /* productVariantSKU: string, */
     productVariantPriceAsString: string,
     productVariantStockAsString: string
   ) => {
@@ -152,7 +152,7 @@ const ProductAdminView = () => {
 
     const request: CreateNewProductVariantRequest = {
       size: productVariantSize,
-      SKU: productVariantSKU,
+      /* SKU: productVariantSKU, */
       price: productVariantPrice,
       stock: productVariantStock,
     };
@@ -296,7 +296,7 @@ const ProductAdminView = () => {
                   key={v.productVariantId}
                   productVariantId={v.productVariantId}
                   size={v.size}
-                  SKU={v.SKU}
+                  sku={v.sku}
                   price={v.price}
                   stock={v.stock}
                   productId={id}
@@ -324,7 +324,7 @@ const ProductAdminView = () => {
                   onChange={(e) => setProductVariantSize(e.target.value)}
                 />
               </div>
-              <div className="label-and-input">
+              {/* <div className="label-and-input">
                 <label htmlFor="productvariantsku">SKU</label>
                 <input
                   type="text"
@@ -333,7 +333,7 @@ const ProductAdminView = () => {
                   value={productVariantSKU}
                   onChange={(e) => setProductVariantSKU(e.target.value)}
                 />
-              </div>
+              </div> */}
               <div className="label-and-input">
                 <label htmlFor="productvariantprice">Pris i kr</label>
                 <input
@@ -361,7 +361,7 @@ const ProductAdminView = () => {
                   onClick={() =>
                     handleCreateNewProductVariant(
                       productVariantSize,
-                      productVariantSKU,
+                      /* productVariantSKU, */
                       productVariantPriceAsString,
                       productVariantStockAsString
                     )
