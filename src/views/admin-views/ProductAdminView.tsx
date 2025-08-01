@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import type { DetailedProductResponse } from "../../models/DetailedProductResponse";
 import { useEffect, useState } from "react";
 import AdminProductVariant from "../../components/admin-components/AdminProductVariant";
@@ -8,7 +8,7 @@ import type { UpdateExistingProductRequest } from "../../models/UpdateExistingPr
 import ErrorPopup from "../../components/ErrorPopup";
 
 const ProductAdminView = () => {
-  const { productId } = useParams<{ productId: string }>();
+  const { categoryId, productId } = useParams<{ categoryId: string; productId: string }>();  //undefined...
   const id = Number(productId);
 
   const [product, setProduct] = useState<DetailedProductResponse | null>(null);
@@ -25,6 +25,7 @@ const ProductAdminView = () => {
   const [productVariantPriceAsString, setProductVariantPriceAsString] = useState<string>("");
   const [productVariantStockAsString, setProductVariantStockAsString] = useState<string>("");
   const [useEffectTrigger, setUseEffectTrigger] = useState<number>(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -179,6 +180,11 @@ const ProductAdminView = () => {
     <>
       {error && <ErrorPopup error={error} setError={setError} />}
       <div className="product">
+        <div className="move-to-right-end">
+          <button className="go-back" onClick={() => navigate(`/admin/category/${categoryId}`)}>
+            Tillbaka
+          </button>
+        </div>
         <div className="detailed-product">
           <div className="product-large-img-wrapper">
             <img src={product.imageUrl} alt={product.name} className="product-large-img" />

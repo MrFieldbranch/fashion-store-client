@@ -15,7 +15,7 @@ const NavAdmin = () => {
 
   return (
     <nav className="nav-admin">
-      <button className="go-back" onClick={() => navigate("/admindashboard")}>
+      <button className="go-back" onClick={() => navigate("/admin/dashboard")}>
         Admin Dashboard
       </button>
       <div className="user-info-and-logout-button-admin">

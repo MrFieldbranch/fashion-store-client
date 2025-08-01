@@ -35,7 +35,7 @@ const Login = ({ setLoginWindowOpen, setError }: LoginProps) => {
       const role = decodedToken.role; /* Skippar || "User" eftersom det finns väl i role? */
       login(userId, userFirstName, userLastName, loginResponse.token, role);
       showToast(`Välkommen ${userFirstName}!`);
-      if (role === "Admin") navigate("/admindashboard");
+      if (role === "Admin") navigate("/admin/dashboard");
       else setLoginWindowOpen(false);
     } catch (err: any) {
       setLoginWindowOpen(false);

@@ -41,23 +41,23 @@ const App = () => {
       </Route>
       <Route element={<AdminLayout />}>
         <Route
-          path="/admindashboard"
+          path="/admin/dashboard"
           element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />}
         />
         <Route
-          path="/allcategoriesadmin"
+          path="/admin/allcategories"
           element={userRole === "Admin" ? <AllCategoriesAdminView /> : <Navigate to="/start" />}
         />
         <Route
-          path="/categoryadmin/:categoryId"
+          path="/admin/category/:categoryId"
           element={userRole === "Admin" ? <CategoryAdminView /> : <Navigate to="/start" />}
         />
         <Route
-          path="/productadmin/:productId"
+          path="/admin/category/:categoryId/product/:productId"
           element={userRole === "Admin" ? <ProductAdminView /> : <Navigate to="/start" />}
         />
         <Route
-          path="/allcustomersadmin"
+          path="/admin/allcustomers"
           element={userRole === "Admin" ? <AllCustomersAdminView /> : <Navigate to="/start" />}
         />
         <Route

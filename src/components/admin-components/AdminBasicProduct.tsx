@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 type AdminBasicProductProps = {
+  categoryId: number;
   productId: number;
   productName: string;
   productSex: number;
@@ -8,7 +9,7 @@ type AdminBasicProductProps = {
   startPrice: number;
 };
 
-const AdminBasicProduct = ({ productId, productName, productSex, imageUrl, startPrice }: AdminBasicProductProps) => {
+const AdminBasicProduct = ({ categoryId, productId, productName, productSex, imageUrl, startPrice }: AdminBasicProductProps) => {
   const navigate = useNavigate();
 
   // Kanske bryta ut till en separat fil/funktion.
@@ -16,7 +17,7 @@ const AdminBasicProduct = ({ productId, productName, productSex, imageUrl, start
   const sex = productSex === 0 ? "Unisex" : productSex === 1 ? "Man" : "Kvinna";
 
   return (
-    <div className="basic-product" onClick={() => navigate(`/productadmin/${productId}`)}>
+    <div className="basic-product" onClick={() => navigate(`/admin/category/${categoryId}/product/${productId}`)}>
       <h3>{productName}</h3>
       <p>{sex}</p>
       <div className="product-small-img-wrapper">

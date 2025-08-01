@@ -9,7 +9,7 @@ const AdminCategory = ({ categoryId, categoryName }: AdminCategoryProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="item" onClick={() => navigate(`/categoryadmin/${categoryId}`)}>
+    <div className="item" onClick={() => navigate(`/admin/category/${categoryId}`)}>
       <p>{categoryName}</p>
     </div>
   );

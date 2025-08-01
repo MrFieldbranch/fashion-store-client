@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import type { DetailedCategoryResponse } from "../../models/DetailedCategoryResponse";
 import apiService from "../../services/api-service";
 import AdminBasicProduct from "../../components/admin-components/AdminBasicProduct";
@@ -19,6 +19,7 @@ const CategoryAdminView = () => {
   const [productColor, setProductColor] = useState<string>("");
   const [productDescription, setProductDescription] = useState<string>("");
   const [useEffectTrigger, setUseEffectTrigger] = useState<number>(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -99,7 +100,12 @@ const CategoryAdminView = () => {
     <>
       {error && <ErrorPopup error={error} setError={setError} />}
       <div className="category-with-products">
-        <h1>{categoryWithProducts.name}</h1>
+        <div className="separate-horizontally">
+          <h1>{categoryWithProducts.name}</h1>
+          <button className="go-back" onClick={() => navigate("/admin/allcategories")}>
+            Tillbaka
+          </button>
+        </div>
         <p>Antal produkter: {categoryWithProducts.productCount}</p>
         <div className="records-container">
           {categoryWithProducts.productCount === 0 ? (
@@ -110,6 +116,7 @@ const CategoryAdminView = () => {
             categoryWithProducts.productsInCategory.map((p) => (
               <AdminBasicProduct
                 key={p.id}
+                categoryId={id}
                 productId={p.id}
                 productName={p.name}
                 productSex={p.productSex}
