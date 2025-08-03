@@ -79,7 +79,7 @@ const BasicProduct = ({
         <img src={imageUrl} alt={productName} className="product-small-img" />
         {userRole && isLiked === false && (
           <img
-            src="/images/heart-hollow-2.png"
+            src="/images/heart-hollow.png"
             alt="hollow heart"
             className="heart-icon-small"
             onClick={(e) => {
@@ -90,7 +90,7 @@ const BasicProduct = ({
         )}
         {userRole && isLiked === true && (
           <img
-            src="/images/heart-filled-2.png"
+            src="/images/heart-filled.png"
             alt="filled-heart"
             className="heart-icon-small"
             onClick={(e) => {
@@ -101,7 +101,7 @@ const BasicProduct = ({
         )}
         {!userRole && (
           <img
-            src="/images/heart-hollow-2.png"
+            src="/images/heart-hollow.png"
             alt="hollow heart"
             className="heart-icon-small"
             onClick={(e) => {
