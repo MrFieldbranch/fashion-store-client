@@ -20,6 +20,7 @@ import type { ShoppingBasketTotalAmountResponse } from "../models/ShoppingBasket
 import type { BasicOrderResponse } from "../models/BasicOrderResponse";
 import type { UserListResponse } from "../models/UserListResponse";
 import type { OrderListForUserResponse } from "../models/OrderListForUserResponse";
+import type { RatingReminderResponse } from "../models/RatingReminderResponse";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
@@ -500,6 +501,22 @@ export class ApiService {
     };
 
     return order;
+  }
+
+  async getRatingRemindersAsync(signal?: AbortSignal): Promise<RatingReminderResponse[]> {
+    const response = await fetch(`${this.baseUrl}/ratingreminders`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta påminnelserna om produktbetyg. ${errorMessage}`);
+    }
+
+    const reminders: RatingReminderResponse[] = await response.json();
+    return reminders;
   }
 }
 

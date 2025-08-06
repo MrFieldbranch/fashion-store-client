@@ -3,9 +3,7 @@ import apiService from "../services/api-service";
 import { useAuth } from "./AuthContext";
 
 interface LikedProductsContextType {
-  likedProductsCountInNav: number;
-  /* increaseLikedInNavByOne: () => void;
-  decreaseLikedInNavByOne: () => void; */
+  likedProductsCountInNav: number;  
   refreshLikedProductsInNav: () => void;
 }
 
@@ -49,15 +47,7 @@ export const LikedProductsProvider = ({ children }: { children: ReactNode }) => 
 
   const refreshLikedProductsInNav = () => {
     setRefreshTrigger((prev) => prev + 1);
-  };
-
-  /* const increaseLikedInNavByOne = () => {
-    setLikedProductsCountInNav((prev) => prev + 1);
-  };
-
-  const decreaseLikedInNavByOne = () => {
-    setLikedProductsCountInNav((prev) => Math.max(0, prev - 1));
-  }; */
+  };  
 
   return (
     <LikedProductsContext.Provider

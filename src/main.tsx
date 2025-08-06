@@ -8,6 +8,7 @@ import { SexProvider } from "./contexts/SexContext.tsx";
 import { LikedProductsProvider } from "./contexts/LikedProductsContext.tsx";
 import { ShoppingBasketProvider } from "./contexts/ShoppingBasketContext.tsx";
 import { ToastProvider } from "./contexts/ToastContext.tsx";
+import { RatingReminderProvider } from "./contexts/RatingReminderContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,9 +17,11 @@ createRoot(document.getElementById("root")!).render(
         <LikedProductsProvider>
           <ShoppingBasketProvider>
             <ToastProvider>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
+              <RatingReminderProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </RatingReminderProvider>
             </ToastProvider>
           </ShoppingBasketProvider>
         </LikedProductsProvider>

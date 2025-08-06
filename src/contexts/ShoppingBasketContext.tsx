@@ -12,7 +12,7 @@ const ShoppingBasketContext = createContext<ShoppingBasketContextType | undefine
 export const useShoppingBasket = (): ShoppingBasketContextType => {
   const context = useContext(ShoppingBasketContext);
   if (!context) {
-    throw new Error("useShoppingBasket måste användas inom en ShoppingBasketProvider");
+    throw new Error("useShoppingBasket måste användas inom en ShoppingBasketProvider.");
   }
   return context;
 };
@@ -60,17 +60,3 @@ export const ShoppingBasketProvider = ({ children }: { children: ReactNode }) =>
     </ShoppingBasketContext.Provider>
   );
 };
-
-// increaseNumberOfItemsInBasketByOne: () => void;
-// decreaseNumberOfItemsInBasketByOne: () => void;
-// Här börjar jag ändra
-/* setUseEffectTriggerInShoppingBasketContext: React.Dispatch<React.SetStateAction<number>>; */
-/* const [useEffectTriggerInShoppingBasketContext, setUseEffectTriggerInShoppingBasketContext] = useState<number>(0); */
-
-/* const increaseNumberOfItemsInBasketByOne = () => {
-    setTotalQuantityInShoppingBasket((prev) => prev + 1);
-  };
-
-  const decreaseNumberOfItemsInBasketByOne = () => {
-    setTotalQuantityInShoppingBasket((prev) => Math.max(0, prev - 1));
-  }; */
