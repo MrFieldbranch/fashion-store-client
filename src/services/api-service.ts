@@ -518,6 +518,19 @@ export class ApiService {
     const reminders: RatingReminderResponse[] = await response.json();
     return reminders;
   }
+
+  async createRatingRemindersAsync(productIds: number[]): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/ratingreminders/create`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+      body: JSON.stringify(productIds),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att skapa påminnelser om produktbetyg. ${errorMessage}`);
+    }
+  }
 }
 
 const apiUrl = import.meta.env.VITE_API_URL;

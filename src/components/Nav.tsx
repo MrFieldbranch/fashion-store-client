@@ -10,6 +10,7 @@ import { useLikedProducts } from "../contexts/LikedProductsContext";
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 import { useToast } from "../contexts/ToastContext";
 import ErrorPopup from "./ErrorPopup";
+import { useRatingReminder } from "../contexts/RatingReminderContext";
 
 const Nav = () => {
   const { sex, setSex } = useSex();
@@ -18,6 +19,7 @@ const Nav = () => {
   const { loggedInUserFirstName, userRole, logout } = useAuth();
   const { likedProductsCountInNav } = useLikedProducts();
   const { totalQuantityInShoppingBasket } = useShoppingBasket();
+  const { totalUnansweredReminders } = useRatingReminder();
   const [loginWindowOpen, setLoginWindowOpen] = useState<boolean>(false);
   const [registerWindowOpen, setRegisterWindowOpen] = useState<boolean>(false);
   const [showCategories, setShowCategories] = useState<boolean>(false);
@@ -145,6 +147,9 @@ const Nav = () => {
               </div>
               <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
                 <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
+                {totalUnansweredReminders > 0 && (
+                  <p className="rating-reminder-nav-number">{totalUnansweredReminders}</p>
+                )}
                 <span className="avatar-tooltip">{loggedInUserFirstName}</span>
               </div>
               <button className="logout-button" onClick={handleLogout}>
@@ -186,6 +191,9 @@ const Nav = () => {
                 </div>
                 <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
                   <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
+                  {totalUnansweredReminders > 0 && (
+                    <p className="rating-reminder-nav-number">{totalUnansweredReminders}</p>
+                  )}
                   <span className="avatar-tooltip">{loggedInUserFirstName}</span>
                 </div>
                 <button className="logout-button" onClick={handleLogout}>

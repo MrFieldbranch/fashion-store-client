@@ -7,7 +7,7 @@ import { useLikedProducts } from "../contexts/LikedProductsContext";
 import ErrorPopup from "../components/ErrorPopup";
 
 const PaymentView = () => {
-  const { refreshShoppingBasketInNav } = useShoppingBasket();
+  const { productIdsInShoppingBasket, refreshShoppingBasketInNav } = useShoppingBasket();
   const { refreshLikedProductsInNav } = useLikedProducts();
   const { loggedInUserFirstName, loggedInUserLastName } = useAuth();
   const [totalAmount, setTotalAmount] = useState<number>(0);
@@ -40,6 +40,7 @@ const PaymentView = () => {
   const handleConfirmPurchase = async () => {
     try {
       const order = await apiService.createOrderAsync();
+      await apiService.createRatingRemindersAsync(productIdsInShoppingBasket);
       refreshShoppingBasketInNav();
       refreshLikedProductsInNav();
       navigate("/confirmation", { state: { order } });

@@ -828,6 +828,24 @@ textarea {
   height: 4rem;
 }
 
+.rating-reminder-nav-number {
+  background-color: var(--background-2);
+  color: var(--text-color-1);
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--text-size-S);
+  font-weight: bold;
+  pointer-events: none; /* Optional: allows clicks to pass through the number */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
 .avatar-tooltip {
   visibility: hidden;
   opacity: 0;

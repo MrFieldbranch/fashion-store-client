@@ -4,4 +4,5 @@ export interface ShoppingBasketResponse {
   items: ShoppingBasketItemResponse[];
   totalAmount: number;
   totalQuantity: number;
+  productIds: number[];
 }

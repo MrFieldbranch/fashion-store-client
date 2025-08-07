@@ -4,6 +4,7 @@ import apiService from "../services/api-service";
 
 interface ShoppingBasketContextType {
   totalQuantityInShoppingBasket: number;
+  productIdsInShoppingBasket: number[];
   refreshShoppingBasketInNav: () => void;
 }
 
@@ -20,6 +21,7 @@ export const useShoppingBasket = (): ShoppingBasketContextType => {
 export const ShoppingBasketProvider = ({ children }: { children: ReactNode }) => {
   const { loggedInUserId } = useAuth();
   const [totalQuantityInShoppingBasket, setTotalQuantityInShoppingBasket] = useState<number>(0);
+  const [productIdsInShoppingBasket, setProductIdsInShoppingBasket] = useState<number[]>([]);
   const [refreshTrigger, setRefreshTrigger] = useState<number>(0);
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export const ShoppingBasketProvider = ({ children }: { children: ReactNode }) =>
         const response = await apiService.getShoppingBasketAsync(abortCont.signal);
         if (!abortCont.signal.aborted) {
           setTotalQuantityInShoppingBasket(response.totalQuantity);
+          setProductIdsInShoppingBasket(response.productIds);
         }
       } catch (err: any) {
         if (err.name !== "AbortError") {
@@ -41,6 +44,7 @@ export const ShoppingBasketProvider = ({ children }: { children: ReactNode }) =>
         }
       }
     };
+
     fetchShoppingBasket();
     return () => abortCont.abort();
   }, [loggedInUserId, refreshTrigger]);
@@ -53,6 +57,7 @@ export const ShoppingBasketProvider = ({ children }: { children: ReactNode }) =>
     <ShoppingBasketContext.Provider
       value={{
         totalQuantityInShoppingBasket,
+        productIdsInShoppingBasket,
         refreshShoppingBasketInNav,
       }}
     >
