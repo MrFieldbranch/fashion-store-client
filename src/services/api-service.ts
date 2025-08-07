@@ -531,6 +531,18 @@ export class ApiService {
       throw new Error(`Det gick inte att skapa påminnelser om produktbetyg. ${errorMessage}`);
     }
   }
+
+  async markAllRemindersAsAnsweredAsync(): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/ratingreminders/answer-all`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att markera alla påminnelser som besvarade. ${errorMessage}`);
+    }
+  }
 }
 
 const apiUrl = import.meta.env.VITE_API_URL;

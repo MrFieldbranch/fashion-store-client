@@ -20,6 +20,7 @@ import AllCategoriesAdminView from "./views/admin-views/AllCategoriesAdminView";
 import AllCustomersAdminView from "./views/admin-views/AllCustomersAdminView";
 import AdminUserView from "./views/admin-views/AdminUserView";
 import AdminUserOrderView from "./views/admin-views/AdminUserOrderView";
+import RatingsAndReviewsView from "./views/RatingsAndReviewsView";
 
 const App = () => {
   const { userRole } = useAuth();
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/confirmation" element={<ConfirmationView />} />
         <Route path="/history/allorders" element={<AllOrdersView />} />
         <Route path="/history/order/:orderId" element={<DetailedOrderView />} />
+        <Route path="/ratings-and-reviews" element={<RatingsAndReviewsView />} />
       </Route>
       <Route element={<AdminLayout />}>
         <Route

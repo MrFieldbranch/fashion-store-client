@@ -1073,6 +1073,13 @@ footer h3 {
   padding: 1rem;
 }
 
+.new-ratings-announcement {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
 @media (max-width: 1000px) {
   nav {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
