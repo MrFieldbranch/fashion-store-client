@@ -21,6 +21,8 @@ import type { BasicOrderResponse } from "../models/BasicOrderResponse";
 import type { UserListResponse } from "../models/UserListResponse";
 import type { OrderListForUserResponse } from "../models/OrderListForUserResponse";
 import type { RatingReminderResponse } from "../models/RatingReminderResponse";
+import type { CreateRatingRequest } from "../models/CreateRatingRequest";
+import type { CreateReviewRequest } from "../models/CreateReviewRequest";
 
 export class ApiService {
   private requestHeaders: { [key: string]: string };
@@ -541,6 +543,44 @@ export class ApiService {
     if (!response.ok) {
       const errorMessage = await response.text();
       throw new Error(`Det gick inte att markera alla påminnelser som besvarade. ${errorMessage}`);
+    }
+  }
+
+  async markReminderAsAnsweredAsync(productId: number): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/ratingreminders/${productId}/answer`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att markera påminnelsen som besvarad. ${errorMessage}`);
+    }
+  }
+
+  async createRatingAsync(productId: number, request: CreateRatingRequest): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/ratings/${productId}`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att betygsätta produkten. ${errorMessage}`);
+    }
+  }
+
+  async createReviewAsync(productId: number, request: CreateReviewRequest): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/reviews/${productId}`, {
+      method: "POST",
+      headers: { ...this.requestHeaders },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att recensera produkten. ${errorMessage}`);
     }
   }
 }

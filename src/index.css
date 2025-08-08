@@ -1080,6 +1080,28 @@ footer h3 {
   margin-bottom: 3rem;
 }
 
+.product-rating-review {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.vertical-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rating {
+  display: flex;
+  gap: 2rem;
+}
+
+.review-textarea {
+  width: 50%;
+}
+
 @media (max-width: 1000px) {
   nav {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
