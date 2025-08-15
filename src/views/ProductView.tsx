@@ -211,7 +211,7 @@ const ProductView = () => {
             )}
             {showRatingsAndReviews && (
               <div className="clickable-background-ratings" onClick={() => setShowRatingsAndReviews(false)}>
-                <div className="ratings-and-reviews">
+                <div className="display-all-ratings-and-reviews">
                   <div className="fixed-heading-ratings-and-reviews">
                     <button
                       className="remove-item-from-shopping-basket"

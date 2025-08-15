@@ -1177,7 +1177,7 @@ footer h3 {
   z-index: 999;
 }
 
-.ratings-and-reviews {
+.display-all-ratings-and-reviews {
   background-color: var(--confirm-background);
   color: var(--text-color-2);
   position: fixed;
