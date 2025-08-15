@@ -1,4 +1,5 @@
 import type { ProductVariantResponse } from "./ProductVariantResponse";
+import type { RatingAndReviewResponse } from "./RatingAndReviewResponse";
 
 export interface DetailedProductResponse {
   id: number;
@@ -10,4 +11,7 @@ export interface DetailedProductResponse {
   color: string;
   productVariants: ProductVariantResponse[];
   isLiked?: boolean;
+  ratingsCount: number;
+  averageGrade: number;
+  ratingsAndReviews: RatingAndReviewResponse[];
 }

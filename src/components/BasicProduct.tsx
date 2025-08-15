@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import apiService from "../services/api-service";
 import { useLikedProducts } from "../contexts/LikedProductsContext";
 import { useSex } from "../contexts/SexContext";
+import AverageGradeStars from "./AverageGradeStars";
 
 type BasicProductProps = {
   productId: number;
@@ -11,6 +12,8 @@ type BasicProductProps = {
   imageUrl: string;
   startPrice: number;
   isLiked: boolean;
+  ratingsCount: number;
+  averageGrade: number;
   setUseEffectTrigger: React.Dispatch<React.SetStateAction<number>>;
   setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
@@ -22,6 +25,8 @@ const BasicProduct = ({
   imageUrl,
   startPrice,
   isLiked,
+  ratingsCount,
+  averageGrade,
   setUseEffectTrigger,
   setError,
 }: BasicProductProps) => {
@@ -111,7 +116,10 @@ const BasicProduct = ({
           />
         )}
       </div>
-      <p className="from-price">Från {startPrice} kr</p>
+      <div className="basic-product-stars-and-price">
+        <AverageGradeStars average={averageGrade} ratingsCount={ratingsCount} variant="basic-product" />
+        <p className="from-price">Från {startPrice} kr</p>
+      </div>
     </div>
   );
 };

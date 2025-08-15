@@ -8,6 +8,8 @@ import type { AddItemToShoppingBasketRequest } from "../models/AddItemToShopping
 import { useShoppingBasket } from "../contexts/ShoppingBasketContext";
 import { useToast } from "../contexts/ToastContext";
 import ErrorPopup from "../components/ErrorPopup";
+import AverageGradeStars from "../components/AverageGradeStars";
+import IndividualRatingAndReview from "../components/IndividualRatingAndReview";
 
 type ChosenProduct = {
   size: string;
@@ -26,6 +28,7 @@ const ProductView = () => {
   const [showSizes, setShowSizes] = useState<boolean>(false);
   const [productChosen, setProductChosen] = useState<ChosenProduct | null>(null);
   const [useEffectTrigger, setUseEffectTrigger] = useState<number>(1);
+  const [showRatingsAndReviews, setShowRatingsAndReviews] = useState<boolean>(false);
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -187,6 +190,49 @@ const ProductView = () => {
               <button className="add-to-shopping-basket" onClick={handleAddToBasket}>
                 Lägg i varukorgen
               </button>
+            )}
+          </div>
+          <div className="detailed-product-ratings-and-reviews">
+            <div className="average-grade-and-ratings-count">
+              <div className="grade-and-stars">
+                {product.ratingsCount > 0 && <p className="big-p">{product.averageGrade}</p>}
+                <AverageGradeStars
+                  ratingsCount={product.ratingsCount}
+                  average={product.averageGrade}
+                  variant="detailed-product"
+                />
+              </div>
+              {product.ratingsCount > 0 && <p className="big-p">{product.ratingsCount} betyg</p>}
+            </div>
+            {!showRatingsAndReviews && product.ratingsCount > 0 && (
+              <button className="show-ratings-and-reviews-button" onClick={() => setShowRatingsAndReviews(true)}>
+                Visa alla betyg och recensioner
+              </button>
+            )}
+            {showRatingsAndReviews && (
+              <div className="clickable-background-ratings" onClick={() => setShowRatingsAndReviews(false)}>
+                <div className="ratings-and-reviews">
+                  <div className="fixed-heading-ratings-and-reviews">
+                    <button
+                      className="remove-item-from-shopping-basket"
+                      onClick={() => setShowRatingsAndReviews(false)}
+                    >
+                      X
+                    </button>
+                  </div>
+                  <div className="scroll-list">
+                    <h2 className="pad-left">Alla betyg och recensioner</h2>
+                    {product.ratingsAndReviews.map((r) => (
+                      <IndividualRatingAndReview
+                        grade={r.grade}
+                        reviewText={r.reviewText}
+                        firstName={r.userFirstName}
+                        lastName={r.userLastName}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>

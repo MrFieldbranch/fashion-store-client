@@ -3,17 +3,17 @@ import type { BasicOrderResponse } from "../models/BasicOrderResponse";
 import apiService from "../services/api-service";
 import { useNavigate } from "react-router-dom";
 import ErrorPopup from "../components/ErrorPopup";
-import type { RatingReminderResponse } from "../models/RatingReminderResponse";
+/* import type { RatingReminderResponse } from "../models/RatingReminderResponse"; */
 import { useRatingReminder } from "../contexts/RatingReminderContext";
 
 const AllOrdersView = () => {
-  const { refreshRatingReminderNumber } = useRatingReminder();
+  const { ratingReminders, refreshRatingReminders } = useRatingReminder();
   const [allOrdersForUser, setAllOrdersForUser] = useState<BasicOrderResponse[]>([]);
-  const [ratingReminders, setRatingReminders] = useState<RatingReminderResponse[]>([]);
+  /* const [ratingReminders, setRatingReminders] = useState<RatingReminderResponse[]>([]); */
   const [error, setError] = useState<string | null>(null);
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(true);
-  const [isLoadingReminders, setIsLoadingReminders] = useState<boolean>(true);
-  const [useEffectTrigger, setUseEffectTrigger] = useState<number>(1);
+  /* const [isLoadingReminders, setIsLoadingReminders] = useState<boolean>(true); */
+  /* const [useEffectTrigger, setUseEffectTrigger] = useState<number>(1); */
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const AllOrdersView = () => {
     return () => abortCont.abort();
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const abortCont = new AbortController();
 
     const fetchRatingReminders = async () => {
@@ -58,19 +58,19 @@ const AllOrdersView = () => {
 
     fetchRatingReminders();
     return () => abortCont.abort();
-  }, [useEffectTrigger]);
+  }, [useEffectTrigger]); */
 
   const handleDeclineRating = async () => {
     try {
       await apiService.markAllRemindersAsAnsweredAsync();
-      setUseEffectTrigger((prev) => prev + 1);
-      refreshRatingReminderNumber();
+      /* setUseEffectTrigger((prev) => prev + 1); */
+      refreshRatingReminders();
     } catch (err: any) {
       setError(err.message || "Ett oväntat fel inträffade. Det gick inte att markera alla påminnelser som besvarade.");
     }
   };
 
-  if (isLoadingOrders || isLoadingReminders)
+  if (isLoadingOrders)
     return (
       <div className="loading">
         <p>Laddar...</p>

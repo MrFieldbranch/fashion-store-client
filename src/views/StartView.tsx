@@ -105,6 +105,8 @@ const StartView = () => {
                   imageUrl={p.imageUrl}
                   startPrice={p.startPrice}
                   isLiked={p.isLiked ? p.isLiked : false}
+                  ratingsCount={p.ratingsCount}
+                  averageGrade={p.averageGrade}
                   setUseEffectTrigger={setUseEffectTrigger}
                   setError={setError}
                 />
@@ -125,6 +127,8 @@ const StartView = () => {
                   imageUrl={p.imageUrl}
                   startPrice={p.startPrice}
                   isLiked={p.isLiked ? p.isLiked : false}
+                  ratingsCount={p.ratingsCount}
+                  averageGrade={p.averageGrade}
                   setUseEffectTrigger={setUseEffectTrigger}
                   setError={setError}
                 />
@@ -145,6 +149,8 @@ const StartView = () => {
                   imageUrl={p.imageUrl}
                   startPrice={p.startPrice}
                   isLiked={p.isLiked ? p.isLiked : false}
+                  ratingsCount={p.ratingsCount}
+                  averageGrade={p.averageGrade}
                   setUseEffectTrigger={setUseEffectTrigger}
                   setError={setError}
                 />

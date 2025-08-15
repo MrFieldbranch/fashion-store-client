@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import type { CreateRatingRequest } from "../models/CreateRatingRequest";
 import apiService from "../services/api-service";
 import type { CreateReviewRequest } from "../models/CreateReviewRequest";
-import { useRatingReminder } from "../contexts/RatingReminderContext";
+import { useToast } from "../contexts/ToastContext";
+/* import { useRatingReminder } from "../contexts/RatingReminderContext"; */
 
 type ProductRatingReviewProps = {
   productId: number;
@@ -19,7 +20,8 @@ const ProductRatingReview = ({
   setUseEffectTrigger,
   setError,
 }: ProductRatingReviewProps) => {
-  const { refreshRatingReminderNumber } = useRatingReminder();
+  /* const { refreshRatingReminderNumber } = useRatingReminder(); */
+  const { showToast } = useToast();
   const [grade, setGrade] = useState<number>(3);
   const [ratingHasBeenSent, setRatingHasBeenSent] = useState<boolean>(false);
   const [review, setReview] = useState<string>("");
@@ -35,7 +37,7 @@ const ProductRatingReview = ({
     try {
       await apiService.createRatingAsync(productId, request);
       await apiService.markReminderAsAnsweredAsync(productId);
-      refreshRatingReminderNumber();
+      /* refreshRatingReminderNumber(); */
       setRatingHasBeenSent(true);
     } catch (err: any) {
       setError(err.message || "Ett fel inträffade. Det gick inte att betygsätta produkten.");
@@ -45,7 +47,7 @@ const ProductRatingReview = ({
   const handleDeclineRatingThisProduct = async () => {
     try {
       await apiService.markReminderAsAnsweredAsync(productId);
-      refreshRatingReminderNumber();
+      /* refreshRatingReminders(); */
       setUseEffectTrigger((prev) => prev + 1);
     } catch (err: any) {
       setError(err.message || "Ett fel inträffade. Det gick inte att markera påminnelsen som besvarad.");
@@ -62,11 +64,17 @@ const ProductRatingReview = ({
     };
     try {
       await apiService.createReviewAsync(productId, request);
-	  setUseEffectTrigger((prev) => prev + 1);
+      setUseEffectTrigger((prev) => prev + 1);
+      showToast(`Tack för att du betygsatte och recenserade ${productName}!`);
     } catch (err: any) {
       setError(err.message || "Ett fel inträffade. Det gick inte att recensera produkten.");
     }
   };
+
+  const handleDeclineReviewingThisProduct = () => {
+    setUseEffectTrigger((prev) => prev + 1);
+    showToast(`Tack för att du betygsatte ${productName}!`);
+  }
 
   return (
     <div className="product-rating-review">
@@ -155,7 +163,7 @@ const ProductRatingReview = ({
             <button className="confirm-button" onClick={handleSendReview}>
               Skicka recension
             </button>
-            <button className="cancel-button" onClick={() => setUseEffectTrigger((prev) => prev + 1)}>
+            <button className="cancel-button" onClick={handleDeclineReviewingThisProduct}>
               Nej tack
             </button>
           </div>

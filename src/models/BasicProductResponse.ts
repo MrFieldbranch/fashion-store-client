@@ -5,4 +5,6 @@ export interface BasicProductResponse {
   imageUrl: string;
   startPrice: number;
   isLiked?: boolean;
+  ratingsCount: number;
+  averageGrade: number;
 }

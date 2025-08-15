@@ -19,7 +19,7 @@ const Nav = () => {
   const { loggedInUserFirstName, userRole, logout } = useAuth();
   const { likedProductsCountInNav } = useLikedProducts();
   const { totalQuantityInShoppingBasket } = useShoppingBasket();
-  const { totalUnansweredReminders } = useRatingReminder();
+  const { ratingReminders } = useRatingReminder();
   const [loginWindowOpen, setLoginWindowOpen] = useState<boolean>(false);
   const [registerWindowOpen, setRegisterWindowOpen] = useState<boolean>(false);
   const [showCategories, setShowCategories] = useState<boolean>(false);
@@ -147,8 +147,8 @@ const Nav = () => {
               </div>
               <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
                 <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
-                {totalUnansweredReminders > 0 && (
-                  <p className="rating-reminder-nav-number">{totalUnansweredReminders}</p>
+                {ratingReminders.length > 0 && (
+                  <p className="rating-reminder-nav-number">{ratingReminders.length}</p>
                 )}
                 <span className="avatar-tooltip">{loggedInUserFirstName}</span>
               </div>
@@ -191,8 +191,8 @@ const Nav = () => {
                 </div>
                 <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
                   <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
-                  {totalUnansweredReminders > 0 && (
-                    <p className="rating-reminder-nav-number">{totalUnansweredReminders}</p>
+                  {ratingReminders.length > 0 && (
+                    <p className="rating-reminder-nav-number">{ratingReminders.length}</p>
                   )}
                   <span className="avatar-tooltip">{loggedInUserFirstName}</span>
                 </div>
