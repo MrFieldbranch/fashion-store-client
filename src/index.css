@@ -41,6 +41,7 @@ html {
   /* Borders */
   --border-1: lightgray;
   --border-2: rgba(26, 1, 40, 0.6);
+  --border-3: black;
 
   /* Border radius */
   --radius-tiny: 0.3rem;
@@ -1178,7 +1179,7 @@ footer h3 {
 }
 
 .display-all-ratings-and-reviews {
-  background-color: var(--confirm-background);
+  background-color: var(--background-1);
   color: var(--text-color-2);
   position: fixed;
   top: 50%;
@@ -1190,6 +1191,7 @@ footer h3 {
   align-items: flex-start;
   gap: 2rem;
   padding: 1rem 0;
+  border: 1px solid var(--border-3);
   border-radius: var(--radius-large);
   z-index: 1001;
   max-height: 80vh;
@@ -1205,7 +1207,7 @@ footer h3 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background: var(--confirm-background);
+  background: var(--background-1);
   z-index: 1; /* Behövs denna? */
 }
 
