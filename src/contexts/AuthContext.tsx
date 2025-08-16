@@ -8,6 +8,7 @@ interface AuthContextType {
   userRole: string | null;
   login: (userId: string, userFirstName: string, userLastName: string, token: string, role: string) => void;
   logout: () => void;
+  hydrated: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loggedInUserFirstName, setLoggedInUserFirstName] = useState<string | null>(null);
   const [loggedInUserLastName, setLoggedInUserLastName] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);  
+  const [hydrated, setHydrated] = useState<boolean>(false);
 
   // Initialize state from localStorage
   useEffect(() => {
@@ -41,6 +43,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUserRole(storedUserRole);
       apiService.setAuthorizationHeader(storedToken);
     }
+
+    setHydrated(true);
   }, []);
 
   const login = (userId: string, userFirstName: string, userLastName: string, token: string, role: string) => {
@@ -70,7 +74,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ loggedInUserId, loggedInUserFirstName, loggedInUserLastName, userRole, login, logout }}
+      value={{ loggedInUserId, loggedInUserFirstName, loggedInUserLastName, userRole, login, logout, hydrated }}
     >
       {children}
     </AuthContext.Provider>

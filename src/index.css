@@ -596,7 +596,7 @@ textarea {
   max-width: 30rem;
 }
 
-.sizes-section {  
+.sizes-section {
   position: relative;
 }
 
@@ -1152,7 +1152,7 @@ footer h3 {
 .grade-and-stars {
   display: flex;
   gap: 1rem;
-  align-items: flex-end;  
+  align-items: flex-end;
   margin-bottom: 1rem;
 }
 
@@ -1195,7 +1195,7 @@ footer h3 {
   border-radius: var(--radius-large);
   z-index: 1001;
   max-height: 80vh;
-  width: 70vw;
+  width: 50vw;
   overflow: hidden;
 }
 
@@ -1214,21 +1214,23 @@ footer h3 {
 .scroll-list {
   width: 100%;
   overflow-y: auto;
-  padding-right: 0.5rem; /* room for scrollbar */  
+  padding-right: 0.5rem; /* room for scrollbar */
 }
 
 .individual-rating-and-review {
-  width: 100%;  
-  border-bottom: 1px solid var(--border-2);
+  width: 100%;
+  margin-bottom: 3rem;
+  /* border-bottom: 1px solid var(--border-2); */
 }
 
 .individual-rating-and-review-content {
-  width: 100%; 
+  width: 100%;
   padding: 0 2rem;
-  height: 12rem;
+  /* height: 12rem; */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  gap: 1rem;
 }
 
 .pad-left {
@@ -1377,6 +1379,10 @@ footer h3 {
   .credit-card {
     border: 2px solid var(--border-2);
     height: 30vh;
+  }
+
+  .display-all-ratings-and-reviews {
+    width: 80vw;
   }
 }
 

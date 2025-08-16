@@ -23,52 +23,73 @@ import AdminUserOrderView from "./views/admin-views/AdminUserOrderView";
 import RatingsAndReviewsView from "./views/RatingsAndReviewsView";
 
 const App = () => {
-  const { userRole } = useAuth();
+  const { userRole, hydrated } = useAuth();
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/start" />} />
       <Route element={<UserLayoutWithSexChoices />}>
-        <Route path="/start" element={<StartView />} />
-        <Route path="/category/:categoryId/sex/:sex" element={<CategoryView />} />
+        <Route path="/start" element={!hydrated ? null : <StartView />} />
+        <Route path="/category/:categoryId/sex/:sex" element={!hydrated ? null : <CategoryView />} />
       </Route>
       <Route element={<UserLayoutWithoutSexChoices />}>
-        <Route path="/product/:productId" element={<ProductView />} />
-        <Route path="/likedproducts" element={<LikedProductsView />} />
-        <Route path="/shoppingbasket" element={<ShoppingBasketView />} />
-        <Route path="/payment" element={<PaymentView />} />
-        <Route path="/confirmation" element={<ConfirmationView />} />
-        <Route path="/history/allorders" element={<AllOrdersView />} />
-        <Route path="/history/order/:orderId" element={<DetailedOrderView />} />
-        <Route path="/ratings-and-reviews" element={<RatingsAndReviewsView />} />
+        <Route path="/product/:productId" element={!hydrated ? null : <ProductView />} />
+        <Route
+          path="/likedproducts"
+          element={!hydrated ? null : userRole === "User" ? <LikedProductsView /> : <Navigate to="/start" />}
+        />
+        <Route
+          path="/shoppingbasket"
+          element={!hydrated ? null : userRole === "User" ? <ShoppingBasketView /> : <Navigate to="/start" />}
+        />
+        <Route
+          path="/payment"
+          element={!hydrated ? null : userRole === "User" ? <PaymentView /> : <Navigate to="/start" />}
+        />
+        <Route
+          path="/confirmation"
+          element={!hydrated ? null : userRole === "User" ? <ConfirmationView /> : <Navigate to="/start" />}
+        />
+        <Route
+          path="/history/allorders"
+          element={!hydrated ? null : userRole === "User" ? <AllOrdersView /> : <Navigate to="/start" />}
+        />
+        <Route
+          path="/history/order/:orderId"
+          element={!hydrated ? null : userRole === "User" ? <DetailedOrderView /> : <Navigate to="/start" />}
+        />
+        <Route
+          path="/ratings-and-reviews"
+          element={!hydrated ? null : userRole === "User" ? <RatingsAndReviewsView /> : <Navigate to="/start" />}
+        />
       </Route>
       <Route element={<AdminLayout />}>
         <Route
           path="/admin/dashboard"
-          element={userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />}
+          element={!hydrated ? null : userRole === "Admin" ? <AdminDashboardView /> : <Navigate to="/start" />}
         />
         <Route
           path="/admin/allcategories"
-          element={userRole === "Admin" ? <AllCategoriesAdminView /> : <Navigate to="/start" />}
+          element={!hydrated ? null : userRole === "Admin" ? <AllCategoriesAdminView /> : <Navigate to="/start" />}
         />
         <Route
           path="/admin/category/:categoryId"
-          element={userRole === "Admin" ? <CategoryAdminView /> : <Navigate to="/start" />}
+          element={!hydrated ? null : userRole === "Admin" ? <CategoryAdminView /> : <Navigate to="/start" />}
         />
         <Route
           path="/admin/category/:categoryId/product/:productId"
-          element={userRole === "Admin" ? <ProductAdminView /> : <Navigate to="/start" />}
+          element={!hydrated ? null : userRole === "Admin" ? <ProductAdminView /> : <Navigate to="/start" />}
         />
         <Route
           path="/admin/allcustomers"
-          element={userRole === "Admin" ? <AllCustomersAdminView /> : <Navigate to="/start" />}
+          element={!hydrated ? null : userRole === "Admin" ? <AllCustomersAdminView /> : <Navigate to="/start" />}
         />
         <Route
           path="/admin/user/:userId"
-          element={userRole === "Admin" ? <AdminUserView /> : <Navigate to="/start" />}
+          element={!hydrated ? null : userRole === "Admin" ? <AdminUserView /> : <Navigate to="/start" />}
         />
         <Route
           path="/admin/user/:userId/order/:orderId"
-          element={userRole === "Admin" ? <AdminUserOrderView /> : <Navigate to="/start" />}
+          element={!hydrated ? null : userRole === "Admin" ? <AdminUserOrderView /> : <Navigate to="/start" />}
         />
       </Route>
       <Route path="*" element={<NotFoundView />} />
