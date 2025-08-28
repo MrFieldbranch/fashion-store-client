@@ -41,32 +41,34 @@ const AllCustomersAdminView = () => {
     <>
       {error && <ErrorPopup error={error} setError={setError} />}
       <div className="all-customers-admin">
-        <h1>Alla kunder</h1>
-        <p>Antal: {userList.totalNumberOfUsers}</p>
-        <table className="table-narrow">
-          <thead>
-            <tr>
-              <th>Namn</th>
-              <th>Antal ordrar</th>
-              <th>Totalt ordervärde (kr)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userList.totalNumberOfUsers === 0 ? (
-              <p>Det finns inga kunder i systemet</p>
-            ) : (
-              userList.users.map((u) => (
-                <tr key={u.userId} onClick={() => navigate(`/admin/user/${u.userId}`)}>
-                  <td>
-                    {u.firstName} {u.lastName}
-                  </td>
-                  <td>{u.orderCount}</td>
-                  <td>{u.totalOrderValueForUser}</td>
+        {userList.totalNumberOfUsers === 0 ? (
+          <p>Det finns inga kunder i systemet</p>
+        ) : (
+          <>
+            <h1>Alla kunder</h1>
+            <p>Antal: {userList.totalNumberOfUsers}</p>
+            <table className="table-narrow">
+              <thead>
+                <tr>
+                  <th>Namn</th>
+                  <th>Antal ordrar</th>
+                  <th>Totalt ordervärde (kr)</th>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {userList.users.map((u) => (
+                  <tr key={u.userId} onClick={() => navigate(`/admin/user/${u.userId}`)}>
+                    <td>
+                      {u.firstName} {u.lastName}
+                    </td>
+                    <td>{u.orderCount}</td>
+                    <td>{u.totalOrderValueForUser}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
       </div>
     </>
   );

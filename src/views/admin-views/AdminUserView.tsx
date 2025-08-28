@@ -53,31 +53,30 @@ const AdminUserView = () => {
             Tillbaka
           </button>
         </div>
-
-        <table className="table-narrow">
-          <thead>
-            <tr>
-              <th>Ordernummer</th>
-              <th>Datum</th>
-              <th>Antal artiklar</th>
-              <th>Totalbelopp (kr)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orderList.orders.length === 0 ? (
-              <p>Kunden har inte gjort några beställningar</p>
-            ) : (
-              orderList.orders.map((o) => (
+        {orderList.orders.length === 0 ? (
+          <p>Kunden har inte gjort några beställningar</p>
+        ) : (
+          <table className="table-narrow">
+            <thead>
+              <tr>
+                <th>Ordernummer</th>
+                <th>Datum</th>
+                <th>Antal artiklar</th>
+                <th>Totalbelopp (kr)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderList.orders.map((o) => (
                 <tr key={o.orderId} onClick={() => navigate(`/admin/user/${id}/order/${o.orderId}`)}>
                   <td>{o.orderId}</td>
                   <td>{o.orderDate.toISOString().split("T")[0]}</td>
                   <td>{o.totalQuantity}</td>
                   <td>{o.totalAmount}</td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </>
   );
