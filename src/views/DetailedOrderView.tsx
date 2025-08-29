@@ -47,7 +47,7 @@ const DetailedOrderView = () => {
       <div className="detailed-order">
         <div className="separate-horizontally">
           <h1>Orderinformation</h1>
-          <button className="go-back" onClick={() => navigate("/history/allorders")}>
+          <button className="button-white" onClick={() => navigate("/history/allorders")}>
             Tillbaka
           </button>
         </div>

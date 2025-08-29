@@ -102,7 +102,7 @@ const CategoryAdminView = () => {
       <div className="category-with-products">
         <div className="separate-horizontally">
           <h1>{categoryWithProducts.name}</h1>
-          <button className="go-back" onClick={() => navigate("/admin/allcategories")}>
+          <button className="button-white" onClick={() => navigate("/admin/allcategories")}>
             Tillbaka
           </button>
         </div>
@@ -127,7 +127,7 @@ const CategoryAdminView = () => {
           )}
         </div>
         {!showEnterNewProduct && (
-          <button className="press-to-create-edit" onClick={() => setShowEnterNewProduct(true)}>
+          <button className="button-purple" onClick={() => setShowEnterNewProduct(true)}>
             Skapa ny produkt
           </button>
         )}
@@ -191,14 +191,14 @@ const CategoryAdminView = () => {
 
             <div className="confirm-or-cancel">
               <button
-                className="confirm-button"
+                className="button-green"
                 onClick={() =>
                   handleCreateNewProduct(productName, productSex, productImageUrl, productColor, productDescription)
                 }
               >
                 OK
               </button>
-              <button className="cancel-button" onClick={handleCloseEnterNewProduct}>
+              <button className="button-red" onClick={handleCloseEnterNewProduct}>
                 AVBRYT
               </button>
             </div>

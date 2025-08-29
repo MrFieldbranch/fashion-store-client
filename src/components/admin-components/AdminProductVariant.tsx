@@ -83,7 +83,7 @@ const AdminProductVariant = ({
       <p>{price} kr</p>
       <p>Antal i lager: {stock}</p>
       {!showEditProductVariant && (
-        <button className="press-to-create-edit" onClick={() => setShowEditProductVariant(true)}>
+        <button className="button-purple" onClick={() => setShowEditProductVariant(true)}>
           Redigera storlek
         </button>
       )}
@@ -111,12 +111,12 @@ const AdminProductVariant = ({
 
           <div className="confirm-or-cancel">
             <button
-              className="confirm-button"
+              className="button-green"
               onClick={() => handleEditProductVariant(newPriceAsString, stockChangeAsString)}
             >
               OK
             </button>
-            <button className="cancel-button" onClick={handleCloseEditProductVariant}>
+            <button className="button-red" onClick={handleCloseEditProductVariant}>
               AVBRYT
             </button>
           </div>

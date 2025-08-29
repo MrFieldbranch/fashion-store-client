@@ -68,10 +68,10 @@ const Login = ({ setLoginWindowOpen, setError }: LoginProps) => {
           />
         </div>
         <div className="confirm-or-cancel">
-          <button className="confirm-button" onClick={() => handleLogin(email, password)}>
+          <button className="button-green" onClick={() => handleLogin(email, password)}>
             OK
           </button>
-          <button className="cancel-button" onClick={() => setLoginWindowOpen(false)}>
+          <button className="button-red" onClick={() => setLoginWindowOpen(false)}>
             AVBRYT
           </button>
         </div>

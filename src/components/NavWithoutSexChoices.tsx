@@ -71,7 +71,7 @@ const NavWithoutSexChoices = () => {
             onClick={() => navigate("/start")}
           />
           {sex && !showCategories && (
-            <button className="button-to-open-categories" onClick={handleShowCategories}>
+            <button className="button-purple" onClick={handleShowCategories}>
               Kategorier
             </button>
           )}
@@ -94,7 +94,7 @@ const NavWithoutSexChoices = () => {
                 </div>
 
                 <div className="dropdown-right-side">
-                  <button className="close-dropdown" onClick={() => setShowCategories(false)}>
+                  <button className="button-white" onClick={() => setShowCategories(false)}>
                     Stäng
                   </button>
                 </div>
@@ -114,21 +114,19 @@ const NavWithoutSexChoices = () => {
               </div>
               <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
                 <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
-                {ratingReminders.length > 0 && (
-                  <p className="rating-reminder-nav-number">{ratingReminders.length}</p>
-                )}
+                {ratingReminders.length > 0 && <p className="rating-reminder-nav-number">{ratingReminders.length}</p>}
                 <span className="avatar-tooltip">{loggedInUserFirstName}</span>
               </div>
-              <button className="logout-button" onClick={handleLogout}>
+              <button className="button-red" onClick={handleLogout}>
                 Logga ut
               </button>
             </div>
           ) : (
             <div className="login-register-buttons">
-              <button className="login-button" onClick={() => setLoginWindowOpen(true)}>
+              <button className="button-white" onClick={() => setLoginWindowOpen(true)}>
                 Logga in
               </button>
-              <button className="register-button" onClick={() => setRegisterWindowOpen(true)}>
+              <button className="button-green" onClick={() => setRegisterWindowOpen(true)}>
                 Skapa ett konto
               </button>
             </div>
@@ -158,21 +156,19 @@ const NavWithoutSexChoices = () => {
                 </div>
                 <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
                   <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
-                  {ratingReminders.length > 0 && (
-                    <p className="rating-reminder-nav-number">{ratingReminders.length}</p>
-                  )}
+                  {ratingReminders.length > 0 && <p className="rating-reminder-nav-number">{ratingReminders.length}</p>}
                   <span className="avatar-tooltip">{loggedInUserFirstName}</span>
                 </div>
-                <button className="logout-button" onClick={handleLogout}>
+                <button className="button-red" onClick={handleLogout}>
                   Logga ut
                 </button>
               </div>
             ) : (
               <div className="login-register-buttons">
-                <button className="login-button" onClick={() => setLoginWindowOpen(true)}>
+                <button className="button-white" onClick={() => setLoginWindowOpen(true)}>
                   Logga in
                 </button>
-                <button className="register-button" onClick={() => setRegisterWindowOpen(true)}>
+                <button className="button-green" onClick={() => setRegisterWindowOpen(true)}>
                   Skapa ett konto
                 </button>
               </div>
@@ -180,7 +176,7 @@ const NavWithoutSexChoices = () => {
           </div>
           <div className="nav-narrow-screen-row-2">
             {sex && !showCategories && (
-              <button className="button-to-open-categories" onClick={handleShowCategories}>
+              <button className="button-purple" onClick={handleShowCategories}>
                 Kategorier
               </button>
             )}
@@ -207,7 +203,7 @@ const NavWithoutSexChoices = () => {
                   </div>
 
                   <div className="dropdown-right-side">
-                    <button className="close-dropdown" onClick={() => setShowCategories(false)}>
+                    <button className="button-white" onClick={() => setShowCategories(false)}>
                       Stäng
                     </button>
                   </div>

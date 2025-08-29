@@ -62,7 +62,7 @@ const PaymentView = () => {
       <div className="payment">
         <div className="separate-horizontally">
           <h1>Avsluta köp</h1>
-          <button className="go-back" onClick={() => navigate("/shoppingbasket")}>
+          <button className="button-white" onClick={() => navigate("/shoppingbasket")}>
             Tillbaka till varukorgen
           </button>
         </div>
@@ -97,7 +97,7 @@ const PaymentView = () => {
           </div>
         </div>
         <div className="confirm-purchase">
-          <button className="confirm-purchase-button" onClick={handleConfirmPurchase}>
+          <button className="button-green" onClick={handleConfirmPurchase}>
             Bekräfta köp
           </button>
         </div>

@@ -15,12 +15,12 @@ const NavAdmin = () => {
 
   return (
     <nav className="nav-admin">
-      <button className="go-back" onClick={() => navigate("/admin/dashboard")}>
+      <button className="button-white" onClick={() => navigate("/admin/dashboard")}>
         Admin Dashboard
       </button>
       <div className="user-info-and-logout-button-admin">
         <p>Inloggad som: {loggedInUserFirstName}</p>
-        <button className="logout-button" onClick={handleAdminLogout}>
+        <button className="button-red" onClick={handleAdminLogout}>
           Logga ut
         </button>
       </div>

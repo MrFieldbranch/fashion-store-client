@@ -6,10 +6,10 @@ const AdminDashboardView = () => {
     <div className="admin-dashboard">
       <h1>Admin Dashboard</h1>
       <div className="wrap-container-admin">
-        <button className="item" onClick={() => navigate("/admin/allcategories")}>
+        <button className="button-white" onClick={() => navigate("/admin/allcategories")}>
           Kategorier
         </button>
-        <button className="item" onClick={() => navigate("/admin/allcustomers")}>
+        <button className="button-white" onClick={() => navigate("/admin/allcustomers")}>
           Kunder
         </button>
       </div>

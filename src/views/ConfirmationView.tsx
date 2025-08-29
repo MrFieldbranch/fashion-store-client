@@ -12,7 +12,7 @@ const ConfirmationView = () => {
       <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
         <div className="pop-up">
           <p>Något gick fel. Ingen beställning kunde hittas.</p>
-          <button className="go-back" onClick={() => navigate("/start")}>
+          <button className="button-white" onClick={() => navigate("/start")}>
             Till startsidan
           </button>
         </div>

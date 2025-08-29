@@ -8,7 +8,7 @@ const ErrorPopup = ({ error, setError }: ErrorProps) => {
     <div className="non-clickable-background" onClick={(e) => e.stopPropagation()}>
       <div className="pop-up">
         <p>{error}</p>
-        <button className="go-back" onClick={() => setError(null)}>
+        <button className="button-white" onClick={() => setError(null)}>
           Tillbaka
         </button>
       </div>

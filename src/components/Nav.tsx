@@ -83,19 +83,19 @@ const Nav = () => {
             />
             <div className="sex-choices">
               <button
-                className={`sex-choice-button ${sex === "Male" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Male" ? "selected-sex" : ""}`}
                 onClick={() => handleSexChange("Male")}
               >
                 Man
               </button>
               <button
-                className={`sex-choice-button ${sex === "Female" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Female" ? "selected-sex" : ""}`}
                 onClick={() => handleSexChange("Female")}
               >
                 Kvinna
               </button>
               <button
-                className={`sex-choice-button ${sex === "Unisex" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Unisex" ? "selected-sex" : ""}`}
                 onClick={() => handleSexChange("Unisex")}
               >
                 Unisex
@@ -104,7 +104,7 @@ const Nav = () => {
           </div>
 
           {sex && !showCategories && (
-            <button className="button-to-open-categories" onClick={handleShowCategories}>
+            <button className="button-purple" onClick={handleShowCategories}>
               Kategorier
             </button>
           )}
@@ -127,7 +127,7 @@ const Nav = () => {
                 </div>
 
                 <div className="dropdown-right-side">
-                  <button className="close-dropdown" onClick={() => setShowCategories(false)}>
+                  <button className="button-white" onClick={() => setShowCategories(false)}>
                     Stäng
                   </button>
                 </div>
@@ -147,21 +147,19 @@ const Nav = () => {
               </div>
               <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
                 <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
-                {ratingReminders.length > 0 && (
-                  <p className="rating-reminder-nav-number">{ratingReminders.length}</p>
-                )}
+                {ratingReminders.length > 0 && <p className="rating-reminder-nav-number">{ratingReminders.length}</p>}
                 <span className="avatar-tooltip">{loggedInUserFirstName}</span>
               </div>
-              <button className="logout-button" onClick={handleLogout}>
+              <button className="button-red" onClick={handleLogout}>
                 Logga ut
               </button>
             </div>
           ) : (
             <div className="login-register-buttons">
-              <button className="login-button" onClick={() => setLoginWindowOpen(true)}>
+              <button className="button-white" onClick={() => setLoginWindowOpen(true)}>
                 Logga in
               </button>
-              <button className="register-button" onClick={() => setRegisterWindowOpen(true)}>
+              <button className="button-green" onClick={() => setRegisterWindowOpen(true)}>
                 Skapa ett konto
               </button>
             </div>
@@ -191,21 +189,19 @@ const Nav = () => {
                 </div>
                 <div className="avatar-wrapper" onClick={() => navigate("/history/allorders")}>
                   <img src="/images/avatar.png" alt="user avatar" className="avatar-nav" />
-                  {ratingReminders.length > 0 && (
-                    <p className="rating-reminder-nav-number">{ratingReminders.length}</p>
-                  )}
+                  {ratingReminders.length > 0 && <p className="rating-reminder-nav-number">{ratingReminders.length}</p>}
                   <span className="avatar-tooltip">{loggedInUserFirstName}</span>
                 </div>
-                <button className="logout-button" onClick={handleLogout}>
+                <button className="button-red" onClick={handleLogout}>
                   Logga ut
                 </button>
               </div>
             ) : (
               <div className="login-register-buttons">
-                <button className="login-button" onClick={() => setLoginWindowOpen(true)}>
+                <button className="button-white" onClick={() => setLoginWindowOpen(true)}>
                   Logga in
                 </button>
-                <button className="register-button" onClick={() => setRegisterWindowOpen(true)}>
+                <button className="button-green" onClick={() => setRegisterWindowOpen(true)}>
                   Skapa ett konto
                 </button>
               </div>
@@ -214,26 +210,26 @@ const Nav = () => {
           <div className="nav-narrow-screen-row-2">
             <div className="sex-choices">
               <button
-                className={`sex-choice-button ${sex === "Male" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Male" ? "selected-sex" : ""}`}
                 onClick={() => handleSexChange("Male")}
               >
                 Man
               </button>
               <button
-                className={`sex-choice-button ${sex === "Female" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Female" ? "selected-sex" : ""}`}
                 onClick={() => handleSexChange("Female")}
               >
                 Kvinna
               </button>
               <button
-                className={`sex-choice-button ${sex === "Unisex" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Unisex" ? "selected-sex" : ""}`}
                 onClick={() => handleSexChange("Unisex")}
               >
                 Unisex
               </button>
             </div>
             {sex && !showCategories && (
-              <button className="button-to-open-categories" onClick={handleShowCategories}>
+              <button className="button-purple" onClick={handleShowCategories}>
                 Kategorier
               </button>
             )}
@@ -260,7 +256,7 @@ const Nav = () => {
                   </div>
 
                   <div className="dropdown-right-side">
-                    <button className="close-dropdown" onClick={() => setShowCategories(false)}>
+                    <button className="button-white" onClick={() => setShowCategories(false)}>
                       Stäng
                     </button>
                   </div>

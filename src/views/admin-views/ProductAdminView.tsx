@@ -181,7 +181,7 @@ const ProductAdminView = () => {
       {error && <ErrorPopup error={error} setError={setError} />}
       <div className="product">
         <div className="move-to-right-end">
-          <button className="go-back" onClick={() => navigate(`/admin/category/${categoryId}`)}>
+          <button className="button-white" onClick={() => navigate(`/admin/category/${categoryId}`)}>
             Tillbaka
           </button>
         </div>
@@ -203,7 +203,7 @@ const ProductAdminView = () => {
             </div>
             <div className="edit-product">
               {!showEditProduct && (
-                <button className="press-to-create-edit" onClick={handleShowEditProduct}>
+                <button className="button-purple" onClick={handleShowEditProduct}>
                   Redigera produkt
                 </button>
               )}
@@ -261,7 +261,7 @@ const ProductAdminView = () => {
 
                   <div className="confirm-or-cancel">
                     <button
-                      className="confirm-button"
+                      className="button-green"
                       onClick={() =>
                         handleEditProduct(
                           newProductName,
@@ -274,7 +274,7 @@ const ProductAdminView = () => {
                     >
                       OK
                     </button>
-                    <button className="cancel-button" onClick={handleCloseEditProduct}>
+                    <button className="button-red" onClick={handleCloseEditProduct}>
                       AVBRYT
                     </button>
                   </div>
@@ -307,7 +307,7 @@ const ProductAdminView = () => {
             )}
           </div>
           {!showEnterNewProductVariant && (
-            <button className="press-to-create-edit" onClick={() => setShowEnterNewProductVariant(true)}>
+            <button className="button-purple" onClick={() => setShowEnterNewProductVariant(true)}>
               Skapa ny storlek
             </button>
           )}
@@ -357,7 +357,7 @@ const ProductAdminView = () => {
 
               <div className="confirm-or-cancel">
                 <button
-                  className="confirm-button"
+                  className="button-green"
                   onClick={() =>
                     handleCreateNewProductVariant(
                       productVariantSize,
@@ -369,7 +369,7 @@ const ProductAdminView = () => {
                 >
                   OK
                 </button>
-                <button className="cancel-button" onClick={handleCloseEnterNewProductVariant}>
+                <button className="button-red" onClick={handleCloseEnterNewProductVariant}>
                   AVBRYT
                 </button>
               </div>

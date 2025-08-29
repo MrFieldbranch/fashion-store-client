@@ -121,12 +121,12 @@ const Register = ({ setRegisterWindowOpen, setError }: RegisterProps) => {
         </div>
         <div className="confirm-or-cancel">
           <button
-            className="confirm-button"
+            className="button-green"
             onClick={() => handleRegister(email, password, passwordAgain, firstName, lastName)}
           >
             OK
           </button>
-          <button className="cancel-button" onClick={() => setRegisterWindowOpen(false)}>
+          <button className="button-red" onClick={() => setRegisterWindowOpen(false)}>
             AVBRYT
           </button>
         </div>

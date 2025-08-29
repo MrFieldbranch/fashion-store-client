@@ -85,7 +85,7 @@ const AllCategoriesAdminView = () => {
               onChange={(e) => setNewCategoryName(e.target.value)}
             />
           </div>
-          <button className="confirm-button" onClick={() => handleCreateNewCategory(newCategoryName)}>
+          <button className="button-green" onClick={() => handleCreateNewCategory(newCategoryName)}>
             OK
           </button>
         </div>

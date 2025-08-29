@@ -187,7 +187,7 @@ const ProductView = () => {
               </>
             )}
             {productChosen && (
-              <button className="add-to-shopping-basket" onClick={handleAddToBasket}>
+              <button className="button-green width-100-percent" onClick={handleAddToBasket}>
                 Lägg i varukorgen
               </button>
             )}
@@ -205,7 +205,7 @@ const ProductView = () => {
               {product.ratingsCount > 0 && <p className="big-p">{product.ratingsCount} betyg</p>}
             </div>
             {!showRatingsAndReviews && product.ratingsCount > 0 && (
-              <button className="show-ratings-and-reviews-button" onClick={() => setShowRatingsAndReviews(true)}>
+              <button className="button-purple" onClick={() => setShowRatingsAndReviews(true)}>
                 Visa alla betyg och recensioner
               </button>
             )}
@@ -214,10 +214,10 @@ const ProductView = () => {
                 <div className="display-all-ratings-and-reviews">
                   <div className="fixed-heading-ratings-and-reviews">
                     <button
-                      className="remove-item-from-shopping-basket"
+                      className="button-white"
                       onClick={() => setShowRatingsAndReviews(false)}
                     >
-                      X
+                      Stäng
                     </button>
                   </div>
                   <div className="scroll-list">

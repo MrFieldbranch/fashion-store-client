@@ -49,7 +49,7 @@ const AdminUserView = () => {
             <br />
             {orderList.firstName} {orderList.lastName}
           </h1>
-          <button className="go-back" onClick={() => navigate("/admin/allcustomers")}>
+          <button className="button-white" onClick={() => navigate("/admin/allcustomers")}>
             Tillbaka
           </button>
         </div>

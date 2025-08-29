@@ -104,10 +104,10 @@ const AllOrdersView = () => {
             </h3>
           )}
           <div className="confirm-or-cancel">
-            <button className="confirm-button" onClick={() => navigate("/ratings-and-reviews")}>
+            <button className="button-green" onClick={() => navigate("/ratings-and-reviews")}>
               OK
             </button>
-            <button className="cancel-button" onClick={handleDeclineRating}>
+            <button className="button-red" onClick={handleDeclineRating}>
               NEJ
             </button>
           </div>

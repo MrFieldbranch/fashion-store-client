@@ -138,10 +138,10 @@ const ProductRatingReview = ({
               </label>
             </div>
             <div className="confirm-or-cancel">
-              <button className="confirm-button" onClick={handleSendRating}>
+              <button className="button-green" onClick={handleSendRating}>
                 Skicka betyg
               </button>
-              <button className="cancel-button" onClick={handleDeclineRatingThisProduct}>
+              <button className="button-red" onClick={handleDeclineRatingThisProduct}>
                 Nej tack
               </button>
             </div>
@@ -160,10 +160,10 @@ const ProductRatingReview = ({
             />
           </div>
           <div className="confirm-or-cancel">
-            <button className="confirm-button" onClick={handleSendReview}>
+            <button className="button-green" onClick={handleSendReview}>
               Skicka recension
             </button>
-            <button className="cancel-button" onClick={handleDeclineReviewingThisProduct}>
+            <button className="button-red" onClick={handleDeclineReviewingThisProduct}>
               Nej tack
             </button>
           </div>

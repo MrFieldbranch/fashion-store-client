@@ -84,6 +84,44 @@ p {
 button {
   cursor: pointer;
   border: none;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  padding: var(--padding-small);
+  border-radius: var(--radius-small);
+  font-size: var(--text-size-L);
+}
+
+button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.button-white {
+  background-color: var(--background-4);
+  color: var(--text-color-2);  
+}
+
+.button-purple {
+  background-color: var(--background-2);
+  color: var(--text-color-1);  
+}
+
+.button-red {
+  background-color: var(--cancel-background);
+  color: var(--text-color-2);  
+}
+
+.button-green {
+  background-color: var(--confirm-background);
+  color: var(--text-color-1);  
+}
+
+.width-100-percent {
+  width: 100%;
+  margin-top: 2rem;
 }
 
 .main-container {
@@ -178,6 +216,18 @@ nav {
 .home-link {
   cursor: pointer;
   height: 5rem;
+  transition: all 0.2s ease-in-out;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); */
+}
+
+.home-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.home-link:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .brand-name-and-sex-choices {
@@ -191,14 +241,6 @@ nav {
   gap: 0.3rem;
 }
 
-.sex-choice-button {
-  background-color: var(--background-4);
-  color: var(--text-color-2);
-  padding: var(--padding-small);
-  border-radius: var(--radius-small);
-  font-size: var(--text-size-L);
-}
-
 .selected-sex {
   text-decoration: underline;
   background-color: var(--background-2);
@@ -208,22 +250,6 @@ nav {
 .login-register-buttons {
   display: flex;
   gap: 3rem;
-}
-
-.login-button {
-  background-color: inherit;
-  color: var(--text-color-2);
-  font-size: var(--text-size-L);
-}
-
-.register-button {
-  background-color: var(--confirm-background);
-  color: var(--text-color-1);
-  padding: var(--padding-small);
-  border-radius: var(--radius-small);
-  font-size: var(--text-size-L);
-  font-weight: bold;
-  /* padding: 0.5rem 1rem; */
 }
 
 .toast {
@@ -267,15 +293,6 @@ nav {
   width: 100vw;
   height: 100vh; /* Kanske fit-content  Kan man göra non-scrollable, non-swipable*/
   z-index: 999;
-}
-
-.button-to-open-categories {
-  background-color: var(--background-2);
-  color: var(--text-color-1);
-  font-size: var(--text-size-XL);
-  font-weight: bold;
-  border-radius: var(--radius-small);
-  padding: var(--padding-small);
 }
 
 .clickable-background {
@@ -342,12 +359,6 @@ nav {
   align-items: flex-end;
   padding-right: 3rem;
   padding-bottom: 2rem;
-}
-
-.close-dropdown {
-  background: none;
-  font-size: var(--text-size-XL);
-  font-weight: bold;
 }
 
 .pop-up {
@@ -417,15 +428,7 @@ nav {
   gap: 0.8rem;
   border: 1px solid var(--border-2);
   border-radius: var(--radius-small);
-  padding: var(--padding-small);
-}
-
-.press-to-create-edit {
-  background-color: var(--background-2);
-  color: var(--text-color-1);
-  border-radius: var(--radius-small);
-  padding: var(--padding-small);
-  font-size: var(--text-size-L);
+  padding: var(--padding-small-more-vertical);
 }
 
 .create-edit {
@@ -478,22 +481,6 @@ textarea {
   gap: 1rem;
 }
 
-.confirm-button {
-  background-color: var(--confirm-background);
-  color: var(--text-color-1);
-  border-radius: var(--radius-small);
-  padding: var(--padding-small);
-  font-size: var(--text-size-L);
-}
-
-.cancel-button {
-  background-color: var(--cancel-background);
-  color: var(--text-color-2);
-  border-radius: var(--radius-small);
-  padding: var(--padding-small);
-  font-size: var(--text-size-L);
-}
-
 .user-info-and-logout-button {
   display: flex;
   gap: 2rem;
@@ -504,15 +491,6 @@ textarea {
   display: flex;
   gap: 2rem;
   align-items: center;
-}
-
-.logout-button {
-  background-color: var(--cancel-background);
-  color: var(--text-color-2);
-  border-radius: var(--radius-small);
-  padding: var(--padding-small);
-  font-size: var(--text-size-L);
-  font-weight: bold;
 }
 
 .basic-product {
@@ -674,17 +652,6 @@ textarea {
   margin-bottom: 0;
 }
 
-.add-to-shopping-basket {
-  background-color: var(--confirm-background);
-  color: var(--text-color-1);
-  border-radius: var(--radius-small);
-  width: 100%;
-  margin-top: 2rem;
-  padding: var(--padding-large);
-  font-size: var(--text-size-L);
-  font-weight: bold;
-}
-
 .table {
   width: 70%;
 }
@@ -736,15 +703,6 @@ textarea {
   padding-top: var(--padding-top);
   display: flex;
   justify-content: center;
-}
-
-.go-to-payment-button {
-  background-color: var(--confirm-background);
-  color: var(--text-color-1);
-  border-radius: var(--radius-small);
-  padding: var(--padding-large);
-  font-size: var(--text-size-XL);
-  font-weight: bold;
 }
 
 .heart-icon {
@@ -902,14 +860,6 @@ textarea {
   margin-bottom: 3rem;
 }
 
-.go-back {
-  background-color: var(--background-4);
-  color: var(--text-color-2);
-  border-radius: var(--radius-small);
-  border: 1px solid var(--border-1);
-  padding: 1rem;
-}
-
 .total-amount-payment {
   font-size: var(--text-size-XL);
   margin-bottom: 3rem;
@@ -970,15 +920,6 @@ textarea {
   padding-top: var(--padding-top);
   display: flex;
   justify-content: flex-end;
-}
-
-.confirm-purchase-button {
-  background-color: var(--confirm-background);
-  color: var(--text-color-1);
-  border-radius: var(--radius-small);
-  padding: var(--padding-large);
-  font-size: var(--text-size-XL);
-  font-weight: bold;
 }
 
 .order-summary {
@@ -1160,14 +1101,6 @@ footer h3 {
   font-size: var(--text-size-XL);
 }
 
-.show-ratings-and-reviews-button {
-  background-color: var(--background-2);
-  color: var(--text-color-1);
-  font-size: var(--text-size-L);
-  border-radius: var(--radius-small);
-  padding: var(--padding-small);
-}
-
 .clickable-background-ratings {
   background: none;
   position: fixed;
@@ -1280,14 +1213,6 @@ footer h3 {
     flex: 1;
   }
 
-  .login-button {
-    margin-right: 2rem;
-  }
-
-  .register-button {
-    margin-right: 2rem;
-  }
-
   .nav-narrow-screen-row-2 {
     display: flex;
     justify-content: center;
@@ -1356,10 +1281,6 @@ footer h3 {
 
   .detailed-product {
     gap: 2rem;
-  }
-
-  .press-to-create-edit {
-    font-size: var(--text-size-M);
   }
 
   .table {

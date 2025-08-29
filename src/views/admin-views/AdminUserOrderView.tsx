@@ -48,7 +48,7 @@ const AdminUserOrderView = () => {
       <div className="admin-user-order">
         <div className="separate-horizontally">
           <h1>Orderinformation</h1>
-          <button className="go-back" onClick={() => navigate(`/admin/user/${userIdNumber}`)}>
+          <button className="button-white" onClick={() => navigate(`/admin/user/${userIdNumber}`)}>
             Tillbaka
           </button>
         </div>
