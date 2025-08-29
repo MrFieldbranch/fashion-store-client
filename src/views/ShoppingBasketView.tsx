@@ -118,7 +118,7 @@ const ShoppingBasketView = () => {
                 <p>{totalAmount} kr</p>
               </div>
               <div className="go-to-payment">
-                <button className="button-green" onClick={() => navigate("/payment")}>
+                <button className="button-green cta-button" onClick={() => navigate("/payment")}>
                   Gå till betalning
                 </button>
               </div>

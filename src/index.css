@@ -124,6 +124,11 @@ button:active {
   margin-top: 2rem;
 }
 
+.cta-button {
+  padding: var(--padding-large);
+  font-size: var(--text-size-XL);
+}
+
 .main-container {
   padding: 15vh 10rem 4vh;
   min-height: 75vh;

@@ -187,7 +187,7 @@ const ProductView = () => {
               </>
             )}
             {productChosen && (
-              <button className="button-green width-100-percent" onClick={handleAddToBasket}>
+              <button className="button-green width-100-percent cta-button" onClick={handleAddToBasket}>
                 Lägg i varukorgen
               </button>
             )}
@@ -213,10 +213,7 @@ const ProductView = () => {
               <div className="clickable-background-ratings" onClick={() => setShowRatingsAndReviews(false)}>
                 <div className="display-all-ratings-and-reviews">
                   <div className="fixed-heading-ratings-and-reviews">
-                    <button
-                      className="button-white"
-                      onClick={() => setShowRatingsAndReviews(false)}
-                    >
+                    <button className="button-white" onClick={() => setShowRatingsAndReviews(false)}>
                       Stäng
                     </button>
                   </div>

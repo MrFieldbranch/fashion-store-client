@@ -97,7 +97,7 @@ const PaymentView = () => {
           </div>
         </div>
         <div className="confirm-purchase">
-          <button className="button-green" onClick={handleConfirmPurchase}>
+          <button className="button-green cta-button" onClick={handleConfirmPurchase}>
             Bekräfta köp
           </button>
         </div>
