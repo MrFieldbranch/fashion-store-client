@@ -89,6 +89,22 @@ export class ApiService {
     return products;
   }
 
+  async getBestRatedProductsBySexAsync(sex: string, signal?: AbortSignal): Promise<BasicProductResponse[]> {
+    const response = await fetch(`${this.baseUrl}/products/best-rated?sex=${encodeURIComponent(sex)}`, {
+      method: "GET",
+      headers: { ...this.requestHeaders },
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Det gick inte att hämta produkterna. ${errorMessage}`);
+    }
+
+    const products: BasicProductResponse[] = await response.json();
+    return products;
+  }
+
   async getAllCategoriesBySexAsync(sex: string, signal?: AbortSignal): Promise<BasicCategoryResponse[]> {
     const response = await fetch(`${this.baseUrl}/categories/sex/${sex}/allcategories`, {
       method: "GET",

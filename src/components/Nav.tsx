@@ -83,19 +83,19 @@ const Nav = () => {
             />
             <div className="sex-choices">
               <button
-                className={`button-white ${sex === "Male" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Male" ? "selected" : ""}`}
                 onClick={() => handleSexChange("Male")}
               >
                 Man
               </button>
               <button
-                className={`button-white ${sex === "Female" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Female" ? "selected" : ""}`}
                 onClick={() => handleSexChange("Female")}
               >
                 Kvinna
               </button>
               <button
-                className={`button-white ${sex === "Unisex" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Unisex" ? "selected" : ""}`}
                 onClick={() => handleSexChange("Unisex")}
               >
                 Unisex
@@ -210,19 +210,19 @@ const Nav = () => {
           <div className="nav-narrow-screen-row-2">
             <div className="sex-choices">
               <button
-                className={`button-white ${sex === "Male" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Male" ? "selected" : ""}`}
                 onClick={() => handleSexChange("Male")}
               >
                 Man
               </button>
               <button
-                className={`button-white ${sex === "Female" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Female" ? "selected" : ""}`}
                 onClick={() => handleSexChange("Female")}
               >
                 Kvinna
               </button>
               <button
-                className={`button-white ${sex === "Unisex" ? "selected-sex" : ""}`}
+                className={`button-white ${sex === "Unisex" ? "selected" : ""}`}
                 onClick={() => handleSexChange("Unisex")}
               >
                 Unisex

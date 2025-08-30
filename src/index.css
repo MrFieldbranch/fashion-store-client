@@ -101,22 +101,22 @@ button:active {
 
 .button-white {
   background-color: var(--background-4);
-  color: var(--text-color-2);  
+  color: var(--text-color-2);
 }
 
 .button-purple {
   background-color: var(--background-2);
-  color: var(--text-color-1);  
+  color: var(--text-color-1);
 }
 
 .button-red {
   background-color: var(--cancel-background);
-  color: var(--text-color-2);  
+  color: var(--text-color-2);
 }
 
 .button-green {
   background-color: var(--confirm-background);
-  color: var(--text-color-1);  
+  color: var(--text-color-1);
 }
 
 .width-100-percent {
@@ -186,6 +186,19 @@ button:active {
 
 .popular-products h2 {
   text-align: center;
+  margin-top: 2rem;
+}
+
+.popular-products > h3 {
+  margin-top: 3rem;
+}
+
+.sorting-options {  
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
 }
 
 .nav-admin {
@@ -221,14 +234,14 @@ nav {
 .home-link {
   cursor: pointer;
   height: 5rem;
-  transition: all 0.2s ease-in-out;  
+  transition: all 0.2s ease-in-out;
 }
 
-.home-link:hover {  
+.home-link:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.home-link:active {  
+.home-link:active {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
@@ -243,7 +256,7 @@ nav {
   gap: 0.3rem;
 }
 
-.selected-sex {
+.selected {
   text-decoration: underline;
   background-color: var(--background-2);
   color: var(--text-color-1);
@@ -387,7 +400,7 @@ nav {
 }
 
 .records-container {
-  margin: 3rem 0;
+  margin: 2rem 0 4rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 2rem;
