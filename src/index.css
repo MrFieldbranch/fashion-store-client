@@ -193,7 +193,7 @@ button:active {
   margin-top: 3rem;
 }
 
-.sorting-options {  
+.sorting-options {
   margin: auto;
   display: flex;
   justify-content: center;
@@ -620,6 +620,10 @@ textarea {
   display: flex;
   flex-direction: column;
   z-index: 1000;
+}
+
+.detailed-product-ratings-and-reviews-narrow-screen {
+  display: none;
 }
 
 /* Varför syns det inte? SVAR: När det inte finns några varianter/storlekar syns inget.*/
@@ -1093,10 +1097,6 @@ footer h3 {
   font-size: var(--text-size-S);
 }
 
-.detailed-product-ratings-and-reviews {
-  margin-top: 10rem;
-}
-
 .average-grade-and-ratings-count {
   margin-bottom: 2rem;
 }
@@ -1191,6 +1191,17 @@ footer h3 {
 
 .text-align-center {
   text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .detailed-product-ratings-and-reviews-wide-screen {
+    display: none;
+  }
+
+  .detailed-product-ratings-and-reviews-narrow-screen {
+    display: block;
+    margin-top: 5rem;
+  }
 }
 
 @media (max-width: 1000px) {
